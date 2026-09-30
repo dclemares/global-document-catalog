@@ -12,14 +12,14 @@
     "other_format": 2
   },
   "global_examples": {
-    "assignments": 319,
+    "assignments": 333,
     "countries": 196,
     "by_side": {
+      "anverso": 82,
       "reverso": 55,
-      "pagina-datos": 196,
-      "anverso": 68
+      "pagina-datos": 196
     },
-    "complete_sets": 53
+    "complete_sets": 55
   },
   "empty_countries_id_documented": 22,
   "empty_countries_id_mrz_documented": 9,

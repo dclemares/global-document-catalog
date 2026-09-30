@@ -52,7 +52,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/fr/AFG-BO-02001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -4156,7 +4163,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/fr/BFA-BO-02001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -4677,7 +4691,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/en/CMR-BO-01002/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -6352,7 +6373,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/fr/COM-BO-01001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -6491,7 +6519,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/en/COG-BO-01001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -11633,7 +11668,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/en/HTI-BO-02001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -12503,7 +12545,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/en/IRQ-BO-01001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -14168,7 +14217,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/en/KAZ-BO-02001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -16915,7 +16971,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/en/MLI-BO-01001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -20502,7 +20565,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/en/PRY-BO-01002/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -21705,7 +21775,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/en/RWA-BO-01001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -22804,7 +22881,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://dge.sn/decret-n-2016-1536-du-29-septembre-2016-portant-application-de-la-loi-n-2016-09-du-14-mars-2016-instituant-une-carte-didentite-biometrique-cedeao-publie-au-jors-n-6965-du-5/",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -23458,7 +23542,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.consilium.europa.eu/prado/en/SYR-BO-01001/index.html",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",
@@ -26319,7 +26410,14 @@
             }
           ]
         },
-        "global_example": null
+        "global_example": {
+          "file": "ejemplos-globales/id-front.png",
+          "label": "Foto de cara · MRZ por confirmar",
+          "basis": "Características documentadas en la fuente; falta imagen del modelo",
+          "evidence_basis": "documented",
+          "source": "https://www.gub.uy/agencia-gobierno-electronico-sociedad-informacion-conocimiento/sites/agencia-gobierno-electronico-sociedad-informacion-conocimiento/files/documentos/publicaciones/3-seguridad-tramites.pdf",
+          "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+        }
       },
       {
         "kind": "ID",

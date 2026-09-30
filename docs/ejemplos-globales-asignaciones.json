@@ -3,6 +3,18 @@
     "code": "AF",
     "country": "Afganistán",
     "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/fr/AFG-BO-02001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+  },
+  {
+    "code": "AF",
+    "country": "Afganistán",
+    "kind": "ID",
     "side": "reverso",
     "file": "ejemplos-globales/id-back.png",
     "label": "MRZ en el reverso · con o sin foto",
@@ -602,6 +614,18 @@
   {
     "code": "BF",
     "country": "Burkina Faso",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/fr/BFA-BO-02001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+  },
+  {
+    "code": "BF",
+    "country": "Burkina Faso",
     "kind": "PASAPORTE",
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
@@ -658,6 +682,18 @@
     "evidence_basis": "standard",
     "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
     "note": "Ejemplo global para orientar la captura. Coincide en presencia de foto y MRZ; no reproduce el diseño de este país."
+  },
+  {
+    "code": "CM",
+    "country": "Camerún",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/en/CMR-BO-01002/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
   },
   {
     "code": "CM",
@@ -890,6 +926,18 @@
   {
     "code": "KM",
     "country": "Comoras",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/fr/COM-BO-01001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+  },
+  {
+    "code": "KM",
+    "country": "Comoras",
     "kind": "PASAPORTE",
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
@@ -898,6 +946,18 @@
     "evidence_basis": "standard",
     "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
     "note": "Ejemplo global para orientar la captura. Coincide en presencia de foto y MRZ; no reproduce el diseño de este país."
+  },
+  {
+    "code": "CG",
+    "country": "Congo",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/en/COG-BO-01001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
   },
   {
     "code": "CG",
@@ -1622,6 +1682,18 @@
   {
     "code": "HT",
     "country": "Haití",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/en/HTI-BO-02001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+  },
+  {
+    "code": "HT",
+    "country": "Haití",
     "kind": "PASAPORTE",
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
@@ -1738,6 +1810,18 @@
     "evidence_basis": "catalog_model",
     "source": "https://github.com/ruledicaprio/SynthPass/blob/samples-data/samples/passports/Indonesia_Passport_Specimen_P0_IDN_2011_mrz.jpg",
     "note": "Ejemplo global para orientar la captura. Coincide en presencia de foto y MRZ; no reproduce el diseño de este país."
+  },
+  {
+    "code": "IQ",
+    "country": "Irak",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/en/IRQ-BO-01001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
   },
   {
     "code": "IQ",
@@ -1942,6 +2026,18 @@
     "evidence_basis": "standard",
     "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
     "note": "Ejemplo global para orientar la captura. Coincide en presencia de foto y MRZ; no reproduce el diseño de este país."
+  },
+  {
+    "code": "KZ",
+    "country": "Kazajistán",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/en/KAZ-BO-02001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
   },
   {
     "code": "KZ",
@@ -2350,6 +2446,18 @@
     "evidence_basis": "standard",
     "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
     "note": "Ejemplo global para orientar la captura. Coincide en presencia de foto y MRZ; no reproduce el diseño de este país."
+  },
+  {
+    "code": "ML",
+    "country": "Mali",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/en/MLI-BO-01001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
   },
   {
     "code": "ML",
@@ -2870,6 +2978,18 @@
   {
     "code": "PY",
     "country": "Paraguay",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/en/PRY-BO-01002/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+  },
+  {
+    "code": "PY",
+    "country": "Paraguay",
     "kind": "PASAPORTE",
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
@@ -3038,6 +3158,18 @@
   {
     "code": "RW",
     "country": "Ruanda",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/en/RWA-BO-01001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+  },
+  {
+    "code": "RW",
+    "country": "Ruanda",
     "kind": "PASAPORTE",
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
@@ -3194,6 +3326,18 @@
   {
     "code": "SN",
     "country": "Senegal",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://dge.sn/decret-n-2016-1536-du-29-septembre-2016-portant-application-de-la-loi-n-2016-09-du-14-mars-2016-instituant-une-carte-didentite-biometrique-cedeao-publie-au-jors-n-6965-du-5/",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
+  },
+  {
+    "code": "SN",
+    "country": "Senegal",
     "kind": "PASAPORTE",
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
@@ -3274,6 +3418,18 @@
     "evidence_basis": "catalog_model",
     "source": "https://www.ica.gov.sg/news-and-publications/newsroom/media-release/14370",
     "note": "Ejemplo global para orientar la captura. Coincide en presencia de foto y MRZ; no reproduce el diseño de este país."
+  },
+  {
+    "code": "SY",
+    "country": "Siria",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.consilium.europa.eu/prado/en/SYR-BO-01001/index.html",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
   },
   {
     "code": "SY",
@@ -3682,6 +3838,18 @@
     "evidence_basis": "standard",
     "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
     "note": "Ejemplo global para orientar la captura. Coincide en presencia de foto y MRZ; no reproduce el diseño de este país."
+  },
+  {
+    "code": "UY",
+    "country": "Uruguay",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Foto de cara · MRZ por confirmar",
+    "basis": "Características documentadas en la fuente; falta imagen del modelo",
+    "evidence_basis": "documented",
+    "source": "https://www.gub.uy/agencia-gobierno-electronico-sociedad-informacion-conocimiento/sites/agencia-gobierno-electronico-sociedad-informacion-conocimiento/files/documentos/publicaciones/3-seguridad-tramites.pdf",
+    "note": "Ejemplo global para orientar la captura del anverso con foto. La MRZ de esta cara sigue por confirmar; asignar este ejemplo no confirma que esté ausente ni reproduce el diseño del país."
   },
   {
     "code": "UY",

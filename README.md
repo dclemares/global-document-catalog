@@ -9,10 +9,10 @@ Catálogo visual de documentos de identidad y pasaportes de **196 países**, con
 - 212 imágenes seleccionadas en 85 países, incluidas 194 recreaciones de demostración.
 - Referencias originales disponibles y enlaces a las fuentes de cada modelo.
 - Indicaciones de foto de cara y MRZ por cara o página, con su nivel de evidencia.
-- 319 asignaciones de ejemplos globales: 68 anversos, 55 reversos y 196 pasaportes.
-- 53 países con las tres piezas globales asignadas.
+- 333 asignaciones de ejemplos globales: 82 anversos, 55 reversos y 196 pasaportes.
+- 55 países con las tres piezas globales asignadas.
 
-Los ejemplos globales orientan la captura: el front se asigna cuando hay foto y no hay MRZ; el back cuando hay MRZ en el reverso, tenga o no foto; el pasaporte representa una página de datos con foto y MRZ. En los pasaportes, 75 asignaciones se apoyan en el modelo del catálogo y 121 en el estándar ICAO, con el modelo del país sin verificar.
+Los ejemplos globales orientan la captura: el front se asigna cuando hay foto y la MRZ está ausente o por confirmar (manteniendo la incertidumbre indicada); el back cuando hay MRZ en el reverso, tenga o no foto; el pasaporte representa una página de datos con foto y MRZ. En los pasaportes, 75 asignaciones se apoyan en el modelo del catálogo y 121 en el estándar ICAO, con el modelo del país sin verificar.
 
 ## Abrir y actualizar
 
