@@ -1,0 +1,37 @@
+{
+  "GB": {
+    "existence": "no_national_card",
+    "text": "No hay tarjeta nacional de identidad británica vigente en este catálogo: el programa anterior fue cancelado. Esto no significa que no existan otras credenciales de identificación.",
+    "source": "https://www.gov.uk/government/news/id-cards-consigned-to-history"
+  },
+  "IE": {
+    "existence": "no_national_card",
+    "text": "No emite DNI nacional. La tarjeta de pasaporte se muestra aparte; la Public Services Card es otra categoría.",
+    "source": "https://data.consilium.europa.eu/doc/document/ST-13462-2018-REV-1/en/pdf"
+  },
+  "DK": {
+    "existence": "exists",
+    "text": "Existe tarjeta municipal de identificación (Legitimationskort); no se ha obtenido su imagen. No equivale al ID nacional de viaje.",
+    "source": "https://www.borger.dk/handlingsside?kommunekode=370&selfserviceId=fe1428a8-6314-4e7d-827d-b2f4717d8c61"
+  },
+  "AU": {
+    "existence": "exists",
+    "text": "Existen tarjetas estatales, como NSW Photo Card. Falta incorporar una variante y sus dos caras; no se presenta como un DNI nacional único.",
+    "source": "https://www.service.nsw.gov.au/services/nsw-photo-card"
+  },
+  "CA": {
+    "existence": "exists",
+    "text": "Existen tarjetas provinciales, como Ontario Photo Card. Falta incorporar una variante y sus dos caras.",
+    "source": "https://www.ontario.ca/page/ontario-photo-card"
+  },
+  "US": {
+    "existence": "exists",
+    "text": "Existen ID estatales, como la tarjeta del DMV de California. Falta incorporar una variante y sus dos caras; no se confunde con la passport card.",
+    "source": "https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/identification-id-cards/"
+  },
+  "RU": {
+    "existence": "other_format",
+    "text": "La identificación interior se recoge en el inventario como pasaporte en libreta. Falta esa imagen; no se interpreta como un ID en formato tarjeta con front/back.",
+    "source": ""
+  }
+}

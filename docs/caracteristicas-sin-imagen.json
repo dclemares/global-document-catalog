@@ -1,0 +1,714 @@
+{
+  "passport_standard": {
+    "model": "Pasaporte ordinario de lectura mecánica (MRP / TD3)",
+    "basis": "standard",
+    "checked_on": "2026-09-30",
+    "photo": {
+      "present": true,
+      "location": "Página de datos · zona V"
+    },
+    "mrz": {
+      "present": true,
+      "location": "Página de datos · zona VII, inferior"
+    },
+    "sides": {
+      "pagina-datos": {
+        "photo": true,
+        "mrz": true
+      }
+    },
+    "note": "Previsión según ICAO Doc 9303, parte 4, §3.2.4. No es una verificación del modelo de este país. Los documentos de emergencia, temporales o históricos pueden diferir.",
+    "sources": [
+      {
+        "label": "ICAO Doc 9303 · parte 4 · zonas obligatorias",
+        "url": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf"
+      }
+    ]
+  },
+  "identity_cards": {
+    "CM": {
+      "model": "ID · ficha PRADO CMR-BO-01002 · referencia 2016",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado; reverso por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha describe un retrato en el anverso. No se ha confirmado la MRZ ni se acredita que esta sea la última emisión. La ausencia de una mención a MRZ no se interpreta como ausencia de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/en/CMR-BO-01002/index.html"
+        }
+      ]
+    },
+    "CG": {
+      "model": "ID · ficha PRADO COG-BO-01001 · referencia 2008",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado; reverso por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha describe un retrato en el anverso. No se ha confirmado la MRZ ni se acredita que esta sea la última emisión. La ausencia de una mención a MRZ no se interpreta como ausencia de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/en/COG-BO-01001/index.html"
+        }
+      ]
+    },
+    "IQ": {
+      "model": "ID · ficha PRADO IRQ-BO-01001 · referencia 2019",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado; reverso por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha describe un retrato en el anverso. No se ha confirmado la MRZ ni se acredita que esta sea la última emisión. La ausencia de una mención a MRZ no se interpreta como ausencia de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/en/IRQ-BO-01001/index.html"
+        }
+      ]
+    },
+    "KZ": {
+      "model": "ID · ficha PRADO KAZ-BO-02001 · referencia 2009",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado; reverso por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha describe un retrato en el anverso. No se ha confirmado la MRZ ni se acredita que esta sea la última emisión. La ausencia de una mención a MRZ no se interpreta como ausencia de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/en/KAZ-BO-02001/index.html"
+        }
+      ]
+    },
+    "HT": {
+      "model": "ID · ficha PRADO HTI-BO-02001 · referencia 2005",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado; reverso por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha describe un retrato en el anverso. No se ha confirmado la MRZ ni se acredita que esta sea la última emisión. La ausencia de una mención a MRZ no se interpreta como ausencia de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/en/HTI-BO-02001/index.html"
+        }
+      ]
+    },
+    "ML": {
+      "model": "ID · ficha PRADO MLI-BO-01001 · referencia 2000",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado; reverso por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha describe un retrato en el anverso. No se ha confirmado la MRZ ni se acredita que esta sea la última emisión. La ausencia de una mención a MRZ no se interpreta como ausencia de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/en/MLI-BO-01001/index.html"
+        }
+      ]
+    },
+    "PY": {
+      "model": "ID · ficha PRADO PRY-BO-01002 · referencia 2012",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado; reverso por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha describe un retrato en el anverso. No se ha confirmado la MRZ ni se acredita que esta sea la última emisión. La ausencia de una mención a MRZ no se interpreta como ausencia de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/en/PRY-BO-01002/index.html"
+        }
+      ]
+    },
+    "BF": {
+      "model": "ID · ficha PRADO BFA-BO-02001 · referencia 2008",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado; reverso por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha describe un retrato en el anverso. No se ha confirmado la MRZ ni se acredita que esta sea la última emisión. La ausencia de una mención a MRZ no se interpreta como ausencia de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/fr/BFA-BO-02001/index.html"
+        }
+      ]
+    },
+    "KM": {
+      "model": "ID · ficha PRADO COM-BO-01001 · referencia 2008",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado; reverso por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha describe un retrato en el anverso. No se ha confirmado la MRZ ni se acredita que esta sea la última emisión. La ausencia de una mención a MRZ no se interpreta como ausencia de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/fr/COM-BO-01001/index.html"
+        }
+      ]
+    },
+    "RW": {
+      "model": "ID · ficha PRADO RWA-BO-01001 · referencia 2022",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso y reverso (retrato secundario)"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": true,
+          "mrz": null
+        }
+      },
+      "note": "PRADO describe retratos en ambas caras, incluido uno secundario en el reverso. MRZ pendiente. El año identifica la referencia consultada, no acredita la última emisión.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/en/RWA-BO-01001/index.html"
+        }
+      ]
+    },
+    "SY": {
+      "model": "ID · ficha PRADO SYR-BO-01001 · referencia 2000",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso y reverso (retrato secundario)"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": true,
+          "mrz": null
+        }
+      },
+      "note": "PRADO describe retratos en ambas caras, incluido uno secundario en el reverso. MRZ pendiente. El año identifica la referencia consultada, no acredita la última emisión.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/en/SYR-BO-01001/index.html"
+        }
+      ]
+    },
+    "AF": {
+      "model": "e-Taskera · AFG-BO-02001 · referencia 2019",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso y reverso (retrato secundario)"
+      },
+      "mrz": {
+        "present": true,
+        "location": "Reverso"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": true,
+          "mrz": true
+        }
+      },
+      "note": "Foto en ambas caras según la ficha; MRZ de tres líneas comprobada en el reverso publicado. No se extrapola a la Taskera en papel ni a otras emisiones.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.consilium.europa.eu/prado/fr/AFG-BO-02001/index.html"
+        },
+        {
+          "label": "Reverso consultado en PRADO",
+          "url": "https://www.consilium.europa.eu/prado/fr/AFG-BO-02001/image-308487.html"
+        }
+      ]
+    },
+    "CR": {
+      "model": "Cédula de identidad · diseño emitido desde octubre de 2025",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso y reverso (retrato secundario)"
+      },
+      "mrz": {
+        "present": true,
+        "location": "Reverso"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": false
+        },
+        "reverso": {
+          "photo": true,
+          "mrz": true
+        }
+      },
+      "note": "Ambas caras comprobadas en las muestras del TSE. El diseño anterior utilizaba código de barras; no debe recibir automáticamente la misma indicación de MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.tse.go.cr/comunicado1081.html"
+        },
+        {
+          "label": "Muestra oficial · anverso",
+          "url": "https://www.tse.go.cr/imgs/ced/diseno-ced-frente.jpg"
+        },
+        {
+          "label": "Muestra oficial · reverso",
+          "url": "https://www.tse.go.cr/imgs/ced/diseno-ced-dorso.jpg"
+        }
+      ]
+    },
+    "VN": {
+      "model": "Căn cước · modelo desde julio de 2024 · personas de 6 años o más",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso"
+      },
+      "mrz": {
+        "present": true,
+        "location": "Reverso"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": false
+        },
+        "reverso": {
+          "photo": false,
+          "mrz": true
+        }
+      },
+      "note": "La descripción oficial enumera la foto en el anverso y la MRZ en el reverso. Excepción: la variante de menores de 6 años no lleva retrato; sí lleva MRZ. No se confunde con el certificado de identidad ni con las tarjetas antiguas.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://canhsatquanlyhanhchinh.gov.vn/gioi-thieu/bo-cong-an-ban-hanh-mau-the-can-cuoc-mau-giay-chung-nhan-can-cuoc-su-dung-tu-ngay-01-7-2024-2812"
+        }
+      ]
+    },
+    "BO": {
+      "model": "Cédula de identidad · formato de noviembre de 2023",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado"
+      },
+      "mrz": {
+        "present": true,
+        "location": "Reverso"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": false
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": true
+        }
+      },
+      "note": "SEGIP confirma la incorporación de MRZ al reverso en 2023. El texto del Decreto 4924 sitúa la fotografía del titular en el anverso.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.segip.gob.bo/wp-content/uploads/2025/10/Resena-historica-SEGIP.pdf"
+        },
+        {
+          "label": "Texto del Decreto 4924 · distribución de las caras",
+          "url": "https://www.lexivox.org/norms/BO-DS-N4924.html"
+        }
+      ]
+    },
+    "GT": {
+      "model": "DPI a color · diseño desde enero de 2025",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Lado por confirmar"
+      },
+      "mrz": {
+        "present": true,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": null,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "RENAP confirma fotografía a color, imagen fantasma y zona de lectura mecánica. La ubicación exacta por cara de este diseño queda pendiente de comprobación; no se traslada automáticamente la del modelo anterior.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://ns1.renap.gob.gt/noticias/medidas-de-seguridad-del-dpi-color"
+        }
+      ]
+    },
+    "UY": {
+      "model": "Cédula con chip · muestra oficial de 2015",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso confirmado"
+      },
+      "mrz": {
+        "present": true,
+        "location": "Reverso"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": true
+        }
+      },
+      "note": "La muestra de AGESIC sitúa foto en el anverso y MRZ en el reverso. AGESIC documenta un cambio del plástico en noviembre de 2022; estas ubicaciones se refieren a la muestra de 2015, no verifican el diseño de 2022.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://www.gub.uy/agencia-gobierno-electronico-sociedad-informacion-conocimiento/sites/agencia-gobierno-electronico-sociedad-informacion-conocimiento/files/documentos/publicaciones/3-seguridad-tramites.pdf"
+        },
+        {
+          "label": "Versiones del plástico 2015 y 2022",
+          "url": "https://www.gub.uy/agencia-gobierno-electronico-sociedad-informacion-conocimiento/comunicacion/publicaciones/documentacion-tecnica-id-uruguay/documentacion-tecnica-id-uruguay-9"
+        }
+      ]
+    },
+    "SN": {
+      "model": "Carte CEDEAO · distribución descrita en 2016",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso (principal y secundaria)"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La descripción de la DGE sitúa dos fotografías en el anverso. Esta fuente no basta para concluir si la tarjeta tiene MRZ; no se deduce por ser una tarjeta CEDEAO.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://dge.sn/decret-n-2016-1536-du-29-septembre-2016-portant-application-de-la-loi-n-2016-09-du-14-mars-2016-instituant-une-carte-didentite-biometrique-cedeao-publie-au-jors-n-6965-du-5/"
+        }
+      ]
+    },
+    "KH": {
+      "model": "Cambodian Identity Card · modelo descrito por el Departamento de Estado",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Anverso"
+      },
+      "mrz": {
+        "present": true,
+        "location": "Anverso según la descripción consular"
+      },
+      "sides": {
+        "anverso": {
+          "photo": true,
+          "mrz": true
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La ficha sitúa foto y MRZ en la sección del anverso. No identifica un año de emisión: comprobar el ejemplar antes de utilizar esta orientación como regla de captura.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://travel.state.gov/content/travel/en/us-visas/Visa-Reciprocity-and-Civil-Documents-by-Country/Cambodia.html"
+        }
+      ]
+    },
+    "DO": {
+      "model": "Nueva cédula de identidad y electoral · diseño presentado para 2026",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Lado por confirmar"
+      },
+      "mrz": {
+        "present": true,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": null,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La JCE confirma fotografía grabada con láser y MRZ para el nuevo diseño. La distribución por caras queda pendiente de inspección; no se reutiliza automáticamente la del modelo de 2014.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://nuevacedula.jce.gob.do/conoce-tu-cedula"
+        },
+        {
+          "label": "JCE · confirmación de MRZ del nuevo diseño",
+          "url": "https://nuevacedula.jce.gob.do/sala-de-prensa/noticias/la-jce-presenta-dise241o-de-las-nuevas-c233dulas-a-periodistas-comunicadores-y-l237deres-de-opini243n"
+        }
+      ]
+    },
+    "NG": {
+      "model": "NINAuth · nueva tarjeta digital · no equivale a todas las tarjetas físicas",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "mrz": {
+        "present": true,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": null,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "NIMC confirma MRZ para esta tarjeta digital. La foto y la distribución por caras no se han verificado en esta revisión. No se atribuye este diseño a una tarjeta física ni a la anterior tarjeta de tokenización.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://ninauth.nimc.gov.ng/news-room/new-digital-id-card"
+        }
+      ]
+    },
+    "LK": {
+      "model": "Smart National Identity Card · servicio oficial DRP",
+      "basis": "documented",
+      "checked_on": "2026-09-30",
+      "photo": {
+        "present": true,
+        "location": "Lado por confirmar"
+      },
+      "mrz": {
+        "present": null,
+        "location": "Lado por confirmar"
+      },
+      "sides": {
+        "anverso": {
+          "photo": null,
+          "mrz": null
+        },
+        "reverso": {
+          "photo": null,
+          "mrz": null
+        }
+      },
+      "note": "La documentación del DRP describe la fotografía usada para la tarjeta. La ubicación por cara y la presencia de MRZ siguen sin verificarse. Un código de barras no confirma MRZ.",
+      "sources": [
+        {
+          "label": "Fuente del modelo y características",
+          "url": "https://drp.gov.lk/en/faq.php"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+CATÁLOGO COMPLETO POR PAÍSES
+
+196 entradas del inventario: 195 países de la lista inicial más Kosovo.
+Se reúnen TODOS, GENERADOS_PRIORITARIOS y REVISION_UE_PRIORITARIOS. La revisión más reciente prevalece para cada país/tipo/cara. Los catálogos originales conservan las variantes históricas.
+
+Cada país muestra ID front, ID back y página de datos del pasaporte, aunque falte una imagen. Tarjetas de pasaporte se muestran aparte.
+Estados: imagen disponible; documento identificado pero falta imagen; ID nacional no emitido/cancelado con fuente; otro formato; existencia por confirmar. No obtener imagen nunca se convierte automáticamente en no existencia. Una ficha PRADO puede corresponder a un modelo histórico.
+Foto y MRZ describen la imagen/modelo mostrado. Retrato secundario incluye imagen fantasma o lenticular reconocible. Una zona de retrato vacía se distingue de una fotografía. Las demos tienen retratos sin rasgos; sus MRZ no se han validado.
+Sin imagen: se muestran características del modelo cuando hay evidencia documental, con fuente y ubicación si se conoce. Un dato confirmado en el documento no confirma automáticamente su presencia en ambas caras. Los pasaportes sin imagen muestran la previsión del estándar ICAO MRP, marcada SEGÚN ESTÁNDAR: no supone verificar el modelo del país. Los demás datos siguen por confirmar. No se deduce MRZ por la presencia de chip, QR o código de barras. Brasil conserva pendiente la comprobación del encuadre físico de la MRZ frente a una tarjeta emitida. Las nuevas demos incluyen el enlace Original para comparar la referencia.
+La lista no acredita cobertura de todas las emisiones ni la vigencia de los documentos. Las imágenes mantienen las fuentes y condiciones de las entregas originales.
+Abrir ABRIR_CATALOGO.html; funciona sin servidor. Los enlaces externos requieren conexión.
+
+EJEMPLOS GLOBALES
+ID front con foto y sin MRZ; ID back con MRZ, con o sin foto de cara: requieren MRZ documentada en esa cara, sin posiciones pendientes. Para el reverso, la presencia de foto no condiciona la asignación del ejemplo global. Pasaporte con foto y MRZ: se asigna según el modelo del catálogo o, si falta imagen, según el estándar ICAO MRP, indicando expresamente que el modelo del país sigue sin verificar. Una evidencia explícita de ausencia de MRZ impide la asignación. No sustituyen la referencia del país ni cuentan como nuevas imágenes nacionales. No se ha identificado ningún pasaporte sin MRZ en las referencias reunidas; no se certifican todas las emisiones, los modelos históricos ni los documentos de emergencia. Ver pasaportes-mrz.json para el desglose. Los diseños genéricos y sus prompts están en ejemplos-globales; el listado se encuentra en ejemplos-globales-asignaciones.json.

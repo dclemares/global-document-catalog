@@ -1,0 +1,33 @@
+{
+  "countries": 196,
+  "countries_with_images": 85,
+  "countries_without_images": 111,
+  "images": 212,
+  "demos": 194,
+  "slots": {
+    "missing_image": 152,
+    "image": 210,
+    "unconfirmed": 220,
+    "not_issued": 4,
+    "other_format": 2
+  },
+  "global_examples": {
+    "assignments": 319,
+    "countries": 196,
+    "by_side": {
+      "reverso": 55,
+      "pagina-datos": 196,
+      "anverso": 68
+    },
+    "complete_sets": 53
+  },
+  "empty_countries_id_documented": 22,
+  "empty_countries_id_mrz_documented": 9,
+  "passport_standard_only": 121,
+  "passport_mrz": {
+    "catalog_model": 75,
+    "standard_only": 121,
+    "without_mrz": [],
+    "scope": "Pasaporte ordinario MRP. No certifica todas las emisiones ni incluye documentos de emergencia o históricos."
+  }
+}
