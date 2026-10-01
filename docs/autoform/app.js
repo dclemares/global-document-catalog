@@ -100,30 +100,43 @@ if(typeof document!=='undefined'){
     return `<div class="cam-mock real" aria-hidden="true">${parts}</div>`;
   }
   // Cámara real del dispositivo (requiere HTTPS o localhost). Si no hay permiso o dispositivo, se mantiene la simulación.
-  let camStream=null;
+  let camStream=null,camPerm='idle',camPromise=null;   // camPerm: idle | pending | granted | denied | unavailable
   function stopCam(){if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}}
+  const CAM_CONSTRAINTS={video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false};
+  // Se pide al pulsar "Continuar" (paso 1): así el aviso del navegador no tapa la transición del paso 3
+  function requestCamera(){
+    if(camStream&&camStream.active)return Promise.resolve('granted');
+    if(window.__noLock){camPerm='unavailable';return Promise.resolve(camPerm);}
+    if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia){camPerm='unavailable';return Promise.resolve(camPerm);}
+    if(camPerm==='denied')return Promise.resolve('denied');
+    camPerm='pending';
+    camPromise=navigator.mediaDevices.getUserMedia(CAM_CONSTRAINTS).then(stream=>{
+      if(!dialog.open){stream.getTracks().forEach(t=>t.stop());return null;}   // cerró el diálogo mientras decidía
+      camStream=stream;camPerm='granted';return stream;
+    }).catch(e=>{camPerm=e&&e.name==='NotAllowedError'?'denied':'unavailable';return null;});
+    const wait=new Promise(r=>setTimeout(()=>r('timeout'),25000));      // si tarda mucho en decidir, se sigue y se usará cuando llegue
+    return Promise.race([camPromise.then(()=>camPerm),wait]);
+  }
   async function startCam(){
     const st=dialog.querySelector('.stage.cam'),v=st?.querySelector('.cam-video');if(!v)return;
     const fail=msg=>{st.classList.add('no-video');if(!dialog.querySelector('.cam-note'))st.insertAdjacentHTML('afterend',`<p class="hint cam-note">${msg}</p>`);};
-    if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia)return fail('Simulación: esta página no puede abrir la cámara (hace falta HTTPS).');
-    try{
-      const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false});
-      if(!st.isConnected||!dialog.open){stream.getTracks().forEach(t=>t.stop());return;}   // la persona ya salió de este paso
-      stopCam();camStream=stream;v.srcObject=stream;
-      const show=()=>{if(!st.isConnected||st.classList.contains('has-video'))return;st.classList.add('has-video');
-        const cap=dialog.querySelector('[data-action="capture"]');if(cap)cap.textContent='Hacer foto';};
-      v.addEventListener('loadeddata',show,{once:true});
-      v.play().then(show).catch(()=>{});
-      setTimeout(show,1500);   // por si el navegador tarda en avisar
-    }catch(e){
-      fail(e&&e.name==='NotAllowedError'?'Simulación: has bloqueado el acceso a la cámara.':'Simulación: no hemos encontrado una cámara disponible.');
+    if(!(camStream&&camStream.active)){
+      if(camPerm==='pending'&&camPromise)await camPromise;                        // todavía decidiendo en el paso 1
+      else if(camPerm==='idle'||camPerm==='granted'){                              // llegada sin pasar por el paso 1 (p. ej. reintento)
+        if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia)return fail('Simulación: esta página no puede abrir la cámara (hace falta HTTPS).');
+        await requestCamera();
+      }
     }
-  }
-  // Los botones del paso 2 aparecen cuando termina toda la animación, con un fogonazo de "foto tomada" sobre el documento
-  let ctaTimer=null;
-  function ctaReveal(ms){
-    clearTimeout(ctaTimer);if(ms<=0)return;
-    ctaTimer=setTimeout(()=>{if(dialog.open&&dialog.querySelector('.dialog-actions.reveal'))announce('Ya puedes hacer la foto.');},ms);
+    if(!st.isConnected||!dialog.open)return;
+    if(!(camStream&&camStream.active)){
+      return fail(camPerm==='denied'?'Simulación: has bloqueado el acceso a la cámara.':!window.isSecureContext||!navigator.mediaDevices?.getUserMedia?'Simulación: esta página no puede abrir la cámara (hace falta HTTPS).':'Simulación: no hemos encontrado una cámara disponible.');
+    }
+    v.srcObject=camStream;
+    const show=()=>{if(!st.isConnected||st.classList.contains('has-video'))return;st.classList.add('has-video');
+      const cap=dialog.querySelector('[data-action="capture"]');if(cap)cap.textContent='Hacer foto';};
+    v.addEventListener('loadeddata',show,{once:true});
+    v.play().then(show).catch(()=>{});
+    setTimeout(show,1500);   // por si el navegador tarda en avisar
   }
   function containRect(st,pad,ratio){
     const b=st.getBoundingClientRect(),W=b.width-2*pad,H=b.height-2*pad;let w=W,h=W/ratio;if(h>H){h=H;w=H*ratio;}
@@ -171,16 +184,15 @@ if(typeof document!=='undefined'){
     const endOpen=isPass?OPEN_AT+OPEN_DUR:flipEnd;
     const GAP=1.45; // tiempo entre pasos
     const T={side:endOpen,place:endOpen+GAP,lines:endOpen+2*GAP,glare:endOpen+3*GAP};
-    const CTA_AT=+(T.glare+1.0).toFixed(3);   // fin del destello final: aparecen los botones y el fogonazo
     const tips=[['side',isPass?'Ábrelo por la página de la foto':d.side==='back'?'Muéstralo por la parte de atrás':'Muéstralo por la cara de la foto'],['place','Ponlo plano sobre un fondo liso'],['lines','Líneas de abajo enteras'],['glare','Sin reflejos ni dedos']];
     const hand=`<img class="hand hand-img" src="assets/hand.webp" alt="">`;
-    const fx=`<div class="fx-wrap" style="--bd:${BAD}s;--ud:${(T.place-.7).toFixed(2)}s;--hd:${(T.lines-.55).toFixed(2)}s;--tp:${T.place}s;--ts:${T.side}s;--po:${OPEN_AT}s;--pt:${TURN_AT}s;--pdur:${OPEN_DUR}s;--cr:.75;--tl:${T.lines}s;--cta:${CTA_AT}s;--tg:${T.glare}s;--mt:${d.formType==='passport'?76:58}%;--mh:${d.formType==='passport'?20:36}%"><div class="fx">${isPass?'<i class="pshadow"></i>':''}<i class="ring r1"></i>${T.side?'<i class="ring r2"></i>':''}<i class="mrz-glow"></i><i class="glare"></i><i class="glint"></i><i class="shot"></i></div><div class="hand-box">${hand}</div></div>`;
-    body(`Prepara tu ${d.formType==='passport'?'pasaporte':'documento'}`,`<p class="hint"><span class="pill-doc">${esc(documentCatalog[issuingCountry].name)} · ${esc(d.label)}</span> <button class="text-button" data-action="choose">Cambiar</button></p>${stageHtml(d,false,true,fx)}<ul class="tips big">${tips.map(([k,t])=>`<li style="--t:${T[k]}s"><span class="mk" aria-hidden="true"><b class="x">✕</b><b class="ok">✓</b></span>${t}</li>`).join('')}</ul><div class="cta-zone" style="--cta:${CTA_AT}s"><div class="cam-loading" role="status" aria-label="Cargando la cámara"><span class="cl-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.2" r="3.6"/></svg>Cargando la cámara…</span><span class="cl-track"><i></i></span></div><div class="dialog-actions reveal"><button class="primary" data-action="camera">Hacer la foto <span aria-hidden="true">→</span></button><button class="secondary" data-action="gallery">Elegir de galería</button><button class="text-button" data-action="choose">Atrás</button></div></div>`,stepsHtml(2),true);
+    const fx=`<div class="fx-wrap" style="--bd:${BAD}s;--ud:${(T.place-.7).toFixed(2)}s;--hd:${(T.lines-.55).toFixed(2)}s;--tp:${T.place}s;--ts:${T.side}s;--po:${OPEN_AT}s;--pt:${TURN_AT}s;--pdur:${OPEN_DUR}s;--cr:.75;--tl:${T.lines}s;--tg:${T.glare}s;--mt:${d.formType==='passport'?76:58}%;--mh:${d.formType==='passport'?20:36}%"><div class="fx">${isPass?'<i class="pshadow"></i>':''}<i class="ring r1"></i>${T.side?'<i class="ring r2"></i>':''}<i class="mrz-glow"></i><i class="glare"></i><i class="glint"></i></div><div class="hand-box">${hand}</div></div>`;
+    body.keep=true;
+    body(`Prepara tu ${d.formType==='passport'?'pasaporte':'documento'}`,`<p class="hint"><span class="pill-doc">${esc(documentCatalog[issuingCountry].name)} · ${esc(d.label)}</span> <button class="text-button" data-action="choose">Cambiar</button></p>${stageHtml(d,false,true,fx)}<ul class="tips big">${tips.map(([k,t])=>`<li style="--t:${T[k]}s"><span class="mk" aria-hidden="true"><b class="x">✕</b><b class="ok">✓</b></span>${t}</li>`).join('')}</ul><div class="dialog-actions"><button class="primary" data-action="camera">Hacer la foto <span aria-hidden="true">→</span></button><button class="secondary" data-action="gallery">Elegir de galería</button><button class="text-button" data-action="choose">Atrás</button></div>`,stepsHtml(2),true);
     fitFx();
-    ctaReveal(matchMedia('(prefers-reduced-motion: reduce)').matches?0:Math.round(CTA_AT*1000));
   }
   function body(title,content,label='PREPARA TU DOCUMENTO',tall=false){
-    stopCam();clearTimeout(ctaTimer);
+    if(!body.keep)stopCam();body.keep=false;
     dialog.classList.toggle('tall',tall);
     $('dialog-context').textContent='Autorrellenar con una foto';
     $('dialog-content').innerHTML=`<div class="dialog-body">${label.startsWith('<ol')?label:`<div class="step-label">${label}</div>`}<h2 id="dialog-title" tabindex="-1">${title}</h2>${content}</div>`;
@@ -194,6 +206,7 @@ if(typeof document!=='undefined'){
     }
     const d=currentDoc();
     const camStage=`<div class="stage cam m-enfoque"><div class="cam-bg"></div><video class="cam-video" muted playsinline autoplay></video><div class="cam-scrim"></div><div class="cam-card"><div class="cam-float"><img src="${d.image}" alt="${esc(d.alt)}">${mockHtml(d)}<i class="scan"></i></div></div><div class="cam-frame"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div><div class="cam-chip"><span>Alinea tu documento con la guía</span></div></div>`;
+    body.keep=true;
     body(d.side==='back'?'Coloca el reverso en el marco':d.side==='front'?'Coloca el anverso en el marco':'Encuadra la página de la foto',`${camStage}<div class="dialog-actions single"><button class="primary" data-action="capture">Simular captura</button><button class="text-button" data-action="intro">Atrás</button></div>`,stepsHtml(3),true);
     dialog.querySelector('.dialog-body').classList.add('noslide');
     announce('Cámara abierta.');layoutCam(fromRect);startCam();
@@ -268,7 +281,12 @@ if(typeof document!=='undefined'){
   $('dialog-content').onclick=e=>{
     const el=e.target.closest('[data-action]');if(!el)return;const action=el.dataset.action;
     if(action==='choose')guide();
-    if(action==='prepare'||action==='intro')prepare();
+    if(action==='intro'){prepare();return;}
+    if(action==='prepare'){
+      const b=el;b.disabled=true;b.textContent='Esperando permiso de la cámara…';
+      requestCamera().then(()=>{if(dialog.open&&dialog.querySelector('[data-action="prepare"]'))prepare();});
+      return;
+    }
     if(action==='pick-type'){documentKey=el.dataset.key;guide();dialog.querySelector('.type-option.on')?.focus();}
     if(action==='camera'||action==='retry-photo'){
       const st=dialog.querySelector('.stage'),im=st&&(st.querySelector('.face.turned img')||st.querySelector('img'));
