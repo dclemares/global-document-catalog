@@ -318,3 +318,12 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .stage.cam.has-video.m-enfoque .cam-video{animation:bgFocus .95s cubic-bezier(.3,.7,.2,1) both}
 .cam-note{flex:none;margin:0;font-size:12px;color:var(--muted);text-align:center}
 @media(prefers-reduced-motion:reduce){.stage.cam.has-video.m-enfoque .cam-video{animation:none}}
+
+/* Fogonazos de los avisos (texto y documento) un 10 % más largos */
+.tips.big li{animation:tipOn2 .605s ease var(--t,0s) both}
+.mk{animation:mkBg .605s ease var(--t,0s) both}
+.mk .x{animation:mkX .33s ease var(--t,0s) both}
+.mk .ok{animation:mkOk .55s ease calc(var(--t,0s) + .11s) both}
+.fx .r1{animation:ringPulse .99s ease var(--tp) both}
+.fx .r2{animation:ringPulse .99s ease var(--ts) both}
+.fx .mrz-glow{animation:mrzFlash2 .77s ease-out var(--tl) both}
