@@ -152,7 +152,7 @@ if(typeof document!=='undefined'){
     const tilt=st.querySelector('.tilt');if(tilt)['--bd','--ud','--po','--pt','--cr','--pdur'].forEach(p=>tilt.style.setProperty(p,fx.style.getPropertyValue(p)));
     const place=()=>{const pad=12,W=st.clientWidth-2*pad,H=st.clientHeight-2*pad,r=img.naturalWidth/img.naturalHeight;let w=W,h=W/r;if(h>H){h=H;w=H*r;}
       Object.assign(fx.style,{left:(st.clientWidth-w)/2+'px',top:(st.clientHeight-h)/2+'px',width:w+'px',height:h+'px'});
-      const ps=st.querySelector('.pass-stage');if(ps&&tilt){const Hb=ps.clientHeight;tilt.style.setProperty('--ps',(w/Hb).toFixed(4));}};
+      const ps=st.querySelector('.pass-stage');if(ps&&tilt){const Hb=ps.clientHeight;tilt.style.setProperty('--ps',(w/Hb).toFixed(4));tilt.style.setProperty('--psy',(h/(.75*Hb)).toFixed(4));}};   // la tapa se ajusta al ancho Y al alto de la página de datos
     img.complete&&img.naturalWidth?place():img.addEventListener('load',place,{once:true});
   }
   window.addEventListener('resize',()=>{if(dialog.open)fitFx();});
