@@ -394,3 +394,14 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 [data-static] .flip-inner{transform:rotateY(180deg)}
 [data-static] .pcover-wrap{display:none}
 [data-static] .pass-stage .pdata{opacity:1}
+/* Last two guide actions (bottom lines, no glare): flashes and their tips 10% longer */
+@media(prefers-reduced-motion:no-preference){
+.fx .mrz-glow{animation:mrzFlash2 .847s ease-out var(--tl) both}
+.fx .mrz-glow::after{animation:mrzSweep 1.21s ease var(--tl) 1 both}
+.fx .glint{animation:glintSweep 1.1s ease var(--tg) 1 forwards}
+.fx .glare{animation:glareIn .5s ease var(--bd,.9s) both,glareOut .77s ease var(--tg) forwards}
+.tips.big li:nth-child(n+3){animation:tipOn2 .666s ease var(--t,0s) both}
+.tips.big li:nth-child(n+3) .mk{animation:mkBg .666s ease var(--t,0s) both}
+.tips.big li:nth-child(n+3) .mk .x{animation:mkX .363s ease var(--t,0s) both}
+.tips.big li:nth-child(n+3) .mk .ok{animation:mkOk .605s ease calc(var(--t,0s) + .121s) both}
+}
