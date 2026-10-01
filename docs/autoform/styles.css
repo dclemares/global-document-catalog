@@ -327,3 +327,9 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .fx .r1{animation:ringPulse .99s ease var(--tp) both}
 .fx .r2{animation:ringPulse .99s ease var(--ts) both}
 .fx .mrz-glow{animation:mrzFlash2 .77s ease-out var(--tl) both}
+
+/* iconos de tipo de documento */
+.type-option .ti{display:grid;place-content:center;flex:none;width:34px;height:34px;font-size:0;color:var(--muted)}
+.type-option .ti svg{width:30px;height:30px;display:block}
+.type-option.on .ti{color:var(--accent)}
+.type-option .ti{width:40px;height:40px}.type-option .ti svg{width:36px;height:36px}

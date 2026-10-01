@@ -32,6 +32,10 @@ if(typeof document!=='undefined'){
     $('profile-detail').innerHTML=`<span class="context-tag">${esc(profile.context)}</span><h4>Espera</h4><p>${esc(profile.expectation)}</p><h4>Feedback simulado</h4><p>«${esc(profile.feedback)}»</p><h4>Decisión incorporada</h4><p>${esc(profile.decision)}</p>`;
     announce(`Perfil ${profile.name} preparado. Datos de ejemplo.`);
   }
+  // Iconos de tipo de documento (SVG, usan el color del texto)
+  const docIcon=type=>type==='passport'
+    ?'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3.5" width="18" height="25" rx="2.5"/><circle cx="16" cy="13.5" r="5"/><ellipse cx="16" cy="13.5" rx="2.2" ry="5"/><path d="M11 13.5h10"/><rect x="13" y="22.5" width="6" height="3" rx=".8"/></svg>'
+    :'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="26" height="18" rx="3"/><circle cx="11" cy="14" r="2.6"/><path d="M6.5 22c.4-2.6 2.2-4 4.5-4s4.1 1.4 4.5 4"/><path d="M19 13h7M19 17h7M19 21h4.5"/></svg>';
   const stageHtml=(d,cam,flip,fx)=>{
     if(!d)return `<div class="stage ${cam?'cam':''}"><div class="stage-empty"><span aria-hidden="true">▭</span>Elige país y tipo para ver<br>qué cara debes fotografiar</div></div>`;
     const passInner=`<div class="pass-stage"><img class="pdata" src="${d.image}" alt="${esc(d.alt)}"><div class="pcover-wrap"><img class="pcover" src="assets/passport/cover.webp" alt=""></div></div>`;
@@ -50,7 +54,7 @@ if(typeof document!=='undefined'){
     const d=currentDoc();if(d)docType=d.formType;
     const countries=Object.entries(documentCatalog).map(([code,c])=>`<option value="${code}" ${issuingCountry===code?'selected':''}>${esc(c.name)}</option>`).join('');
     const types=Object.entries(documentCatalog[issuingCountry]?.documents||{});
-    const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Tipo de documento">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${t.formType==='passport'?'▤':'▭'}</span>${esc(t.label)}</button>`).join('')}</div>`:'<p class="hint">Primero elige el país que expidió el documento.</p>';
+    const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Tipo de documento">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${docIcon(t.formType)}</span>${esc(t.label)}</button>`).join('')}</div>`:'<p class="hint">Primero elige el país que expidió el documento.</p>';
     const preview=d?`<div class="pick-preview"><img src="${d.image}" alt=""><div><b>Fotografiarás: ${esc(sideName(d))}</b><span>${d.formType==='passport'?'La página con tu foto y los datos.':'Solo esta cara; no hace falta la otra.'}</span></div></div>`:'';
     body('¿Qué documento vas a usar?',`<div class="field"><label for="issuing-country">País que lo expidió</label><select id="issuing-country" class="big-select"><option value="">Selecciona un país</option>${countries}</select></div><div class="field"><span class="lbl">Tipo de documento</span>${typeButtons}</div>${preview}<div class="dialog-actions"><button class="primary" data-action="prepare" ${d?'':'disabled'}>Continuar</button><button class="text-button" data-action="exit">Prefiero escribirlos</button></div>`,stepsHtml(1));
   }
