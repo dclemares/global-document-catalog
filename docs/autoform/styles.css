@@ -333,3 +333,7 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .type-option .ti svg{width:30px;height:30px;display:block}
 .type-option.on .ti{color:var(--accent)}
 .type-option .ti{width:40px;height:40px}.type-option .ti svg{width:36px;height:36px}
+
+/* Paso 1: el documento se muestra solo, sin marcos ni fondos alrededor */
+.pick-preview{padding:0;background:none;border:0;border-radius:0}
+.pick-preview img{background:none;border:0;border-radius:0;box-shadow:none;filter:drop-shadow(0 2px 5px #211d3926)}
