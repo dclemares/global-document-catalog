@@ -414,3 +414,5 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .cam-mock.real .mband{align-items:stretch}
 /* Passport cover shadow: tight contact shadow that fits inside the stage margin (the old 9px blur was cut off by the stage edges, leaving a visible rectangle) */
 .pcover-wrap{filter:drop-shadow(0 3px 3px #2a101045) drop-shadow(0 6px 5px #2a101022)}
+/* The cover is rotated 90deg, so a shadow offset "down" in its own axes lands on the LEFT of the screen. Offset along its local x so it falls under the passport. */
+.pcover-wrap{filter:drop-shadow(3px 0 3px #2a101045) drop-shadow(6px 0 5px #2a101022)}
