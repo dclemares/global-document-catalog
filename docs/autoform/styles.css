@@ -338,8 +338,9 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .pick-preview{padding:0;background:none;border:0;border-radius:0}
 .pick-preview img{background:none;border:0;border-radius:0;box-shadow:none;filter:drop-shadow(0 2px 5px #211d3926)}
 
-/* Mano (ilustración aportada): dedos sobre la zona de las líneas y la palma hacia abajo, fuera del documento */
-.hand.hand-img{display:block;width:36%;height:auto;right:5%;left:auto;bottom:-22%}
+/* Mano (ilustración aportada): erguida (8°), mitad derecha del documento, dedos hasta el inicio de las líneas y palma fuera por debajo.
+   top:auto es necesario: la regla genérica .stage img fija inset:12px */
+.hand.hand-img{display:block;top:auto;left:auto;height:auto;width:54%;right:4%;bottom:-88%;rotate:8deg;transform-origin:50% 85%}
 
 /* Paso 1: se mantiene el recuadro exterior (más oscuro); la imagen del documento va sin marco propio */
 .pick-preview{padding:10px;background:#f7f7fc;border:1px solid var(--line);border-radius:12px}
