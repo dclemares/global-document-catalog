@@ -52,11 +52,10 @@ if(typeof document!=='undefined'){
   // Paso 1 · elegir documento
   function guide(){
     const d=currentDoc();if(d)docType=d.formType;
-    const countryNames=Object.values(documentCatalog).map(c=>`<option value="${esc(c.name)}"></option>`).join('');
     const types=Object.entries(documentCatalog[issuingCountry]?.documents||{});
     const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Tipo de documento">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${docIcon(t.formType)}</span>${esc(t.label)}</button>`).join('')}</div>`:'<p class="hint">Primero elige el país que expidió el documento.</p>';
     const preview=d?`<div class="pick-preview"><img src="${d.image}" alt=""><div><b>Fotografiarás: ${esc(sideName(d))}</b><span>${d.formType==='passport'?'La página con tu foto y los datos.':'Solo esta cara; no hace falta la otra.'}</span></div></div>`:'';
-    body('¿Qué documento vas a usar?',`<div class="field combo"><label for="issuing-country">País que lo expidió</label><input id="issuing-country" class="big-select" type="text" list="country-list" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Escribe o elige un país" value="${esc(documentCatalog[issuingCountry]?.name||'')}" aria-autocomplete="list"><datalist id="country-list">${countryNames}</datalist></div><div class="field"><span class="lbl">Tipo de documento</span>${typeButtons}</div>${preview}<div class="dialog-actions single"><button class="primary" data-action="prepare" ${d?'':'disabled'}>Continuar</button></div>`,stepsHtml(1));
+    body('¿Qué documento vas a usar?',`<div class="field combo"><label for="issuing-country">País que lo expidió</label><div class="cbx"><input id="issuing-country" class="big-select" role="combobox" aria-expanded="false" aria-controls="country-list" aria-autocomplete="list" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Selecciona un país" value="${esc(documentCatalog[issuingCountry]?.name||'')}"><ul id="country-list" class="cbx-list" role="listbox" hidden></ul></div></div><div class="field"><span class="lbl">Tipo de documento</span>${typeButtons}</div>${preview}<div class="dialog-actions single"><button class="primary" data-action="prepare" ${d?'':'disabled'}>Continuar</button></div>`,stepsHtml(1),true);   // misma altura que los otros pasos: la lista de países cabe dentro
   }
   // Esquema (mock-up) del documento: zonas de foto, datos y líneas de lectura como referencia visual para la foto
   function genericMock(d){
@@ -120,21 +119,11 @@ if(typeof document!=='undefined'){
       fail(e&&e.name==='NotAllowedError'?'Simulación: has bloqueado el acceso a la cámara.':'Simulación: no hemos encontrado una cámara disponible.');
     }
   }
-  // "Hacer la foto" y "Elegir de galería" no se pueden pulsar hasta que acabe la animación de la guía
-  let prepTimer=null,prepLocked=false;
-  function prepLock(ms){
-    clearTimeout(prepTimer);prepLocked=ms>0;if(!prepLocked)return;
-    const btns=()=>dialog.querySelectorAll('[data-action="camera"],[data-action="gallery"]');
-    btns().forEach(b=>{b.classList.add('wait');b.setAttribute('aria-disabled','true');});
-    prepTimer=setTimeout(()=>{prepLocked=false;btns().forEach(b=>{b.classList.remove('wait');b.removeAttribute('aria-disabled');b.classList.add('ready');});dialog.querySelector('.wait-msg')?.remove();announce('Ya puedes hacer la foto.');},ms);
-  }
-  function showWait(){
-    dialog.querySelector('.wait-msg')?.remove();
-    const acts=dialog.querySelector('.dialog-actions');if(!acts)return;
-    acts.insertAdjacentHTML('beforebegin','<p class="wait-msg" role="status">Un momento: la guía todavía no ha terminado. Léela y en unos segundos podrás hacer la foto.</p>');
-    announce('La guía todavía no ha terminado. Espera unos segundos.');
-    acts.querySelectorAll('.wait').forEach(b=>{b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');});
-    clearTimeout(showWait.t);showWait.t=setTimeout(()=>dialog.querySelector('.wait-msg')?.remove(),3200);
+  // Los botones del paso 2 aparecen cuando termina toda la animación, con un fogonazo de "foto tomada" sobre el documento
+  let ctaTimer=null;
+  function ctaReveal(ms){
+    clearTimeout(ctaTimer);if(ms<=0)return;
+    ctaTimer=setTimeout(()=>{if(dialog.open&&dialog.querySelector('.dialog-actions.reveal'))announce('Ya puedes hacer la foto.');},ms);
   }
   function containRect(st,pad,ratio){
     const b=st.getBoundingClientRect(),W=b.width-2*pad,H=b.height-2*pad;let w=W,h=W/ratio;if(h>H){h=H;w=H*ratio;}
@@ -182,15 +171,16 @@ if(typeof document!=='undefined'){
     const endOpen=isPass?OPEN_AT+OPEN_DUR:flipEnd;
     const GAP=1.45; // tiempo entre pasos
     const T={side:endOpen,place:endOpen+GAP,lines:endOpen+2*GAP,glare:endOpen+3*GAP};
+    const CTA_AT=+(T.glare+1.0).toFixed(3);   // fin del destello final: aparecen los botones y el fogonazo
     const tips=[['side',isPass?'Ábrelo por la página de la foto':d.side==='back'?'Muéstralo por la parte de atrás':'Muéstralo por la cara de la foto'],['place','Ponlo plano sobre un fondo liso'],['lines','Líneas de abajo enteras'],['glare','Sin reflejos ni dedos']];
     const hand=`<img class="hand hand-img" src="assets/hand.webp" alt="">`;
-    const fx=`<div class="fx-wrap" style="--bd:${BAD}s;--ud:${(T.place-.7).toFixed(2)}s;--hd:${(T.lines-.55).toFixed(2)}s;--tp:${T.place}s;--ts:${T.side}s;--po:${OPEN_AT}s;--pt:${TURN_AT}s;--pdur:${OPEN_DUR}s;--cr:.75;--tl:${T.lines}s;--tg:${T.glare}s;--mt:${d.formType==='passport'?76:58}%;--mh:${d.formType==='passport'?20:36}%"><div class="fx">${isPass?'<i class="pshadow"></i>':''}<i class="ring r1"></i>${T.side?'<i class="ring r2"></i>':''}<i class="mrz-glow"></i><i class="glare"></i><i class="glint"></i></div><div class="hand-box">${hand}</div></div>`;
-    body(`Prepara tu ${d.formType==='passport'?'pasaporte':'documento'}`,`<p class="hint"><span class="pill-doc">${esc(documentCatalog[issuingCountry].name)} · ${esc(d.label)}</span> <button class="text-button" data-action="choose">Cambiar</button></p>${stageHtml(d,false,true,fx)}<ul class="tips big">${tips.map(([k,t])=>`<li style="--t:${T[k]}s"><span class="mk" aria-hidden="true"><b class="x">✕</b><b class="ok">✓</b></span>${t}</li>`).join('')}</ul><div class="dialog-actions"><button class="primary" data-action="camera">Hacer la foto <span aria-hidden="true">→</span></button><button class="secondary" data-action="gallery">Elegir de galería</button><button class="text-button" data-action="choose">Atrás</button></div>`,stepsHtml(2),true);
+    const fx=`<div class="fx-wrap" style="--bd:${BAD}s;--ud:${(T.place-.7).toFixed(2)}s;--hd:${(T.lines-.55).toFixed(2)}s;--tp:${T.place}s;--ts:${T.side}s;--po:${OPEN_AT}s;--pt:${TURN_AT}s;--pdur:${OPEN_DUR}s;--cr:.75;--tl:${T.lines}s;--cta:${CTA_AT}s;--tg:${T.glare}s;--mt:${d.formType==='passport'?76:58}%;--mh:${d.formType==='passport'?20:36}%"><div class="fx">${isPass?'<i class="pshadow"></i>':''}<i class="ring r1"></i>${T.side?'<i class="ring r2"></i>':''}<i class="mrz-glow"></i><i class="glare"></i><i class="glint"></i><i class="shot"></i></div><div class="hand-box">${hand}</div></div>`;
+    body(`Prepara tu ${d.formType==='passport'?'pasaporte':'documento'}`,`<p class="hint"><span class="pill-doc">${esc(documentCatalog[issuingCountry].name)} · ${esc(d.label)}</span> <button class="text-button" data-action="choose">Cambiar</button></p>${stageHtml(d,false,true,fx)}<ul class="tips big">${tips.map(([k,t])=>`<li style="--t:${T[k]}s"><span class="mk" aria-hidden="true"><b class="x">✕</b><b class="ok">✓</b></span>${t}</li>`).join('')}</ul><div class="dialog-actions reveal" style="--cta:${CTA_AT}s"><button class="primary" data-action="camera">Hacer la foto <span aria-hidden="true">→</span></button><button class="secondary" data-action="gallery">Elegir de galería</button><button class="text-button" data-action="choose">Atrás</button></div>`,stepsHtml(2),true);
     fitFx();
-    prepLock(matchMedia('(prefers-reduced-motion: reduce)').matches||window.__noLock?0:Math.round((T.glare+1.0)*1000));   // se desbloquea al terminar el destello final
+    ctaReveal(matchMedia('(prefers-reduced-motion: reduce)').matches?0:Math.round(CTA_AT*1000));
   }
   function body(title,content,label='PREPARA TU DOCUMENTO',tall=false){
-    stopCam();clearTimeout(prepTimer);prepLocked=false;
+    stopCam();clearTimeout(ctaTimer);
     dialog.classList.toggle('tall',tall);
     $('dialog-context').textContent='Autorrellenar con una foto';
     $('dialog-content').innerHTML=`<div class="dialog-body">${label.startsWith('<ol')?label:`<div class="step-label">${label}</div>`}<h2 id="dialog-title" tabindex="-1">${title}</h2>${content}</div>`;
@@ -280,7 +270,6 @@ if(typeof document!=='undefined'){
     if(action==='choose')guide();
     if(action==='prepare'||action==='intro')prepare();
     if(action==='pick-type'){documentKey=el.dataset.key;guide();dialog.querySelector('.type-option.on')?.focus();}
-    if(prepLocked&&(action==='camera'||action==='gallery')){showWait();return;}
     if(action==='camera'||action==='retry-photo'){
       const st=dialog.querySelector('.stage'),im=st&&(st.querySelector('.face.turned img')||st.querySelector('img'));
       camera(action==='camera'&&st&&st.querySelector('.fx-wrap')&&im&&im.naturalWidth?{...containRect(st,12,im.naturalWidth/im.naturalHeight),ratio:im.naturalWidth/im.naturalHeight}:null);
@@ -296,24 +285,45 @@ if(typeof document!=='undefined'){
       readData.documentNumber=number;partialFixed=true;if(conflictsFor(form,readData).length)conflictReview();else applyResult();
     }
   };
-  // País escribible: se elige al coincidir con un nombre (también al elegirlo de la lista) o, al confirmar, si solo hay una coincidencia por el principio
+  // País: desplegable con aspecto de selector; al abrirlo o escribir se filtra la lista (sin tildes ni mayúsculas)
   const nrm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
-  function pickCountry(text,commit){
-    const q=nrm(text);if(!q)return;
-    const codes=Object.keys(documentCatalog);
-    let code=codes.find(c=>nrm(documentCatalog[c].name)===q);
-    if(!code&&commit){const m=codes.filter(c=>nrm(documentCatalog[c].name).startsWith(q));if(m.length===1)code=m[0];}
-    if(!code||code===issuingCountry)return;
+  let comboActive=-1;
+  const comboEls=()=>({inp:$('issuing-country'),list:$('country-list')});
+  function renderCountryList(q=''){
+    const {inp,list}=comboEls();if(!list)return;
+    const n=nrm(q);
+    const all=Object.entries(documentCatalog).map(([code,c])=>({code,name:c.name,k:nrm(c.name)}));
+    const hits=n?all.filter(c=>c.k.includes(n)).sort((a,b)=>(b.k.startsWith(n)-a.k.startsWith(n))||a.name.localeCompare(b.name,'es')):all;
+    list.innerHTML=hits.length?hits.map((c,i)=>`<li role="option" id="co-${c.code}" data-code="${c.code}" aria-selected="${c.code===issuingCountry}">${esc(c.name)}</li>`).join(''):'<li class="none" role="presentation">No hay ningún país con ese nombre</li>';
+    comboActive=-1;inp.removeAttribute('aria-activedescendant');
+    if(!n&&issuingCountry){const cur=list.querySelector(`[data-code="${issuingCountry}"]`);if(cur)list.scrollTop=Math.max(0,cur.offsetTop-70);}
+  }
+  function openCombo(){const {inp,list}=comboEls();if(!list)return;renderCountryList('');list.hidden=false;inp.setAttribute('aria-expanded','true');inp.closest('.cbx').classList.add('open');inp.select();}
+  function closeCombo(){const {inp,list}=comboEls();if(!list)return;list.hidden=true;inp.setAttribute('aria-expanded','false');inp.closest('.cbx')?.classList.remove('open');inp.value=documentCatalog[issuingCountry]?.name||'';}
+  function chooseCountry(code){
+    if(!documentCatalog[code])return;
     issuingCountry=code;
     const keys=Object.keys(documentCatalog[code].documents);documentKey=keys.includes('id')?'id':(keys[0]||'');   // por defecto el documento de identidad; si el país no lo tiene, el pasaporte
     guide();dialog.querySelector('.type-option.on')?.focus();
   }
-  $('dialog-content').addEventListener('input',e=>{if(e.target.id==='issuing-country')pickCountry(e.target.value,false);});
-  $('dialog-content').addEventListener('change',e=>{
-    if(e.target.id==='issuing-country'){
-      pickCountry(e.target.value,true);
-      const inp=$('issuing-country');if(inp&&documentCatalog[issuingCountry])inp.value=documentCatalog[issuingCountry].name;   // si no coincide nada, vuelve al país elegido
-    }
+  window.__pickCountry=chooseCountry;   // gancho para pruebas
+  function moveActive(d){
+    const items=[...$('country-list').querySelectorAll('li[data-code]')];if(!items.length)return;
+    comboActive=(comboActive+d+items.length)%items.length;
+    items.forEach((li,i)=>li.classList.toggle('active',i===comboActive));
+    const li=items[comboActive];li.scrollIntoView({block:'nearest'});$('issuing-country').setAttribute('aria-activedescendant',li.id);
+  }
+  const dc=$('dialog-content');
+  dc.addEventListener('focusin',e=>{if(e.target.id==='issuing-country'&&$('country-list').hidden)openCombo();});
+  dc.addEventListener('click',e=>{if(e.target.id==='issuing-country'&&$('country-list').hidden)openCombo();});
+  dc.addEventListener('input',e=>{if(e.target.id==='issuing-country'){const {list,inp}=comboEls();list.hidden=false;inp.setAttribute('aria-expanded','true');inp.closest('.cbx').classList.add('open');renderCountryList(inp.value);}});
+  dc.addEventListener('keydown',e=>{
+    if(e.target.id!=='issuing-country')return;
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();if($('country-list').hidden)openCombo();else moveActive(e.key==='ArrowDown'?1:-1);}
+    else if(e.key==='Enter'){e.preventDefault();const items=[...$('country-list').querySelectorAll('li[data-code]')];const li=items[comboActive]||(items.length===1?items[0]:null)||items[0];if(li&&!$('country-list').hidden)chooseCountry(li.dataset.code);}
+    else if(e.key==='Escape'&&!$('country-list').hidden){e.stopPropagation();e.preventDefault();closeCombo();}
   });
+  dc.addEventListener('mousedown',e=>{const li=e.target.closest('#country-list li[data-code]');if(li){e.preventDefault();chooseCountry(li.dataset.code);}});
+  dc.addEventListener('focusout',e=>{if(e.target.id==='issuing-country'){const q=nrm(e.target.value);const codes=Object.keys(documentCatalog);const exact=q&&codes.find(c=>nrm(documentCatalog[c].name)===q);if(exact&&exact!==issuingCountry){chooseCountry(exact);return;}closeCombo();}});
   reset();
 }
