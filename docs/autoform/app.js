@@ -340,11 +340,13 @@ if(typeof document!=='undefined'){
   }
   function openCombo(){const {inp,list}=comboEls();if(!list)return;renderCountryList('');list.hidden=false;inp.setAttribute('aria-expanded','true');inp.closest('.cbx').classList.add('open');inp.select();}
   function closeCombo(){const {inp,list}=comboEls();if(!list)return;list.hidden=true;inp.setAttribute('aria-expanded','false');inp.closest('.cbx')?.classList.remove('open');inp.value=documentCatalog[issuingCountry]?.name||'';}
+  let choosing=false;
   function chooseCountry(code){
     if(!documentCatalog[code])return;
     issuingCountry=code;
     const keys=Object.keys(documentCatalog[code].documents);documentKey=keys.includes('id')?'id':(keys[0]||'');   // default to the ID document; if the country doesn't have one, the passport
-    guide();dialog.querySelector('.type-option.on')?.focus();
+    choosing=true;try{guide();}finally{choosing=false;}   // re-rendering fires a focusout with the old text: it must not re-select the previous country
+    dialog.querySelector('.type-option.on')?.focus();
   }
   window.__pickCountry=chooseCountry;   // hook for tests
   function moveActive(d){
@@ -364,6 +366,6 @@ if(typeof document!=='undefined'){
     else if(e.key==='Escape'&&!$('country-list').hidden){e.stopPropagation();e.preventDefault();closeCombo();}
   });
   dc.addEventListener('mousedown',e=>{const li=e.target.closest('#country-list li[data-code]');if(li){e.preventDefault();chooseCountry(li.dataset.code);}});
-  dc.addEventListener('focusout',e=>{if(e.target.id==='issuing-country'){const q=nrm(e.target.value);const codes=Object.keys(documentCatalog);const exact=q&&codes.find(c=>nrm(documentCatalog[c].name)===q);if(exact&&exact!==issuingCountry){chooseCountry(exact);return;}closeCombo();}});
+  dc.addEventListener('focusout',e=>{if(e.target.id==='issuing-country'){if(choosing)return;const q=nrm(e.target.value);const codes=Object.keys(documentCatalog);const exact=q&&codes.find(c=>nrm(documentCatalog[c].name)===q);if(exact&&exact!==issuingCountry){chooseCountry(exact);return;}closeCombo();}});
   reset();
 }
