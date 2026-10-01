@@ -380,3 +380,16 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .fx .shot{position:absolute;inset:0;z-index:6;background:#fff;opacity:0;pointer-events:none;animation:shotFlash .7s ease-out var(--cta,0s) both}
 @keyframes shotFlash{0%{opacity:0}10%{opacity:.96}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){#scan-dialog .dialog-actions.reveal{visibility:visible;opacity:1;animation:none}.fx .shot{display:none}}
+
+/* ===== Barra "Cargando la cámara" en el hueco de los botones; termina cuando acaba la animación ===== */
+.cta-zone{position:relative;margin-top:auto;padding-top:6px;flex:none}
+#scan-dialog .cta-zone .dialog-actions{margin-top:0;padding-top:0}
+.cam-loading{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;animation:loadOut .3s ease var(--cta,0s) forwards}
+.cl-label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:650;color:var(--muted)}
+.cl-label svg{width:19px;height:19px;color:var(--accent);animation:camPulse 1.3s ease-in-out infinite}
+.cl-track{display:block;width:min(100%,300px);height:8px;border-radius:99px;background:#e6e6f4;overflow:hidden}
+.cl-track i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),#8793ff);animation:loadFill var(--cta,6s) linear forwards}
+@keyframes loadFill{to{width:100%}}
+@keyframes loadOut{to{opacity:0;visibility:hidden}}
+@keyframes camPulse{0%,100%{opacity:.55;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+@media(prefers-reduced-motion:reduce){.cam-loading{display:none}}
