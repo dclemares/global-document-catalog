@@ -405,3 +405,12 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .tips.big li:nth-child(n+3) .mk .x{animation:mkX .363s ease var(--t,0s) both}
 .tips.big li:nth-child(n+3) .mk .ok{animation:mkOk .605s ease calc(var(--t,0s) + .121s) both}
 }
+/* Closed passport: the data page stays hidden until the cover starts to open (it used to peek out around the cover) */
+@media(prefers-reduced-motion:no-preference){.pass-stage .pdata{opacity:0;animation:pdataIn .15s ease calc(var(--po,.85s) + .15s) both}}
+[data-static] .pass-stage .pdata{animation:none;opacity:1}
+/* MRZ never leaves the frame */
+.cam-mock .mband{overflow:hidden}
+/* MRZ lines stretch to the real MRZ width of the document (they used to shrink-wrap and sit centered) */
+.cam-mock.real .mband{align-items:stretch}
+/* Passport cover shadow: tight contact shadow that fits inside the stage margin (the old 9px blur was cut off by the stage edges, leaving a visible rectangle) */
+.pcover-wrap{filter:drop-shadow(0 3px 3px #2a101045) drop-shadow(0 6px 5px #2a101022)}

@@ -113,7 +113,7 @@ if(typeof document!=='undefined'){
         case 'text':{const kk=Math.max(1,Math.min(k||2,8));return box('mtext',x,y,w,h,'<s></s>'.repeat(kk),`--k:${kk}`);}
         case 'mrz':{const kk=Math.max(1,Math.min(k||(pass?2:3),3));
           const ln=Array.from({length:kk},(_,j)=>{const src=mrzLines[Math.min(j,mrzLines.length-1)];return `<span>${[...src.replace(/&lt;/g,'<')].slice(0,chars).map(c=>`<s>${c==='<'?'&lt;':c}</s>`).join('')}</span>`}).join('');
-          return box('mband',x,y,w,h,ln,`font-size:calc(var(--mh,200px)*${(h/100/kk*0.72).toFixed(4)})`);}
+          return box('mband',x,y,w,h,ln,`font-size:min(calc(var(--mh,200px)*${(h/100/kk*0.72).toFixed(4)}),calc(var(--mw,300px)*${(w/100/(chars*0.62)).toFixed(4)}))`);}
         default:return '';
       }
     }).join('');
@@ -341,12 +341,12 @@ if(typeof document!=='undefined'){
   function openCombo(){const {inp,list}=comboEls();if(!list)return;renderCountryList('');list.hidden=false;inp.setAttribute('aria-expanded','true');inp.closest('.cbx').classList.add('open');inp.select();}
   function closeCombo(){const {inp,list}=comboEls();if(!list)return;list.hidden=true;inp.setAttribute('aria-expanded','false');inp.closest('.cbx')?.classList.remove('open');inp.value=documentCatalog[issuingCountry]?.name||'';}
   let choosing=false;
-  function chooseCountry(code){
+  function chooseCountry(code,viaKey=false){
     if(!documentCatalog[code])return;
     issuingCountry=code;
     const keys=Object.keys(documentCatalog[code].documents);documentKey=keys.includes('id')?'id':(keys[0]||'');   // default to the ID document; if the country doesn't have one, the passport
     choosing=true;try{guide();}finally{choosing=false;}   // re-rendering fires a focusout with the old text: it must not re-select the previous country
-    dialog.querySelector('.type-option.on')?.focus();
+    if(viaKey)dialog.querySelector('.type-option.on')?.focus();   // only keyboard users: a mouse/touch pick must not leave a focus ring on the document type
   }
   window.__pickCountry=chooseCountry;   // hook for tests
   function moveActive(d){
@@ -362,7 +362,7 @@ if(typeof document!=='undefined'){
   dc.addEventListener('keydown',e=>{
     if(e.target.id!=='issuing-country')return;
     if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();if($('country-list').hidden)openCombo();else moveActive(e.key==='ArrowDown'?1:-1);}
-    else if(e.key==='Enter'){e.preventDefault();const items=[...$('country-list').querySelectorAll('li[data-code]')];const li=items[comboActive]||(items.length===1?items[0]:null)||items[0];if(li&&!$('country-list').hidden)chooseCountry(li.dataset.code);}
+    else if(e.key==='Enter'){e.preventDefault();const items=[...$('country-list').querySelectorAll('li[data-code]')];const li=items[comboActive]||(items.length===1?items[0]:null)||items[0];if(li&&!$('country-list').hidden)chooseCountry(li.dataset.code,true);}
     else if(e.key==='Escape'&&!$('country-list').hidden){e.stopPropagation();e.preventDefault();closeCombo();}
   });
   dc.addEventListener('mousedown',e=>{const li=e.target.closest('#country-list li[data-code]');if(li){e.preventDefault();chooseCountry(li.dataset.code);}});
