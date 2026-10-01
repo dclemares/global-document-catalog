@@ -1,218 +1,218 @@
-# Autorrellenado con fotografía del documento
+# Autofill from a document photo
 
-Propuesta y prototipo · 30 de septiembre de 2026
+Proposal and prototype · 30 September 2026
 
-## Límite exacto
+## Exact boundary
 
-**Inicio:** clic en «Escanear documento», dentro de la tarjeta de autorrellenado de la captura del usuario.
+**Start:** click on "Scan document", inside the autofill card from the user's screenshot.
 
-**Fin correcto:** se han leído los datos y los campos correspondientes del formulario están rellenos.
+**Correct end:** the data has been read and the corresponding form fields are filled in.
 
-Incluye preparación, indicaciones, permisos, toma de foto o imagen existente, lectura, errores, reintentos y aplicación de valores. Cancelar o volver a la entrada manual son salidas del escaneo, no éxitos de lectura.
+This includes preparation, guidance, permissions, taking a photo or using an existing image, reading, errors, retries, and applying values. Cancelling or returning to manual entry are exits from the scan, not successful readings.
 
-Quedan fuera envío del formulario, validación del registro, gestión de huéspedes, menores, pagos, aceptación legal del documento y cualquier paso posterior al autorrellenado. La caducidad se copia como dato; este flujo no decide si el documento es admisible. La captura solo muestra el punto de entrada: no conocemos el escáner actual, así que los riesgos no se presentan como fallos comprobados del producto.
+Out of scope: form submission, registration validation, guest management, minors, payments, legal acceptance of the document, and any step after autofill. The expiry date is copied as data; this flow does not decide whether the document is admissible. The screenshot only shows the entry point: we do not know the current scanner, so the risks are not presented as verified failures of the product.
 
-## Método
+## Method
 
-Se siguen las cinco etapas solicitadas: flujo inicial V0 → expectativas de 20 perfiles → propuesta V1 → feedback de los mismos 20 perfiles → decisiones V2 y desarrollo.
+The five requested stages are followed: initial flow V0 → expectations of 20 profiles → proposal V1 → feedback from the same 20 profiles → V2 decisions and development.
 
-Los perfiles y sus comentarios son **simulaciones sintéticas**, no entrevistas reales. Cada caso es una hipótesis sobre necesidades, fricciones y respuesta a un diseño. No se inventan porcentajes de éxito ni se afirma que el flujo esté validado por personas. Los datos de demostración son ficticios y no proceden de los informes del repositorio.
+The profiles and their comments are **synthetic simulations**, not real interviews. Each case is a hypothesis about needs, friction, and response to a design. No success percentages are invented and the flow is not claimed to be validated by people. The demo data is fictitious and does not come from the repository's reports.
 
-## 1. Flujo inicial V0
+## 1. Initial flow V0
 
-Clic en autorrellenar → abrir cámara → fotografiar documento → leer → copiar al formulario.
+Click autofill → open camera → photograph document → read → copy to the form.
 
-Su ventaja es la brevedad. Sus supuestos problemáticos son que el usuario sabe qué fotografiar, tiene cámara disponible, da permiso y obtiene una lectura completa en el primer intento. La primera ronda explora dónde fallaría.
+Its advantage is brevity. Its problematic assumptions are that the user knows what to photograph, has a camera available, grants permission, and gets a complete reading on the first attempt. The first round explores where it would fail.
 
-## 2. Primera ronda: qué esperan los 20 perfiles
+## 2. First round: what the 20 profiles expect
 
-| Perfil | Contexto | Expectativa | Fricción prevista en V0 |
+| Profile | Context | Expectation | Expected friction in V0 |
 |---|---|---|---|
-| 1. Lucía | Móvil · DNI español · primera vez | Saber qué cara fotografiar sin entender qué significa MRZ. | Fotografía el anverso y recibe un error genérico. |
-| 2. James | Móvil · pasaporte · llegada con prisa | Hacer una foto y ver los campos rellenos con el menor número de pasos. | Una pantalla de revisión obligatoria añade trabajo a una lectura clara. |
-| 3. Carmen | Poca experiencia digital · móvil | Instrucciones cortas y un botón evidente en cada paso. | No entiende permisos ni cuándo se toma la foto. |
-| 4. Álex | Documento plastificado · reflejos | Que le expliquen cómo mejorar una foto fallida. | Repite la misma foto indefinidamente. |
-| 5. Marta | Android antiguo · cámara borrosa | Tener una salida si la cámara no consigue una foto nítida. | Bucle de reintentos o bloqueo del dispositivo. |
-| 6. Noah | Permiso de cámara denegado | Recuperarse sin tener que entender los ajustes del navegador. | El sistema insiste en pedir el mismo permiso. |
-| 7. Sofía | Portátil sin cámara | Poder leer una imagen existente cuando no tiene cámara. | La experiencia presupone un móvil. |
-| 8. Hugo | Móvil · conexión interrumpida durante la lectura | No repetir la foto si lo único que falla es la conexión. | Un fallo de red se presenta como foto defectuosa. |
-| 9. Amina | Nombre transliterado en el documento | Reconocer y corregir su nombre sin cambiar su identidad. | Se presenta la transliteración como nombre definitivo. |
-| 10. José Luis | Pasaporte · líneas cortadas en los extremos | Saber cuánto documento debe entrar en la foto. | Solo fotografía el centro de las líneas. |
-| 11. Sari | Foto de galería · documento girado | No editar la foto a mano para que se lea. | Se rechaza una imagen legible solo por su orientación. |
-| 12. Wei | Documento desgastado · un carácter dudoso | Corregir solo el carácter que no se ha podido leer. | Se inserta un número de documento inventado o se pierde toda la lectura. |
-| 13. Paula | Documento antiguo sin zona legible por máquina | Que se acepte la entrada manual como vía normal. | Interpreta «sin MRZ» como documento no válido. |
-| 14. Eva | Preocupación por privacidad | Entender para qué se toma la foto antes de dar acceso a la cámara. | Abandona si la cámara se abre sin contexto. |
-| 15. Daniel | Baja visión · zoom y lector de pantalla | Instrucciones y mensajes que pueda leer con zoom o lector de pantalla. | La cámara y los placeholders son el único modo de interacción. |
-| 16. Óscar | Movilidad reducida · pulso inestable | No depender de mantener el documento en una posición precisa. | Captura demasiado exigente o temporizada. |
-| 17. Laura | Foto con dos documentos en la misma imagen | Saber si debe fotografiar los documentos juntos o separados. | Se mezclan datos de dos documentos. |
-| 18. Diego | Formulario ya parcialmente rellenado | Conservar lo que escribió al probar el escaneo. | Una nueva lectura sustituye silenciosamente valores correctos. |
-| 19. Emma | Habitación con poca luz | Una indicación concreta para conseguir una imagen legible. | No entiende si debe acercarse, enfocar o buscar luz. |
-| 20. Bruno | Servicio de lectura lento o caído | Saber que sigue leyendo y poder salir si tarda demasiado. | Spinner infinito o resultado tardío que rellena el formulario tras cancelar. |
+| 1. Lucía | Mobile · Spanish DNI · first time | To know which side to photograph without understanding what MRZ means. | Photographs the front and gets a generic error. |
+| 2. James | Mobile · passport · arriving in a hurry | To take a photo and see the fields filled in with as few steps as possible. | A mandatory review screen adds work to a clear reading. |
+| 3. Carmen | Little digital experience · mobile | Short instructions and an obvious button at each step. | Does not understand permissions or when the photo is taken. |
+| 4. Álex | Laminated document · glare | To be told how to improve a failed photo. | Repeats the same photo indefinitely. |
+| 5. Marta | Old Android · blurry camera | To have a way out if the camera cannot take a sharp photo. | Retry loop or device lock-up. |
+| 6. Noah | Camera permission denied | To recover without having to understand browser settings. | The system keeps asking for the same permission. |
+| 7. Sofía | Laptop without a camera | To be able to read an existing image when there is no camera. | The experience assumes a mobile phone. |
+| 8. Hugo | Mobile · connection drops during reading | Not to retake the photo if only the connection fails. | A network failure is presented as a defective photo. |
+| 9. Amina | Transliterated name on the document | To recognize and correct her name without changing her identity. | The transliteration is presented as the definitive name. |
+| 10. José Luis | Passport · lines cut off at the edges | To know how much of the document must fit in the photo. | Only photographs the middle of the lines. |
+| 11. Sari | Gallery photo · rotated document | Not to edit the photo by hand to make it readable. | A readable image is rejected solely because of its orientation. |
+| 12. Wei | Worn document · one doubtful character | To correct only the character that could not be read. | An invented document number is inserted or the whole reading is lost. |
+| 13. Paula | Old document without a machine-readable zone | For manual entry to be accepted as a normal route. | Interprets "no MRZ" as an invalid document. |
+| 14. Eva | Privacy concerns | To understand what the photo is for before granting camera access. | Abandons if the camera opens without context. |
+| 15. Daniel | Low vision · zoom and screen reader | Instructions and messages that can be read with zoom or a screen reader. | The camera and placeholders are the only mode of interaction. |
+| 16. Óscar | Reduced mobility · unsteady hand | Not to depend on holding the document in a precise position. | Capture that is too demanding or timed. |
+| 17. Laura | Photo with two documents in the same image | To know whether to photograph the documents together or separately. | Data from two documents gets mixed. |
+| 18. Diego | Form already partially filled in | To keep what he typed when trying out the scan. | A new reading silently replaces correct values. |
+| 19. Emma | Dimly lit room | A concrete tip for getting a readable image. | Does not understand whether to move closer, focus, or find light. |
+| 20. Bruno | Slow or down reading service | To know it is still reading and be able to leave if it takes too long. | Endless spinner or a late result that fills the form after cancelling. |
 
-La síntesis de estas expectativas es: mostrar qué zona importa antes de pedir permisos, ayudar a corregir la foto según el problema y mantener una salida sin pérdida de datos. No exigir aprender la palabra «MRZ».
+The synthesis of these expectations is: show which zone matters before asking for permissions, help correct the photo according to the problem, and keep an exit that loses no data. Do not require learning the word "MRZ".
 
-## 3. Propuesta V1
+## 3. Proposal V1
 
-Clic → elegir documento y ver guía → cámara o imagen existente → captura manual → lectura → revisión de todos los datos → aplicar → formulario relleno.
+Click → choose document and see guide → camera or existing image → manual capture → reading → review of all data → apply → form filled in.
 
-La guía representa las dos o tres líneas con letras, números y signos «<». El pasaporte muestra la página de datos; la tarjeta muestra la cara que contiene las líneas, sin asumir que siempre sea el reverso. Se fotografía un solo documento, con líneas completas y sin reflejos. La cámara no se abre hasta que el usuario la solicita.
+The guide depicts the two or three lines of letters, numbers, and "<" signs. The passport shows the data page; the card shows the side that contains the lines, without assuming it is always the back. Only one document is photographed, with complete lines and no glare. The camera does not open until the user requests it.
 
-Esta versión añade claridad pero también una revisión obligatoria incluso cuando la lectura es completa. Además, «repetir foto» por sí solo no resuelve una caída de conexión ni explica cómo corregir el encuadre. La segunda ronda cuestiona esas decisiones.
+This version adds clarity but also a mandatory review even when the reading is complete. In addition, "retake photo" on its own neither resolves a dropped connection nor explains how to correct the framing. The second round questions those decisions.
 
-## 4. Segunda ronda: feedback simulado sobre V1
+## 4. Second round: simulated feedback on V1
 
-| Perfil | Feedback sintético sobre V1 | Cambio adoptado para V2 |
+| Profile | Synthetic feedback on V1 | Change adopted for V2 |
 |---|---|---|
-| 1. Lucía | «La guía ayuda, pero necesito ver las líneas que tengo que buscar.» | D01 · Ejemplo visual de las líneas y opción «No encuentro estas líneas». |
-| 2. James | «Si ya se ha leído bien, quiero ver el formulario relleno directamente.» | D02 · Lectura fiable: cerrar el panel y aplicar directamente, con confirmación visible. |
-| 3. Carmen | «Prefiero pulsar yo el botón y poder volver atrás.» | D03 · Captura explícita, texto sencillo y salida visible. |
-| 4. Álex | ««No se pudo leer» no me dice qué cambiar.» | D04 · Mensaje específico si hay señal fiable; salida manual prioritaria tras dos fallos. |
-| 5. Marta | «Después de dos intentos prefiero escribir y seguir.» | D04 · Reintento opcional y alternativa manual desde el inicio. |
-| 6. Noah | «Déjame elegir una foto o introducir mis datos.» | D05 · No repetir el permiso automáticamente; ofrecer foto y entrada manual. |
-| 7. Sofía | «El ordenador también tiene que tener una salida clara.» | D05 · Ruta de imagen y manual; traspaso al móvil fuera del MVP. |
-| 8. Hugo | «La foto estaba bien; quiero reintentar leerla, no hacerla otra vez.» | D06 · Distinguir foto ilegible de fallo de servicio; reintentar la misma captura. |
-| 9. Amina | «Dejadme corregirlo y explicad que viene del documento.» | D07 · Aplicar la transliteración leída sin reconstruir grafías y señalar su procedencia. |
-| 10. José Luis | «Necesito saber que las líneas tienen que verse de principio a fin.» | D08 · Marco con margen y error específico de encuadre cuando sea detectable. |
-| 11. Sari | «Podríais girarla antes de pedirme otra foto.» | D09 · Normalizar orientación antes de leer; en demo se representa una lectura correcta. |
-| 12. Wei | «Mostradme el campo dudoso y conservad lo que sí se ha leído.» | D10 · Revisar solo el número dudoso; sin volver a teclear todo. |
-| 13. Paula | «Mi documento existe; no digáis que es inválido por no leerlo.» | D11 · Documento sin MRZ: explicar el límite del escaneo y volver al formulario. |
-| 14. Eva | «Explicad para qué es la foto y dejadme salir antes de abrir la cámara.» | D12 · Explicación previa, cierre visible y permiso solo al pulsar cámara. |
-| 15. Daniel | «Necesito oír si está leyendo, si ha fallado y cuándo ha rellenado los campos.» | D13 · Etiquetas, diálogo con foco, anuncios de estado y fin del autorrellenado. |
-| 16. Óscar | «Quiero usar una foto existente sin prisas.» | D03 / D05 · Sin cuenta atrás; imagen existente y entrada manual. |
-| 17. Laura | «Decidme que fotografíe solo un documento cada vez.» | D14 · Un documento por foto; rechazo de capturas múltiples cuando se detecten. |
-| 18. Diego | «Quiero elegir entre el dato anterior y el leído.» | D15 · Si hay diferencias, conservar lo escrito por defecto y elegir por campo. |
-| 19. Emma | «Pedidme ir a un lugar con más luz, sin hacerme repetir a ciegas.» | D16 · Ayuda de iluminación si hay señal fiable; reintento guiado. |
-| 20. Bruno | «Quiero cancelar sin que los datos aparezcan después por sorpresa.» | D17 · Cancelación, timeout y descarte de resultados tardíos. |
+| 1. Lucía | "The guide helps, but I need to see the lines I'm supposed to look for." | D01 · Visual example of the lines and a "I can't find these lines" option. |
+| 2. James | "If it has already been read correctly, I want to see the form filled in directly." | D02 · Reliable reading: close the panel and apply directly, with visible confirmation. |
+| 3. Carmen | "I prefer to press the button myself and be able to go back." | D03 · Explicit capture, simple text, and a visible exit. |
+| 4. Álex | "'Could not be read' doesn't tell me what to change." | D04 · Specific message when there is a reliable signal; manual exit prioritized after two failures. |
+| 5. Marta | "After two attempts I'd rather type and move on." | D04 · Optional retry and a manual alternative from the start. |
+| 6. Noah | "Let me choose a photo or enter my details." | D05 · Do not repeat the permission request automatically; offer photo and manual entry. |
+| 7. Sofía | "The computer also needs a clear way out." | D05 · Image and manual route; handoff to mobile is outside the MVP. |
+| 8. Hugo | "The photo was fine; I want to retry reading it, not take it again." | D06 · Distinguish an unreadable photo from a service failure; retry the same capture. |
+| 9. Amina | "Let me correct it, and explain that it comes from the document." | D07 · Apply the transliteration as read without reconstructing spellings, and indicate its provenance. |
+| 10. José Luis | "I need to know the lines have to be visible from beginning to end." | D08 · Frame with margin and a specific framing error when detectable. |
+| 11. Sari | "Could you rotate it before asking me for another photo?" | D09 · Normalize orientation before reading; in the demo a correct reading is represented. |
+| 12. Wei | "Show me the doubtful field and keep what was read correctly." | D10 · Review only the doubtful number; no retyping everything. |
+| 13. Paula | "My document exists; don't say it's invalid just because it can't be read." | D11 · Document without MRZ: explain the scan's limit and return to the form. |
+| 14. Eva | "Explain what the photo is for and let me leave before the camera opens." | D12 · Prior explanation, visible close, and permission only when the camera is pressed. |
+| 15. Daniel | "I need to hear whether it is reading, whether it failed, and when it has filled the fields." | D13 · Labels, dialog with focus, status announcements, and end of autofill. |
+| 16. Óscar | "I want to use an existing photo without being rushed." | D03 / D05 · No countdown; existing image and manual entry. |
+| 17. Laura | "Tell me to photograph only one document at a time." | D14 · One document per photo; reject multiple-document captures when detected. |
+| 18. Diego | "I want to choose between the previous value and the one read." | D15 · If there are differences, keep what was typed by default and choose per field. |
+| 19. Emma | "Ask me to go somewhere with more light, without making me retry blindly." | D16 · Lighting help when there is a reliable signal; guided retry. |
+| 20. Bruno | "I want to cancel without the data appearing later by surprise." | D17 · Cancellation, timeout, and discarding of late results. |
 
-No todos los problemas se consideran resueltos: cada perfil conserva una validación pendiente en el panel del prototipo. Los diagnósticos de reflejo, recorte, oscuridad o múltiples documentos necesitan señales reales del proveedor; no se deben fabricar a partir de un error genérico.
+Not all problems are considered solved: each profile retains a pending validation in the prototype's panel. Diagnoses of glare, cropping, darkness, or multiple documents need real signals from the provider; they must not be fabricated from a generic error.
 
-## 5. Flujo final con país emisor y tipo de documento
+## 5. Final flow with issuing country and document type
 
-### Camino principal
+### Main path
 
-1. **Clic.** Abrir un panel sobre el formulario, conservando todo lo escrito.
-2. **Elegir y preparar.** Pedir país emisor y tipo de documento antes de abrir la cámara; no confundir país emisor con nacionalidad. Con vuestro catálogo, resolver la cara exacta: anverso, reverso o página de datos. Mostrar una imagen del documento correspondiente, el marco sobre la zona real y una instrucción directa como «Fotografía el reverso de tu DNI». Si el país tiene modelos con caras diferentes, distinguir el modelo en el selector. Acciones: usar cámara, elegir foto, cambiar selección y «Mi documento no se parece a este».
-3. **Fotografiar.** Solicitar permiso solo al pulsar cámara. Mostrar un marco suficientemente amplio para no cortar extremos y tres ayudas: documento apoyado, buena luz sin reflejos y todas las líneas nítidas. Captura explícita, sin cuenta atrás.
-4. **Leer.** Mostrar un estado de lectura con cancelación. Procesar orientación antes de OCR. No añadir una pantalla genérica «¿Se ve bien?» después de cada foto: la comprobación automática determina si hace falta intervenir.
-5. **Rellenar.** Lectura fiable y sin conflictos: aplicar de forma atómica, cerrar el panel, destacar campos rellenados y mostrar «Documento leído. X campos rellenados». El contador refleja campos cuyo valor cambió. **Aquí termina el flujo.** No botón de continuar, confirmación de registro ni pantalla posterior.
+1. **Click.** Open a panel over the form, preserving everything that was typed.
+2. **Choose and prepare.** Ask for the issuing country and document type before opening the camera; do not confuse issuing country with nationality. With your catalog, resolve the exact side: front, back, or data page. Show an image of the corresponding document, the frame over the real zone, and a direct instruction such as "Photograph the back of your DNI". If the country has models with different sides, distinguish the model in the selector. Actions: use camera, choose photo, change selection, and "My document doesn't look like this".
+3. **Photograph.** Request permission only when the camera is pressed. Show a frame wide enough not to cut off the ends and three tips: document resting flat, good light without glare, and all lines sharp. Explicit capture, no countdown.
+4. **Read.** Show a reading state with cancellation. Process orientation before OCR. Do not add a generic "Does it look good?" screen after every photo: the automatic check determines whether intervention is needed.
+5. **Fill in.** Reliable reading with no conflicts: apply atomically, close the panel, highlight the filled fields, and show "Document read. X fields filled in". The counter reflects fields whose value changed. **The flow ends here.** No continue button, registration confirmation, or later screen.
 
-### Intervenciones solo cuando hacen falta
+### Interventions only when needed
 
-| Situación | Mensaje y acción | Condición de salida |
+| Situation | Message and action | Exit condition |
 |---|---|---|
-| Permiso denegado | Explicar que puede habilitar cámara en ajustes, elegir imagen o cerrar | Imagen elegida o salida sin cambios |
-| Sin cámara | Ofrecer imagen existente | Lectura o salida |
-| Cara incorrecta | «No vemos las líneas de lectura» y volver a la guía | Nueva foto con las líneas |
-| Líneas cortadas | «Aleja un poco el documento» | Nueva foto completa |
-| Reflejos | «Inclina ligeramente el documento o cambia de luz» | Nueva foto legible |
-| Desenfoque | «Apoya el documento y espera a que enfoque» | Nueva foto legible |
-| Poca luz | «Acerca el documento a una luz uniforme» | Nueva foto legible |
-| Varios documentos | «Deja un solo documento en la imagen» | Nueva foto individual |
-| Sin MRZ compatible | Explicar el límite de lectura sin declarar inválido el documento | Volver al formulario |
-| Error no clasificado | «No hemos podido leer las líneas. Comprueba que estén completas y nítidas» | Reintento o salida |
-| Fallo de conexión/servicio | Reintentar lectura de la misma captura | Respuesta de lectura o cancelación |
-| Espera excesiva | Estado de timeout con reintento o cierre | Sin spinner indefinido |
-| Un campo dudoso | Mantener resultados fiables en memoria; pedir solo el dato que falta o nueva foto | Corrección explícita y aplicación |
-| Diferencia con datos escritos | Comparar valor actual y leído; conservar actual por defecto | Aplicación con elecciones por campo |
+| Permission denied | Explain that the camera can be enabled in settings, choose an image, or close | Image chosen or exit with no changes |
+| No camera | Offer an existing image | Reading or exit |
+| Wrong side | "We can't see the reading lines" and return to the guide | New photo with the lines |
+| Lines cut off | "Move the document a little farther away" | New complete photo |
+| Glare | "Tilt the document slightly or change the light" | New readable photo |
+| Blur | "Rest the document on a surface and wait for it to focus" | New readable photo |
+| Low light | "Move the document closer to an even light source" | New readable photo |
+| Multiple documents | "Leave only one document in the image" | New single-document photo |
+| No compatible MRZ | Explain the reading limit without declaring the document invalid | Return to the form |
+| Unclassified error | "We couldn't read the lines. Check that they are complete and sharp" | Retry or exit |
+| Connection/service failure | Retry reading the same capture | Reading response or cancellation |
+| Excessive wait | Timeout state with retry or close | No indefinite spinner |
+| One doubtful field | Keep reliable results in memory; ask only for the missing value or a new photo | Explicit correction and application |
+| Difference from typed data | Compare current and read value; keep current by default | Application with per-field choices |
 
-Si se acumulan dos fallos, destacar la vuelta al formulario y mantener disponible el reintento. Dos intentos es una hipótesis inicial de UX, no un resultado medido. En la integración, proponer 15 segundos como timeout configurable y ajustarlo al proveedor; la demo acelera la espera para facilitar las pruebas.
+If two failures accumulate, highlight the return to the form and keep retry available. Two attempts is an initial UX hypothesis, not a measured result. In the integration, propose 15 seconds as a configurable timeout and adjust it to the provider; the demo speeds up the wait to make testing easier.
 
-La lectura parcial no debe rellenar silenciosamente un valor dudoso. La ruta de ejemplo pide el número de documento y, al resolverlo, aplica el conjunto. El mensaje final distingue «Lectura completada con tu corrección» de lectura automática completa. Si faltan varios campos, mostrar solo los afectados, permitiendo repetir foto o salir; no convertirlo en otro formulario completo.
+A partial reading must not silently fill in a doubtful value. The example route asks for the document number and, once it is resolved, applies the whole set. The final message distinguishes "Reading completed with your correction" from a fully automatic reading. If several fields are missing, show only those affected, allowing the user to retake the photo or leave; do not turn it into another full form.
 
-Los nombres se copian tal como se leen, sin reconstruir acentos ni dividir apellidos automáticamente. El segundo apellido existente se conserva. Los datos que la MRZ no contiene quedan como estaban. Cuando el modelo real del producto requiera otra distribución de nombres, deberá establecerse un mapeo explícito sin adivinar.
+Names are copied as read, without reconstructing accents or splitting surnames automatically. An existing second surname is kept. Data that the MRZ does not contain stays as it was. When the product's real model requires a different name layout, an explicit mapping must be established without guessing.
 
-### Microcopy de producción propuesto
+### Proposed production microcopy
 
-- Entrada: «Autorrellena tus datos» / «Haz una foto de las líneas de tu documento».
-- Guía: «Busca las líneas con letras, números y signos <».
-- Cámara: «Encuadra las líneas completas» / «Hacer foto».
-- Lectura: «Estamos leyendo las líneas» / «Cancelar lectura».
-- Éxito: «Documento leído. X campos rellenados».
-- Parcial: «Solo falta un dato por leer».
-- Conflicto: «Ya habías escrito algunos datos».
+- Entry: "Autofill your details" / "Take a photo of the lines on your document".
+- Guide: "Look for the lines with letters, numbers, and < signs".
+- Camera: "Frame the complete lines" / "Take photo".
+- Reading: "We're reading the lines" / "Cancel reading".
+- Success: "Document read. X fields filled in".
+- Partial: "Just one detail left to read".
+- Conflict: "You had already typed some details".
 
-Los botones del prototipo dicen «Simular» o «de prueba» para dejar claro que no activan cámara, galería u OCR reales. Estas etiquetas no son microcopy propuesto para producción.
+The prototype's buttons say "Simulate" or "test" to make clear that they do not activate a real camera, gallery, or OCR. These labels are not proposed production microcopy.
 
-## 6. Especificación de implementación
+## 6. Implementation specification
 
-### Estados y reglas
+### States and rules
 
 `idle → country_and_type → side_guidance → permission/capture → reading → filled`
 
-Ramas: `capture → image_error → capture`; `reading → service_error → reading`; `reading → partial → correction → filled`; `reading → conflict → explicit_merge → filled`; cualquier estado del panel permite `cancel → idle` sin aplicar resultados pendientes.
+Branches: `capture → image_error → capture`; `reading → service_error → reading`; `reading → partial → correction → filled`; `reading → conflict → explicit_merge → filled`; any panel state allows `cancel → idle` without applying pending results.
 
-Mantener tres objetos separados: formulario existente, captura temporal e intento de lectura. Solo la transición a `filled` aplica el resultado. Cancelar invalida el identificador de intento, libera recursos y descarta resultados tardíos. Al cerrar cámara, detener sus tracks; al reemplazar imagen, liberar el object URL. El prototipo simula este comportamiento con un token de intento y no usa cámara ni imágenes reales.
+Keep three separate objects: existing form, temporary capture, and reading attempt. Only the transition to `filled` applies the result. Cancelling invalidates the attempt identifier, releases resources, and discards late results. When closing the camera, stop its tracks; when replacing an image, release the object URL. The prototype simulates this behavior with an attempt token and uses no real camera or images.
 
-### Entrada y salida del lector propuesto
+### Proposed reader input and output
 
-Este contrato es una propuesta, no una API existente.
+This contract is a proposal, not an existing API.
 
-Entrada: `attemptId`, imagen temporal y preferencia de tipo de documento. Salida: `attemptId`, `status` (`complete`, `partial`, `unreadable`, `unsupported`), campos con valor/procedencia/estado de revisión, y `reasonCode` sustentado por una señal real. Incluir resultados de formato y dígitos de control según el tipo de MRZ. Un checksum no prueba autenticidad del documento ni identidad de la persona.
+Input: `attemptId`, temporary image, and document type preference. Output: `attemptId`, `status` (`complete`, `partial`, `unreadable`, `unsupported`), fields with value/provenance/review state, and a `reasonCode` backed by a real signal. Include format and check-digit results according to the MRZ type. A checksum does not prove the document's authenticity or the person's identity.
 
-Para relleno directo exigir lectura estructuralmente consistente y ausencia de campos marcados como dudosos. Calibrar umbrales de confianza con imágenes reales; no inventar porcentajes. Fechas con siglo ambiguo no se resuelven por intuición: se marcan como dato por revisar. Traducir códigos de nacionalidad usando un catálogo; no inferir nacionalidad a partir de país emisor.
+For direct filling, require a structurally consistent reading and no fields marked as doubtful. Calibrate confidence thresholds with real images; do not invent percentages. Dates with an ambiguous century are not resolved by intuition: they are marked as data to review. Translate nationality codes using a catalog; do not infer nationality from the issuing country.
 
-### Aplicación al formulario
+### Applying to the form
 
-Rellenar solo campos obtenidos de la lectura. No borrar campos no leídos ni cambiar valores escritos sin elección explícita. Construir el parche en memoria y aplicarlo en una sola transición. Conservar procedencia de campo (`read`, `manual`, `user_corrected`) en el estado local. La integración debe capturar la versión del formulario al comenzar para detectar cambios concurrentes.
+Fill in only fields obtained from the reading. Do not clear unread fields or change typed values without an explicit choice. Build the patch in memory and apply it in a single transition. Keep field provenance (`read`, `manual`, `user_corrected`) in local state. The integration must capture the form version at the start to detect concurrent changes.
 
-### Tratamiento de la foto
+### Handling the photo
 
-Antes de integrar, confirmar proveedor, formatos admitidos, límites de tamaño, política de conservación y texto informativo real. Una imagen no admitida debe dar un mensaje claro y permitir elegir otra sin reiniciar el flujo. No introducir imagen, base64, MRZ o valores personales en analítica, URLs ni logs. En la demo no hay captura, subida, almacenamiento persistente ni scripts externos. No se promete una política de borrado de producción que no conocemos.
+Before integrating, confirm the provider, supported formats, size limits, retention policy, and the actual informational text. An unsupported image must produce a clear message and allow choosing another without restarting the flow. Do not include the image, base64, MRZ, or personal values in analytics, URLs, or logs. The demo has no capture, upload, persistent storage, or external scripts. No production deletion policy is promised, since we do not know it.
 
-## 7. Desarrollo y cobertura
+## 7. Development and coverage
 
-La carpeta contiene un prototipo sin dependencias externas, que conserva la estética de la captura: fondo lavanda, navegación lateral, tarjeta redondeada, acento azul violeta y secciones del formulario. Se ha limitado intencionadamente al autorrellenado; el formulario de fondo sirve para mostrar el resultado.
+The folder contains a prototype with no external dependencies that keeps the look of the screenshot: lavender background, side navigation, rounded card, blue-violet accent, and form sections. It is intentionally limited to autofill; the background form serves to show the result.
 
-Implementado: guía por documento, captura simulada, lectura simulada cancelable, todos los estados de la tabla salvo error genérico/archivo real, corrección de un campo dudoso, conciliación de valores previos, aplicación directa, confirmación de relleno, conservación de campos no leídos, 20 perfiles, dos rondas consultables y diseño adaptable.
+Implemented: per-document guide, simulated capture, cancellable simulated reading, all states in the table except generic error/real file, correction of a doubtful field, reconciliation of previous values, direct application, fill confirmation, preservation of unread fields, 20 profiles, two browsable rounds, and a responsive design.
 
-No implementado: OCR, procesamiento o carga real de imagen, permisos reales, medición de luz/enfoque, normalización real de orientación, API, validación de parser MRZ y dispositivos reales. Estas dependencias están especificadas; la demo no las finge. Los controles «Simular foto corregida / servicio recuperado» están separados y rotulados como controles de prueba; permiten recorrer el camino de recuperación, pero no son parte de la UI de producción.
+Not implemented: OCR, real image processing or upload, real permissions, light/focus measurement, real orientation normalization, API, MRZ parser validation, and real devices. These dependencies are specified; the demo does not fake them. The "Simulate corrected photo / service recovered" controls are separate and labeled as test controls; they allow walking through the recovery path, but are not part of the production UI.
 
-Abrir `index.html` directamente o ejecutar desde la raíz del repositorio:
+Open `index.html` directly or run from the repository root:
 
 ```sh
-python3 -m http.server 8765 --bind 127.0.0.1 --directory autoform-mrz
+python3 -m http.server 8765 --bind 127.0.0.1 --directory docs/autoform
 ```
 
-Servir solo esta carpeta: el resto del repositorio contiene información privada.
+Serve only this folder: the rest of the repository contains private information.
 
-## 8. Criterios de aceptación y prueba real posterior
+## 8. Acceptance criteria and subsequent real testing
 
-1. Una lectura correcta rellena el formulario sin una pantalla extra de revisión.
-2. País y tipo son obligatorios; la guía usa la cara configurada para esa combinación y modelo. No se solicita al huésped que adivine anverso/reverso.
-3. No se solicita cámara antes de una acción explícita.
-4. El usuario puede cerrar en cualquier paso sin perder datos ni recibir después un resultado cancelado.
-5. Los errores fotográficos dicen qué cambiar; los errores de servicio permiten releer la misma captura.
-6. Después de dos fallos se destaca la salida; nunca hay bucle obligatorio.
-7. Un carácter dudoso no se inventa ni se rellena sin intervención.
-8. Los datos ya escritos se conservan salvo elección explícita por campo.
-9. Los campos no presentes en la lectura se mantienen.
-10. El final visible es el formulario relleno; no contiene envío ni pasos de registro.
-11. Foco contenido en el diálogo, Escape disponible, etiquetas persistentes y anuncios de lectura/resultado.
-12. Los 20 casos siguen identificados como simulaciones y no se convierten en métricas reales.
+1. A correct reading fills in the form without an extra review screen.
+2. Country and type are mandatory; the guide uses the side configured for that combination and model. The guest is not asked to guess front/back.
+3. The camera is not requested before an explicit action.
+4. The user can close at any step without losing data or receiving a cancelled result afterward.
+5. Photo errors say what to change; service errors allow re-reading the same capture.
+6. After two failures the exit is highlighted; there is never a mandatory loop.
+7. A doubtful character is not invented or filled in without intervention.
+8. Data already typed is preserved unless explicitly chosen per field.
+9. Fields not present in the reading are kept.
+10. The visible end is the filled-in form; it contains no submission or registration steps.
+11. Focus contained in the dialog, Escape available, persistent labels, and announcements of reading/result.
+12. The 20 cases remain identified as simulations and are not turned into real metrics.
 
-Para validar con personas, pedir únicamente «rellena los datos usando una foto del documento» y detener la sesión cuando aparecen los campos. Observar descubrimiento de la zona, tiempo hasta foto legible, comprensión de errores, cancelaciones, reintentos y reconocimiento del éxito. Medir por dispositivo y documento. Hacer pruebas específicas de zoom, teclado, VoiceOver/TalkBack, permisos, imagen girada y respuestas tardías. No evaluar envío ni conversión de registro en este trabajo.
+To validate with people, ask only "fill in your details using a photo of the document" and stop the session when the fields appear. Observe discovery of the zone, time to a readable photo, understanding of errors, cancellations, retries, and recognition of success. Measure per device and document. Run specific tests for zoom, keyboard, VoiceOver/TalkBack, permissions, rotated images, and late responses. Do not evaluate submission or registration conversion in this work.
 
-## Fuentes
+## Sources
 
-- [ICAO · Doc 9303](https://www.icao.int/publications/doc-series/doc-9303): referencia de documentos de lectura mecánica; catálogo de pasaportes TD3 y tarjetas TD1/TD2. El parser real debe contrastarse con las partes aplicables.
-- [W3C WAI · Notificaciones de formularios](https://www.w3.org/WAI/tutorials/forms/notifications/): errores comprensibles, asociación con campos y anuncio de resultados. Sustenta la propuesta de foco y mensajes.
+- [ICAO · Doc 9303](https://www.icao.int/publications/doc-series/doc-9303): reference for machine-readable documents; catalog of TD3 passports and TD1/TD2 cards. The real parser must be checked against the applicable parts.
+- [W3C WAI · Form notifications](https://www.w3.org/WAI/tutorials/forms/notifications/): understandable errors, association with fields, and announcement of results. Supports the focus and messaging proposal.
 
-Las decisiones de UX son inferencias de diseño. Estas fuentes no validan las simulaciones ni demuestran la eficacia de la propuesta.
+The UX decisions are design inferences. These sources do not validate the simulations or demonstrate the effectiveness of the proposal.
 
 
-## Catálogo visual del prototipo
+## Visual catalog of the prototype
 
-La selección es explícita y obligatoria. Cambiar país limpia el tipo elegido para impedir que sobreviva una combinación incompatible. Las selecciones se conservan al volver de la guía y nunca modifican la nacionalidad del formulario.
+Selection is explicit and mandatory. Changing the country clears the chosen type to prevent an incompatible combination from surviving. Selections are kept when returning from the guide and never modify the form's nationality.
 
-| País y tipo de ejemplo | Cara indicada | Ejemplo utilizado |
+| Example country and type | Side indicated | Example used |
 |---|---|---|
-| España · DNI | Reverso | Imagen de muestra del DNI con tres líneas inferiores |
-| España · Pasaporte | Página de datos con foto | Página de muestra dentro de una composición de libreta abierta |
-| Francia · Documento de identidad, modelo antiguo grande | Anverso | Imagen local del modelo con dos líneas debajo de la foto |
-| India · Pasaporte | Página de datos con foto | Ejemplar local marcado SPECIMEN |
+| Spain · DNI | Back | Sample DNI image with three lines at the bottom |
+| Spain · Passport | Data page with photo | Sample page within an open booklet composition |
+| France · Identity document, old large model | Front | Local image of the model with two lines below the photo |
+| India · Passport | Data page with photo | Local specimen marked SPECIMEN |
 
-Este es un catálogo reducido de demostración. La integración utilizará el catálogo ya conocido por el producto, incluyendo versión/modelo cuando haga falta; no se extrapola una cara para todos los documentos de un país. La foto de ejemplo y las coordenadas de la guía son datos de la misma configuración (`documents.js`).
+This is a reduced demonstration catalog. The integration will use the catalog the product already knows, including version/model when needed; a side is not extrapolated to all documents of a country. The example photo and the guide coordinates are data from the same configuration (`documents.js`).
 
-La imagen original se mantiene; el marco exterior y el resaltado de MRZ son capas de HTML/CSS. El pasaporte tiene página contigua, encuadernación y página de datos para diferenciarlo visualmente de una tarjeta. En la vista de cámara se indica «EJEMPLO», sin presentar la imagen como una captura real. La lectura sigue simulada.
+The original image is kept; the outer frame and the MRZ highlight are HTML/CSS layers. The passport has an adjacent page, binding, and data page to visually distinguish it from a card. The camera view shows "EXAMPLE", without presenting the image as a real capture. Reading remains simulated.
 
-Recursos: [DNI de muestra, Gobierno de España](https://commons.wikimedia.org/wiki/File:Spanish_ID_card_(back_side).webp); [pasaporte de muestra, MonicasHouse](https://commons.wikimedia.org/wiki/File:Spanish_passport_data_page_sample.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). El detalle de archivos y atribuciones está en `assets/CREDITOS.txt`.
+Resources: [sample DNI, Government of Spain](https://commons.wikimedia.org/wiki/File:Spanish_ID_card_(back_side).webp); [sample passport, MonicasHouse](https://commons.wikimedia.org/wiki/File:Spanish_passport_data_page_sample.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Details of files and attributions are in `assets/CREDITOS.txt`.

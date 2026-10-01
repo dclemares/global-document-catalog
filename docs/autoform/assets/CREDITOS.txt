@@ -1,19 +1,19 @@
-Recursos visuales del prototipo de autorrellenado
+Visual assets of the autofill prototype
 
-DOCUMENTOS (assets/catalog/*.webp)
-Recreaciones con IA de documentos de identidad y pasaportes, generadas a partir de referencias públicas
-(fichas PRADO del Consejo de la UE y otras fuentes enlazadas en el catálogo global de documentos).
-Todos los datos son ficticios, los retratos no tienen rasgos y las líneas MRZ son ilustrativas y no están
-validadas para OCR. No sirven para validar identidades ni documentos. Fuentes y límites:
-  ../LEEME.txt  y  ../index.html (catálogo)
-Se ha recortado el fondo blanco de cada imagen y se han guardado en WebP con transparencia.
+DOCUMENTS (assets/catalog/*.webp)
+AI recreations of identity documents and passports, generated from public references
+(PRADO sheets from the Council of the EU and other sources linked in the global document catalog).
+All data is fictitious, the portraits have no features, and the MRZ lines are illustrative and not
+validated for OCR. They cannot be used to verify identities or documents. Sources and limits:
+  ../LEEME.txt  and  ../index.html (catalog)
+The white background of each image has been cropped out and the images saved as WebP with transparency.
 
-ZONAS DE CADA DOCUMENTO (layouts.js)
-Posiciones aproximadas (en %) de foto, texto, QR/código de barras, chip y MRZ, anotadas visualmente
-sobre cada recreación para dibujar el esquema de referencia de la cámara. Son estimaciones, no medidas.
+ZONES OF EACH DOCUMENT (layouts.js)
+Approximate positions (in %) of photo, text, QR/barcode, chip and MRZ, annotated visually
+on each recreation to draw the reference outline for the camera. They are estimates, not measurements.
 
-PORTADA DEL PASAPORTE (assets/passport/cover.webp)
-Imagen de portada de pasaporte genérica aportada para el prototipo, recortada sin fondo.
+PASSPORT COVER (assets/passport/cover.webp)
+Generic passport cover image supplied for the prototype, cropped with no background.
 
-MANO (animación, assets/hand.webp)
-Ilustración de una mano aportada para el prototipo, con fondo transparente.
+HAND (animation, assets/hand.webp)
+Illustration of a hand supplied for the prototype, with a transparent background.

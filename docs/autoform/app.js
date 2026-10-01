@@ -1,6 +1,6 @@
 'use strict';
 
-const fieldLabels={nationality:'Nacionalidad',firstName:'Nombre o nombres',surname:'Apellidos',secondSurname:'Segundo apellido',birthDate:'Fecha de nacimiento',documentNumber:'Número de documento',expiryDate:'Fecha de caducidad'};
+const fieldLabels={nationality:'Nationality',firstName:'First name(s)',surname:'Surname',secondSurname:'Second surname',birthDate:'Date of birth',documentNumber:'Document number',expiryDate:'Expiry date'};
 const scanKeys=['firstName','surname','nationality','birthDate','documentNumber','expiryDate'];
 function blankForm(){return {nationality:'',firstName:'',surname:'',secondSurname:'',birthDate:'',documentType:'id',documentNumber:'',expiryDate:'',sources:{}};}
 function conflictsFor(current,read){return scanKeys.filter(key=>current[key]&&read[key]&&current[key]!==read[key]);}
@@ -21,23 +21,23 @@ if(typeof document!=='undefined'){
   function renderForm(){
     document.querySelectorAll('.read-origin').forEach(el=>el.remove());
     for(const key of [...Object.keys(fieldLabels),'documentType']){$(key).value=form[key];$(key).classList.toggle('read',form.sources[key]==='read');}
-    for(const key of scanKeys)if(['read','user_corrected'].includes(form.sources[key])){const label=document.createElement('small');label.className='read-origin';label.textContent=form.sources[key]==='read'?'✓ Leído del documento':'✓ Completado con tu corrección';$(key).parentElement.append(label);}
+    for(const key of scanKeys)if(['read','user_corrected'].includes(form.sources[key])){const label=document.createElement('small');label.className='read-origin';label.textContent=form.sources[key]==='read'?'✓ Read from your document':'✓ Completed with your correction';$(key).parentElement.append(label);}
   }
   function note(message,kind='success'){$('form-notice').textContent=message;$('form-notice').className=`notice ${kind}`;$('form-notice').hidden=false;}
   function reset(){
     token++;if(dialog.open)dialog.close();issuingCountry='';documentKey='';form=blankForm();attempts=0;readData=null;correctedPhoto=false;partialFixed=false;
-    if(profile.scenario==='conflict'){form.firstName='Diego';form.surname='García López';form.nationality='Española';}
+    if(profile.scenario==='conflict'){form.firstName='Diego';form.surname='García López';form.nationality='Spanish';}
     docType=[2,10].includes(profile.id)?'passport':'id';form.documentType=docType;
     $('profile-select').value=String(profile.id);$('form-notice').hidden=true;renderForm();
-    $('profile-detail').innerHTML=`<span class="context-tag">${esc(profile.context)}</span><h4>Espera</h4><p>${esc(profile.expectation)}</p><h4>Feedback simulado</h4><p>«${esc(profile.feedback)}»</p><h4>Decisión incorporada</h4><p>${esc(profile.decision)}</p>`;
-    announce(`Perfil ${profile.name} preparado. Datos de ejemplo.`);
+    $('profile-detail').innerHTML=`<span class="context-tag">${esc(profile.context)}</span><h4>Expects</h4><p>${esc(profile.expectation)}</p><h4>Simulated feedback</h4><p>“${esc(profile.feedback)}”</p><h4>Decision applied</h4><p>${esc(profile.decision)}</p>`;
+    announce(`Profile ${profile.name} ready. Sample data.`);
   }
-  // Iconos de tipo de documento (SVG, usan el color del texto)
+  // Document type icons (SVG, use the text color)
   const docIcon=type=>type==='passport'
     ?'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3.5" width="18" height="25" rx="2.5"/><circle cx="16" cy="13.5" r="5"/><ellipse cx="16" cy="13.5" rx="2.2" ry="5"/><path d="M11 13.5h10"/><rect x="13" y="22.5" width="6" height="3" rx=".8"/></svg>'
     :'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="26" height="18" rx="3"/><circle cx="11" cy="14" r="2.6"/><path d="M6.5 22c.4-2.6 2.2-4 4.5-4s4.1 1.4 4.5 4"/><path d="M19 13h7M19 17h7M19 21h4.5"/></svg>';
   const stageHtml=(d,cam,flip,fx)=>{
-    if(!d)return `<div class="stage ${cam?'cam':''}"><div class="stage-empty"><span aria-hidden="true">▭</span>Elige país y tipo para ver<br>qué cara debes fotografiar</div></div>`;
+    if(!d)return `<div class="stage ${cam?'cam':''}"><div class="stage-empty"><span aria-hidden="true">▭</span>Choose a country and type to see<br>which side to photograph</div></div>`;
     const passInner=`<div class="pass-stage"><img class="pdata" src="${d.image}" alt="${esc(d.alt)}"><div class="pcover-wrap"><img class="pcover" src="assets/passport/cover.webp" alt=""></div></div>`;
     const inner=flip&&d.formType==='passport'&&fx?passInner:flip&&d.imageOther?`<div class="flip-wrap"><div class="flip-inner" style="--fd:${FLIP_DELAY}s"><div class="face"><img src="${d.imageOther}" alt=""></div><div class="face turned"><img src="${d.image}" alt="${esc(d.alt)}"></div></div></div>`:`<img src="${d.image}" alt="${esc(d.alt)}">`;
     const corners=cam?'<i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>':'';
@@ -45,12 +45,12 @@ if(typeof document!=='undefined'){
   };
   function currentDoc(){return resolveDocument(issuingCountry,documentKey);}
   function typeOptions(){
-    return `<option value="">Selecciona</option>${Object.entries(documentCatalog[issuingCountry]?.documents||{}).map(([key,d])=>`<option value="${key}" ${documentKey===key?'selected':''}>${esc(d.label)}</option>`).join('')}`;
+    return `<option value="">Select</option>${Object.entries(documentCatalog[issuingCountry]?.documents||{}).map(([key,d])=>`<option value="${key}" ${documentKey===key?'selected':''}>${esc(d.label)}</option>`).join('')}`;
   }
-  const stepsHtml=n=>`<ol class="steps" aria-label="Pasos"><li class="${n===1?'on':n>1?'done':''}"><b>1</b> Documento</li><li class="${n===2?'on':n>2?'done':''}"><b>2</b> Prepárate</li><li class="${n===3?'on':''}"><b>3</b> Foto</li></ol>`;
+  const stepsHtml=n=>`<ol class="steps" aria-label="Steps"><li class="${n===1?'on':n>1?'done':''}"><b>1</b> Document</li><li class="${n===2?'on':n>2?'done':''}"><b>2</b> Get ready</li><li class="${n===3?'on':''}"><b>3</b> Photo</li></ol>`;
   const sideName=d=>d.sideLabel.split(' · ')[0];
-  // Paso 1 · elegir documento
-  // Precarga: las animaciones no empiezan hasta que todas sus imágenes están cargadas y decodificadas
+  // Step 1 · choose document
+  // Preload: animations don't start until all their images are loaded and decoded
   const preloadCache=new Map();
   function preloadImg(src){
     if(!src)return Promise.resolve(true);
@@ -58,7 +58,7 @@ if(typeof document!=='undefined'){
     const p=new Promise(res=>{
       const im=new Image();im.decoding='async';
       im.onload=()=>(im.decode?im.decode():Promise.resolve()).then(()=>res(true),()=>res(true));
-      im.onerror=()=>{preloadCache.delete(src);res(false);};   // si falla, se podrá reintentar
+      im.onerror=()=>{preloadCache.delete(src);res(false);};   // if it fails, it can be retried
       im.src=src;
     });
     preloadCache.set(src,p);return p;
@@ -69,15 +69,15 @@ if(typeof document!=='undefined'){
     const all=Promise.all(docAssets(d).map(preloadImg)).then(r=>r.every(Boolean));
     return Promise.race([all,new Promise(r=>setTimeout(()=>r(false),ms))]);
   }
-  ['assets/hand.webp','assets/passport/cover.webp'].forEach(preloadImg);   // mano y tapa: desde el arranque
+  ['assets/hand.webp','assets/passport/cover.webp'].forEach(preloadImg);   // hand and cover: from startup
   function guide(){
-    const d=currentDoc();if(d){docType=d.formType;preloadDoc(d);}   // se van cargando mientras la persona elige
+    const d=currentDoc();if(d){docType=d.formType;preloadDoc(d);}   // load while the person is choosing
     const types=Object.entries(documentCatalog[issuingCountry]?.documents||{});
-    const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Tipo de documento">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${docIcon(t.formType)}</span>${esc(t.label)}</button>`).join('')}</div>`:'<p class="hint">Primero elige el país que expidió el documento.</p>';
-    const preview=d?`<div class="pick-preview"><div class="pp-img"><img src="${d.image}" alt="${esc(d.alt)}"></div><div class="pp-cap"><b>Fotografiarás: ${esc(sideName(d))}</b><span>${d.formType==='passport'?'La página con tu foto y los datos.':'Solo esta cara; no hace falta la otra.'}</span></div></div>`:'';
-    body('¿Qué documento vas a usar?',`<div class="field combo"><label for="issuing-country">País que lo expidió</label><div class="cbx"><input id="issuing-country" class="big-select" role="combobox" aria-expanded="false" aria-controls="country-list" aria-autocomplete="list" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Selecciona un país" value="${esc(documentCatalog[issuingCountry]?.name||'')}"><ul id="country-list" class="cbx-list" role="listbox" hidden></ul></div></div><div class="field"><span class="lbl">Tipo de documento</span>${typeButtons}</div>${preview}<div class="dialog-actions single"><button class="primary" data-action="prepare" ${d?'':'disabled'}>Continuar</button></div>`,stepsHtml(1),true);   // misma altura que los otros pasos: la lista de países cabe dentro
+    const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Document type">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${docIcon(t.formType)}</span>${esc(t.label)}</button>`).join('')}</div>`:'<p class="hint">First choose the country that issued the document.</p>';
+    const preview=d?`<div class="pick-preview"><div class="pp-img"><img src="${d.image}" alt="${esc(d.alt)}"></div><div class="pp-cap"><b>You will photograph: ${esc(sideName(d))}</b><span>${d.formType==='passport'?'The page with your photo and details.':'Just this side; the other isn\'t needed.'}</span></div></div>`:'';
+    body('Which document will you use?',`<div class="field combo"><label for="issuing-country">Issuing country</label><div class="cbx"><input id="issuing-country" class="big-select" role="combobox" aria-expanded="false" aria-controls="country-list" aria-autocomplete="list" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Choose a country" value="${esc(documentCatalog[issuingCountry]?.name||'')}"><ul id="country-list" class="cbx-list" role="listbox" hidden></ul></div></div><div class="field"><span class="lbl">Document type</span>${typeButtons}</div>${preview}<div class="dialog-actions single"><button class="primary" data-action="prepare" ${d?'':'disabled'}>Continue</button></div>`,stepsHtml(1),true);   // same height as the other steps: the country list fits inside
   }
-  // Esquema (mock-up) del documento: zonas de foto, datos y líneas de lectura como referencia visual para la foto
+  // Document mock-up: photo, data and reading-line zones as a visual reference for the photo
   function genericMock(d){
     const pass=d.formType==='passport',front=d.side==='front';let n=0;
     const part=(cls,style,inner='')=>`<i class="${cls}" style="${style};--i:${n++}">${inner}</i>`;
@@ -91,7 +91,7 @@ if(typeof document!=='undefined'){
     const band=`<div class="mband" style="top:${top}%;height:${h}%;--i:${n++}"><pre class="${pass?'p':'i'}">${lines.join('\n')}</pre></div>`;
     return `<div class="cam-mock" aria-hidden="true">${body}${band}</div>`;
   }
-  // Esquema real: dibuja las zonas anotadas en la imagen de cada documento (foto, chip, QR, MRZ…)
+  // Real mock-up: draws the annotated zones on each document image (photo, chip, QR, MRZ…)
   function mockHtml(d){
     const key=(d.image||'').split('/').pop().replace(/\.\w+$/,'');
     const L=typeof documentLayouts!=='undefined'?documentLayouts[key]:null;
@@ -119,11 +119,11 @@ if(typeof document!=='undefined'){
     }).join('');
     return `<div class="cam-mock real" aria-hidden="true">${parts}</div>`;
   }
-  // Cámara real del dispositivo (requiere HTTPS o localhost). Si no hay permiso o dispositivo, se mantiene la simulación.
+  // The device's real camera (requires HTTPS or localhost). If there is no permission or device, the simulation stays.
   let camStream=null,camPerm='idle',camPromise=null;   // camPerm: idle | pending | granted | denied | unavailable
   function stopCam(){if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}}
   const CAM_CONSTRAINTS={video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false};
-  // Se pide al pulsar "Continuar" (paso 1): así el aviso del navegador no tapa la transición del paso 3
+  // Requested when pressing "Continue" (step 1): this way the browser prompt doesn't cover the step 3 transition
   function requestCamera(){
     if(camStream&&camStream.active)return Promise.resolve('granted');
     if(window.__noLock){camPerm='unavailable';return Promise.resolve(camPerm);}
@@ -131,38 +131,38 @@ if(typeof document!=='undefined'){
     if(camPerm==='denied')return Promise.resolve('denied');
     camPerm='pending';
     camPromise=navigator.mediaDevices.getUserMedia(CAM_CONSTRAINTS).then(stream=>{
-      if(!dialog.open){stream.getTracks().forEach(t=>t.stop());return null;}   // cerró el diálogo mientras decidía
+      if(!dialog.open){stream.getTracks().forEach(t=>t.stop());return null;}   // the dialog was closed while the user was deciding
       camStream=stream;camPerm='granted';return stream;
     }).catch(e=>{camPerm=e&&e.name==='NotAllowedError'?'denied':'unavailable';return null;});
-    const wait=new Promise(r=>setTimeout(()=>r('timeout'),25000));      // si tarda mucho en decidir, se sigue y se usará cuando llegue
+    const wait=new Promise(r=>setTimeout(()=>r('timeout'),25000));      // if the user takes too long to decide, carry on and use the camera when it arrives
     return Promise.race([camPromise.then(()=>camPerm),wait]);
   }
   async function startCam(){
     const st=dialog.querySelector('.stage.cam'),v=st?.querySelector('.cam-video');if(!v)return;
     const fail=msg=>{st.classList.add('no-video');if(!dialog.querySelector('.cam-note'))st.insertAdjacentHTML('afterend',`<p class="hint cam-note">${msg}</p>`);};
     if(!(camStream&&camStream.active)){
-      if(camPerm==='pending'&&camPromise)await camPromise;                        // todavía decidiendo en el paso 1
-      else if(camPerm==='idle'||camPerm==='granted'){                              // llegada sin pasar por el paso 1 (p. ej. reintento)
-        if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia)return fail('Simulación: esta página no puede abrir la cámara (hace falta HTTPS).');
+      if(camPerm==='pending'&&camPromise)await camPromise;                        // still deciding in step 1
+      else if(camPerm==='idle'||camPerm==='granted'){                              // arrived without going through step 1 (e.g. retry)
+        if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia)return fail('Simulation: this page cannot open the camera (HTTPS is required).');
         await requestCamera();
       }
     }
     if(!st.isConnected||!dialog.open)return;
     if(!(camStream&&camStream.active)){
-      return fail(camPerm==='denied'?'Simulación: has bloqueado el acceso a la cámara.':!window.isSecureContext||!navigator.mediaDevices?.getUserMedia?'Simulación: esta página no puede abrir la cámara (hace falta HTTPS).':'Simulación: no hemos encontrado una cámara disponible.');
+      return fail(camPerm==='denied'?'Simulation: camera access has been blocked.':!window.isSecureContext||!navigator.mediaDevices?.getUserMedia?'Simulation: this page cannot open the camera (HTTPS is required).':'Simulation: no available camera was found.');
     }
     v.srcObject=camStream;
     const show=()=>{if(!st.isConnected||st.classList.contains('has-video'))return;st.classList.add('has-video');
-      const cap=dialog.querySelector('[data-action="capture"]');if(cap)cap.textContent='Hacer foto';};
+      const cap=dialog.querySelector('[data-action="capture"]');if(cap)cap.textContent='Take photo';};
     v.addEventListener('loadeddata',show,{once:true});
     v.play().then(show).catch(()=>{});
-    setTimeout(show,1500);   // por si el navegador tarda en avisar
+    setTimeout(show,1500);   // in case the browser is slow to report
   }
   function containRect(st,pad,ratio){
     const b=st.getBoundingClientRect(),W=b.width-2*pad,H=b.height-2*pad;let w=W,h=W/ratio;if(h>H){h=H;w=H*ratio;}
     return {left:b.left+(b.width-w)/2,top:b.top+(b.height-h)/2,width:w,height:h};
   }
-  // Transición paso 2 → cámara: el documento vuela hasta el visor y la cámara se abre en iris desde él
+  // Step 2 → camera transition: the document flies to the viewfinder and the camera opens like an iris from it
   function layoutCam(from){
     const st=dialog.querySelector('.stage.cam');if(!st)return;
     const card=st.querySelector('.cam-card'),frame=st.querySelector('.cam-frame'),img=st.querySelector('.cam-card img');
@@ -183,71 +183,71 @@ if(typeof document!=='undefined'){
     };
     from?.ratio||(img.complete&&img.naturalWidth)?run():img.addEventListener('load',run,{once:true});
   }
-  const FLIP_DELAY=.935,FLIP_DUR=.9; // espera inicial 10 % mayor (antes 0,85 s)
+  const FLIP_DELAY=.935,FLIP_DUR=.9; // initial delay 10% longer (was 0.85 s)
   function fitFx(){
     const st=dialog.querySelector('.stage'),fx=st?.querySelector('.fx-wrap');if(!fx)return;
     const img=st.querySelector('.face.turned img')||st.querySelector('img');
     const tilt=st.querySelector('.tilt');if(tilt)['--bd','--ud','--po','--pt','--cr','--pdur'].forEach(p=>tilt.style.setProperty(p,fx.style.getPropertyValue(p)));
     const place=()=>{const pad=12,W=st.clientWidth-2*pad,H=st.clientHeight-2*pad,r=img.naturalWidth/img.naturalHeight;let w=W,h=W/r;if(h>H){h=H;w=H*r;}
       Object.assign(fx.style,{left:(st.clientWidth-w)/2+'px',top:(st.clientHeight-h)/2+'px',width:w+'px',height:h+'px'});
-      const ps=st.querySelector('.pass-stage');if(ps&&tilt){const Hb=ps.clientHeight;tilt.style.setProperty('--ps',(w/Hb).toFixed(4));tilt.style.setProperty('--psy',(h/(.75*Hb)).toFixed(4));}};   // la tapa se ajusta al ancho Y al alto de la página de datos
+      const ps=st.querySelector('.pass-stage');if(ps&&tilt){const Hb=ps.clientHeight;tilt.style.setProperty('--ps',(w/Hb).toFixed(4));tilt.style.setProperty('--psy',(h/(.75*Hb)).toFixed(4));}};   // the cover fits both the width AND the height of the data page
     img.complete&&img.naturalWidth?place():img.addEventListener('load',place,{once:true});
   }
   window.addEventListener('resize',()=>{if(dialog.open)fitFx();});
-  // Paso 2 · cómo preparar el documento
+  // Step 2 · how to prepare the document
   function prepare(loaded=true){
     const d=currentDoc();if(!d)return guide();docType=d.formType;
     const flipEnd=FLIP_DELAY+FLIP_DUR;
     const isPass=d.formType==='passport';
-    const TURN_AT=FLIP_DELAY,OPEN_AT=FLIP_DELAY,OPEN_DUR=1.5; // el pasaporte se abre más despacio que el giro del ID // pasaporte: aparece cerrado en horizontal, pausa y la tapa se abre por el lomo
-    const BAD=isPass?OPEN_AT+OPEN_DUR/2:FLIP_DELAY+FLIP_DUR/2; // mano, brillo e inclinación entran justo cuando el documento está a medio girar
+    const TURN_AT=FLIP_DELAY,OPEN_AT=FLIP_DELAY,OPEN_DUR=1.5; // the passport opens more slowly than the ID turn // passport: appears closed and horizontal, pauses, then the cover opens at the spine
+    const BAD=isPass?OPEN_AT+OPEN_DUR/2:FLIP_DELAY+FLIP_DUR/2; // hand, glare and tilt come in just as the document is halfway through its turn
     const endOpen=isPass?OPEN_AT+OPEN_DUR:flipEnd;
-    const GAP=1.45; // tiempo entre pasos
+    const GAP=1.45; // time between steps
     const T={side:endOpen,place:endOpen+GAP,lines:endOpen+2*GAP,glare:endOpen+3*GAP};
-    const tips=[['side',isPass?'Ábrelo por la página de la foto':d.side==='back'?'Muéstralo por la parte de atrás':'Muéstralo por la cara de la foto'],['place','Ponlo plano sobre un fondo liso'],['lines','Líneas de abajo enteras'],['glare','Sin reflejos ni dedos']];
+    const tips=[['side',isPass?'Open it to the photo page':d.side==='back'?'Show the back side':'Show the photo side'],['place','Lay it flat on a plain background'],['lines','Keep the bottom lines fully in view'],['glare','No glare or fingers']];
     const hand=`<img class="hand hand-img" src="assets/hand.webp" alt="">`;
     const fx=`<div class="fx-wrap" style="--bd:${BAD}s;--ud:${(T.place-.7).toFixed(2)}s;--hd:${(T.lines-.55).toFixed(2)}s;--tp:${T.place}s;--ts:${T.side}s;--po:${OPEN_AT}s;--pt:${TURN_AT}s;--pdur:${OPEN_DUR}s;--cr:.75;--tl:${T.lines}s;--tg:${T.glare}s;--mt:${d.formType==='passport'?76:58}%;--mh:${d.formType==='passport'?20:36}%"><div class="fx">${isPass?'<i class="pshadow"></i>':''}<i class="ring r1"></i>${T.side?'<i class="ring r2"></i>':''}<i class="mrz-glow"></i><i class="glare"></i><i class="glint"></i></div><div class="hand-box">${hand}</div></div>`;
     body.keep=true;
-    body(`Prepara tu ${d.formType==='passport'?'pasaporte':'documento'}`,`<p class="hint"><span class="pill-doc">${esc(documentCatalog[issuingCountry].name)} · ${esc(d.label)}</span> <button class="text-button" data-action="choose">Cambiar</button></p>${stageHtml(d,false,true,fx)}<ul class="tips big">${tips.map(([k,t])=>`<li style="--t:${T[k]}s"><span class="mk" aria-hidden="true"><b class="x">✕</b><b class="ok">✓</b></span>${t}</li>`).join('')}</ul><div class="dialog-actions"><button class="primary" data-action="camera">Hacer la foto <span aria-hidden="true">→</span></button><button class="secondary" data-action="gallery">Elegir de galería</button><button class="text-button" data-action="choose">Atrás</button></div>`,stepsHtml(2),true);
+    body(`Get your ${d.formType==='passport'?'passport':'ID document'} ready`,`<p class="hint"><span class="pill-doc">${esc(documentCatalog[issuingCountry].name)} · ${esc(d.label)}</span> <button class="text-button" data-action="choose">Change</button></p>${stageHtml(d,false,true,fx)}<ul class="tips big">${tips.map(([k,t])=>`<li style="--t:${T[k]}s"><span class="mk" aria-hidden="true"><b class="x">✕</b><b class="ok">✓</b></span>${t}</li>`).join('')}</ul><div class="dialog-actions"><button class="primary" data-action="camera">Take the photo <span aria-hidden="true">→</span></button><button class="secondary" data-action="gallery">Choose from gallery</button><button class="text-button" data-action="choose">Back</button></div>`,stepsHtml(2),true);
     fitFx();
-    if(!loaded)dialog.querySelector('.dialog-body').dataset.static='1';   // sin animaciones si faltan imágenes: nada de cortes
+    if(!loaded)dialog.querySelector('.dialog-body').dataset.static='1';   // no animations if images are missing: no jerky cuts
   }
-  function body(title,content,label='PREPARA TU DOCUMENTO',tall=false){
+  function body(title,content,label='GET YOUR DOCUMENT READY',tall=false){
     if(!body.keep)stopCam();body.keep=false;
     dialog.classList.toggle('tall',tall);
-    $('dialog-context').textContent='Autorrellenar con una foto';
+    $('dialog-context').textContent='Autofill with a photo';
     $('dialog-content').innerHTML=`<div class="dialog-body">${label.startsWith('<ol')?label:`<div class="step-label">${label}</div>`}<h2 id="dialog-title" tabindex="-1">${title}</h2>${content}</div>`;
     if(dialog.open)$('dialog-title').focus();
   }
   function closeScan(){token++;stopCam();dialog.close();$('start-scan').focus();}
-  function exitToForm(){closeScan();note('Escaneo cerrado. Lo que ya habías escrito sigue en el formulario.','neutral');$('firstName').focus();}
+  function exitToForm(){closeScan();note('Scan closed. What you had already typed is still in the form.','neutral');$('firstName').focus();}
   function camera(fromRect){
     if(['denied','desktop'].includes(profile.scenario)){
-      body(profile.scenario==='denied'?'La cámara no tiene permiso':'No hay una cámara disponible',`<p>${profile.scenario==='denied'?'Puedes permitir el acceso desde los ajustes de tu navegador o elegir una foto del documento.':'Puedes usar una imagen del documento que ya tengas.'}</p><div class="notice warning">Estado simulado. No hemos solicitado acceso real a tu cámara.</div><div class="dialog-actions"><button class="primary" data-action="gallery">Elegir de galería</button><button class="secondary" data-action="exit">Volver al formulario</button><button class="text-button" data-action="intro">Volver a la guía</button></div>`);return;
+      body(profile.scenario==='denied'?'Camera permission needed':'No camera available',`<p>${profile.scenario==='denied'?'You can allow access in your browser settings or choose a photo of the document.':'You can use an image of the document that you already have.'}</p><div class="notice warning">Simulated state. We haven't requested real access to your camera.</div><div class="dialog-actions"><button class="primary" data-action="gallery">Choose from gallery</button><button class="secondary" data-action="exit">Back to the form</button><button class="text-button" data-action="intro">Back to the guide</button></div>`);return;
     }
     const d=currentDoc();
-    const camStage=`<div class="stage cam m-enfoque"><div class="cam-bg"></div><video class="cam-video" muted playsinline autoplay></video><div class="cam-scrim"></div><div class="cam-card"><div class="cam-float"><img src="${d.image}" alt="${esc(d.alt)}">${mockHtml(d)}<i class="scan"></i></div></div><div class="cam-frame"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div><div class="cam-chip"><span>Alinea tu documento con la guía</span></div></div>`;
+    const camStage=`<div class="stage cam m-enfoque"><div class="cam-bg"></div><video class="cam-video" muted playsinline autoplay></video><div class="cam-scrim"></div><div class="cam-card"><div class="cam-float"><img src="${d.image}" alt="${esc(d.alt)}">${mockHtml(d)}<i class="scan"></i></div></div><div class="cam-frame"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div><div class="cam-chip"><span>Align your document with the guide</span></div></div>`;
     body.keep=true;
-    body(d.side==='back'?'Coloca el reverso en el marco':d.side==='front'?'Coloca el anverso en el marco':'Encuadra la página de la foto',`${camStage}<div class="dialog-actions single"><button class="primary" data-action="capture">Simular captura</button><button class="text-button" data-action="intro">Atrás</button></div>`,stepsHtml(3),true);
+    body(d.side==='back'?'Place the back in the frame':d.side==='front'?'Place the front in the frame':'Frame the photo page',`${camStage}<div class="dialog-actions single"><button class="primary" data-action="capture">Simulate capture</button><button class="text-button" data-action="intro">Back</button></div>`,stepsHtml(3),true);
     dialog.querySelector('.dialog-body').classList.add('noslide');
-    announce('Cámara abierta.');layoutCam(fromRect);startCam();
+    announce('Camera open.');layoutCam(fromRect);startCam();
   }
 
   const errorMessages={
-    glare:['Un reflejo tapa las líneas','Inclina ligeramente el documento o cambia de luz. Evita que el brillo tape las letras.'],
-    blur:['Las líneas no se ven nítidas','Apoya el documento, limpia la lente y espera a que enfoque antes de tomar la foto.'],
-    'wrong-side':['No vemos las líneas de lectura','Busca la cara con dos o tres líneas de letras, números y signos <.'],
-    cropped:['Falta un extremo de las líneas','Aleja un poco el documento. Las líneas deben verse de principio a fin.'],
-    multiple:['Hay más de un documento en la foto','Deja un solo documento en la imagen para evitar mezclar sus datos.'],
-    dark:['Necesitamos un poco más de luz','Acerca el documento a una luz uniforme. Evita que tu móvil haga sombra sobre las líneas.'],
-    'no-mrz':['No encontramos líneas que podamos leer','Si tu documento no tiene estas líneas, puedes volver al formulario y escribir los datos. Esto no significa que tu documento sea inválido.'],
-    offline:['Se ha interrumpido la conexión','No hace falta repetir la foto. Puedes intentar leer la misma imagen de nuevo o cancelar.'],
-    timeout:['La lectura está tardando demasiado','Puedes reintentar leer la misma foto o cancelar. Lo que ya escribiste sigue en el formulario.']
+    glare:['Glare is covering the lines','Tilt the document slightly or change the lighting. Make sure the glare doesn\'t cover the letters.'],
+    blur:['The lines aren\'t sharp','Rest the document on a surface, clean the lens and wait for it to focus before taking the photo.'],
+    'wrong-side':['We can\'t see the MRZ reading lines','Look for the side with two or three lines of letters, numbers and < signs.'],
+    cropped:['One end of the lines is cut off','Move the document back a little. The lines must be visible from start to finish.'],
+    multiple:['There is more than one document in the photo','Leave just one document in the image so the details don\'t get mixed up.'],
+    dark:['We need a bit more light','Move the document closer to an even light. Avoid casting a shadow from your phone over the lines.'],
+    'no-mrz':['We couldn\'t find any lines we can read','If your document doesn\'t have these lines, you can go back to the form and type in the details. This doesn\'t mean your document is invalid.'],
+    offline:['The connection was interrupted','You don\'t need to retake the photo. You can try reading the same image again or cancel.'],
+    timeout:['Reading is taking too long','You can try reading the same photo again or cancel. What you already typed is still in the form.']
   };
   function errorScreen(kind){
     const d=resolveDocument(issuingCountry,documentKey);
     const [title,message]=kind==='wrong-side'&&d?[d.title,d.instruction]:errorMessages[kind];const manualFirst=attempts>=2||kind==='no-mrz';const service=['offline','timeout'].includes(kind);
-    body(title,`<p>${esc(message)}</p>${attempts>=2?'<div class="notice warning">Ya lo has intentado dos veces. Puedes volver al formulario sin perder lo escrito.</div>':''}<div class="dialog-actions">${manualFirst?'<button class="primary" data-action="exit">Volver al formulario</button>':''}${kind!=='no-mrz'?`<button class="${manualFirst?'secondary':'primary'}" data-action="${service?'retry-read':'retry-photo'}">${service?'Reintentar lectura':'Hacer otra foto'}</button>`:''}${!manualFirst?'<button class="secondary" data-action="exit">Cancelar escaneo</button>':''}<button class="text-button" data-action="intro">Ver la guía</button></div>${kind!=='no-mrz'?`<div class="sim-control"><span>Control de prueba</span><button class="text-button" data-action="recover">${service?'Simular servicio recuperado':'Simular una foto corregida'} →</button></div>`:''}`,'NO HEMOS PODIDO COMPLETAR LA LECTURA');
+    body(title,`<p>${esc(message)}</p>${attempts>=2?'<div class="notice warning">You have tried twice already. You can go back to the form without losing what you typed.</div>':''}<div class="dialog-actions">${manualFirst?'<button class="primary" data-action="exit">Back to the form</button>':''}${kind!=='no-mrz'?`<button class="${manualFirst?'secondary':'primary'}" data-action="${service?'retry-read':'retry-photo'}">${service?'Retry reading':'Take another photo'}</button>`:''}${!manualFirst?'<button class="secondary" data-action="exit">Cancel scan</button>':''}<button class="text-button" data-action="intro">View the guide</button></div>${kind!=='no-mrz'?`<div class="sim-control"><span>Test control</span><button class="text-button" data-action="recover">${service?'Simulate service restored':'Simulate a corrected photo'} →</button></div>`:''}`,'WE COULDN\'T COMPLETE THE READING');
   }
   function sample(){
     let data={...resolveDocument(issuingCountry,documentKey).sample};
@@ -258,8 +258,8 @@ if(typeof document!=='undefined'){
   }
   function read(){
     attempts++;const request=++token;
-    body('Estamos leyendo las líneas',`<p>Cuando estén listas, rellenaremos los campos del formulario.</p><div class="loading" aria-hidden="true"></div><p role="status">Lectura simulada en curso…</p><div class="dialog-actions"><button class="secondary" data-action="exit">Cancelar lectura</button></div>`,'LEYENDO TU FOTO');
-    announce('Lectura de la foto en curso.');
+    body('We\'re reading the lines',`<p>When they\'re ready, we\'ll fill in the form fields.</p><div class="loading" aria-hidden="true"></div><p role="status">Simulated reading in progress…</p><div class="dialog-actions"><button class="secondary" data-action="exit">Cancel reading</button></div>`,'READING YOUR PHOTO');
+    announce('Reading the photo.');
     setTimeout(()=>{
       if(request!==token||!dialog.open)return;
       const kind=profile.scenario;
@@ -271,11 +271,11 @@ if(typeof document!=='undefined'){
     },profile.scenario==='timeout'?1700:750);
   }
   function partialReview(){
-    body('Solo falta un dato por leer',`<p>Hemos leído el resto de los datos, pero no distinguimos un carácter del número de documento.</p><div class="notice warning">No vamos a adivinarlo. Escríbelo tal como aparece en el documento o vuelve a hacer la foto.</div><div class="field"><label for="uncertain-number">Número de documento</label><input id="uncertain-number" autocomplete="off" spellcheck="false" aria-describedby="uncertain-hint"><small id="uncertain-hint">En este ejemplo puedes escribir DEMO12345.</small><small id="uncertain-error" class="field-error" hidden></small></div><div class="dialog-actions"><button class="primary" data-action="resolve">Usar este número y rellenar</button><button class="secondary" data-action="retry-photo">Hacer otra foto</button><button class="text-button" data-action="exit">Cancelar sin aplicar</button></div>`,'LECTURA PARCIAL');
+    body('Just one detail left to read',`<p>We\'ve read the rest of the details, but we couldn\'t make out one character of the document number.</p><div class="notice warning">We won\'t guess it. Type it exactly as it appears on the document or retake the photo.</div><div class="field"><label for="uncertain-number">Document number</label><input id="uncertain-number" autocomplete="off" spellcheck="false" aria-describedby="uncertain-hint"><small id="uncertain-hint">In this example you can type DEMO12345.</small><small id="uncertain-error" class="field-error" hidden></small></div><div class="dialog-actions"><button class="primary" data-action="resolve">Use this number and fill in</button><button class="secondary" data-action="retry-photo">Take another photo</button><button class="text-button" data-action="exit">Cancel without applying</button></div>`,'PARTIAL READING');
   }
   function conflictReview(){
     const conflicts=conflictsFor(form,readData);
-    body('Ya habías escrito algunos datos',`<p>Hay diferencias con la foto. Conservaremos lo que escribiste, salvo que elijas sustituirlo.</p><div class="notice warning">Comprueba que has fotografiado el documento correcto.</div><div class="review-grid">${conflicts.map(key=>`<div class="field"><label for="accept-${key}">${esc(fieldLabels[key])}</label><p class="current-value">Actual: <b>${esc(form[key])}</b><br>Leído: <b>${esc(readData[key])}</b></p><label class="check conflict-choice"><input id="accept-${key}" type="checkbox" data-accept="${key}"> Usar el dato de la foto</label></div>`).join('')}</div><p class="small-note">Los campos vacíos se rellenarán con los datos leídos.</p><div class="dialog-actions"><button class="primary" data-action="apply-conflicts">Rellenar el formulario</button><button class="secondary" data-action="intro">Usar otro documento</button><button class="text-button" data-action="exit">Cancelar sin aplicar</button></div>`,'ANTES DE SUSTITUIR DATOS');
+    body('You had already typed some details',`<p>There are differences with the photo. We\'ll keep what you typed unless you choose to replace it.</p><div class="notice warning">Check that you photographed the right document.</div><div class="review-grid">${conflicts.map(key=>`<div class="field"><label for="accept-${key}">${esc(fieldLabels[key])}</label><p class="current-value">Current: <b>${esc(form[key])}</b><br>Read: <b>${esc(readData[key])}</b></p><label class="check conflict-choice"><input id="accept-${key}" type="checkbox" data-accept="${key}"> Use the detail from the photo</label></div>`).join('')}</div><p class="small-note">Empty fields will be filled in with the details we read.</p><div class="dialog-actions"><button class="primary" data-action="apply-conflicts">Fill in the form</button><button class="secondary" data-action="intro">Use another document</button><button class="text-button" data-action="exit">Cancel without applying</button></div>`,'BEFORE REPLACING DETAILS');
   }
   function applyResult(accept={}){
     const before={...form};form=mergeRead(form,readData,accept);
@@ -283,13 +283,13 @@ if(typeof document!=='undefined'){
     if(!before.documentNumber||accept.documentNumber)form.documentType=docType;
     if(partialFixed)form.sources.documentNumber='user_corrected';
     const updated=scanKeys.filter(key=>form[key]!==before[key]);closeScan();renderForm();
-    const extra=profile.scenario==='names'?' El nombre conserva la escritura que aparece en las líneas del documento.':'';
-    note(`${partialFixed?'Lectura completada con tu corrección.':'Documento leído.'} ${updated.length?`${updated.length} campos rellenados`:'Los datos ya estaban en el formulario'}.${extra}`);
-    $('form-notice').setAttribute('tabindex','-1');$('form-notice').focus();$('form-notice').scrollIntoView({block:'center',behavior:'auto'});announce('Autorrellenado completado. Los datos leídos están en el formulario.');
+    const extra=profile.scenario==='names'?' The name keeps the spelling shown in the document\'s reading lines.':'';
+    note(`${partialFixed?'Reading completed with your correction.':'Document read.'} ${updated.length?`${updated.length} fields filled in`:'The details were already in the form'}.${extra}`);
+    $('form-notice').setAttribute('tabindex','-1');$('form-notice').focus();$('form-notice').scrollIntoView({block:'center',behavior:'auto'});announce('Autofill complete. The details we read are in the form.');
   }
   $('profile-select').innerHTML=profiles.map(p=>`<option value="${p.id}">${String(p.id).padStart(2,'0')} · ${esc(p.name)} — ${esc(p.context.split(' · ')[0])}</option>`).join('');
-  $('profile-list').innerHTML=profiles.map(p=>`<article class="profile-card"><h2><span class="profile-number">${String(p.id).padStart(2,'0')}</span>${esc(p.name)}</h2><p class="context">${esc(p.context)}</p><dl><dt>Ronda 1 · Qué espera</dt><dd>${esc(p.expectation)}</dd><dt>Fricción prevista</dt><dd>${esc(p.risk)}</dd><dt>Ronda 2 · Feedback simulado sobre V1</dt><dd>«${esc(p.feedback)}»</dd><dt>Cambio en V2</dt><dd>${esc(p.decision)}</dd><dt>Qué falta validar</dt><dd>${esc(p.residual)}</dd></dl><button class="secondary" data-profile="${p.id}">Probar este caso →</button></article>`).join('');
-  function showStudy(show){$('study').hidden=!show;$('prototype').hidden=show;$('study-toggle').textContent=show?'Volver al prototipo ↗':'Estudio de 20 perfiles ↗';window.scrollTo({top:0,behavior:'auto'});}
+  $('profile-list').innerHTML=profiles.map(p=>`<article class="profile-card"><h2><span class="profile-number">${String(p.id).padStart(2,'0')}</span>${esc(p.name)}</h2><p class="context">${esc(p.context)}</p><dl><dt>Round 1 · What they expect</dt><dd>${esc(p.expectation)}</dd><dt>Expected friction</dt><dd>${esc(p.risk)}</dd><dt>Round 2 · Simulated feedback on V1</dt><dd>“${esc(p.feedback)}”</dd><dt>Change in V2</dt><dd>${esc(p.decision)}</dd><dt>Still to validate</dt><dd>${esc(p.residual)}</dd></dl><button class="secondary" data-profile="${p.id}">Try this case →</button></article>`).join('');
+  function showStudy(show){$('study').hidden=!show;$('prototype').hidden=show;$('study-toggle').textContent=show?'Back to the prototype ↗':'20-profile study ↗';window.scrollTo({top:0,behavior:'auto'});}
   $('study-toggle').onclick=()=>showStudy($('study').hidden);
   $('profile-list').onclick=e=>{const button=e.target.closest('[data-profile]');if(button){profile=profiles.find(p=>p.id===Number(button.dataset.profile));reset();showStudy(false);}};
   $('profile-select').onchange=e=>{profile=profiles.find(p=>p.id===Number(e.target.value));reset();};$('reset').onclick=reset;
@@ -304,8 +304,8 @@ if(typeof document!=='undefined'){
     if(action==='choose')guide();
     if(action==='intro'){prepare();return;}
     if(action==='prepare'){
-      const b=el;b.disabled=true;b.textContent='Esperando permiso de la cámara…';
-      requestCamera().then(()=>{if(dialog.open&&dialog.querySelector('[data-action="prepare"]')){b.textContent='Cargando la guía…';}return preloadDoc(currentDoc());})
+      const b=el;b.disabled=true;b.textContent='Waiting for camera permission…';
+      requestCamera().then(()=>{if(dialog.open&&dialog.querySelector('[data-action="prepare"]')){b.textContent='Loading the guide…';}return preloadDoc(currentDoc());})
         .then(ok=>{if(dialog.open&&dialog.querySelector('[data-action="prepare"]'))prepare(ok);});
       return;
     }
@@ -316,16 +316,16 @@ if(typeof document!=='undefined'){
     }
     if(['gallery','capture','retry-read'].includes(action))read();
     if(action==='exit')exitToForm();
-    if(action==='no-lines')body('Comprueba el país y el modelo',`<p>Puede que tengas otra versión. Revisa tu selección para ver las indicaciones que correspondan a tu documento.</p><div class="dialog-actions"><button class="primary" data-action="choose">Cambiar país o documento</button><button class="secondary" data-action="exit">Volver al formulario</button></div>`);
+    if(action==='no-lines')body('Check the country and document version',`<p>You may have a different version. Review your selection to see the instructions that match your document.</p><div class="dialog-actions"><button class="primary" data-action="choose">Change country or document</button><button class="secondary" data-action="exit">Back to the form</button></div>`);
     if(action==='recover'){correctedPhoto=true;read();}
     if(action==='apply-conflicts'){const accept={};document.querySelectorAll('[data-accept]').forEach(el=>{accept[el.dataset.accept]=el.checked;});applyResult(accept);}
     if(action==='resolve'){
       const number=$('uncertain-number').value.trim();
-      if(!number){$('uncertain-error').hidden=false;$('uncertain-error').textContent='Escribe el número tal como aparece en tu documento.';$('uncertain-number').setAttribute('aria-invalid','true');$('uncertain-number').setAttribute('aria-describedby','uncertain-error');$('uncertain-number').focus();return;}
+      if(!number){$('uncertain-error').hidden=false;$('uncertain-error').textContent='Type the number exactly as it appears on your document.';$('uncertain-number').setAttribute('aria-invalid','true');$('uncertain-number').setAttribute('aria-describedby','uncertain-error');$('uncertain-number').focus();return;}
       readData.documentNumber=number;partialFixed=true;if(conflictsFor(form,readData).length)conflictReview();else applyResult();
     }
   };
-  // País: desplegable con aspecto de selector; al abrirlo o escribir se filtra la lista (sin tildes ni mayúsculas)
+  // Country: dropdown styled like a select; opening it or typing filters the list (accent- and case-insensitive)
   const nrm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
   let comboActive=-1;
   const comboEls=()=>({inp:$('issuing-country'),list:$('country-list')});
@@ -333,8 +333,8 @@ if(typeof document!=='undefined'){
     const {inp,list}=comboEls();if(!list)return;
     const n=nrm(q);
     const all=Object.entries(documentCatalog).map(([code,c])=>({code,name:c.name,k:nrm(c.name)}));
-    const hits=n?all.filter(c=>c.k.includes(n)).sort((a,b)=>(b.k.startsWith(n)-a.k.startsWith(n))||a.name.localeCompare(b.name,'es')):all;
-    list.innerHTML=hits.length?hits.map((c,i)=>`<li role="option" id="co-${c.code}" data-code="${c.code}" aria-selected="${c.code===issuingCountry}">${esc(c.name)}</li>`).join(''):'<li class="none" role="presentation">No hay ningún país con ese nombre</li>';
+    const hits=n?all.filter(c=>c.k.includes(n)).sort((a,b)=>(b.k.startsWith(n)-a.k.startsWith(n))||a.name.localeCompare(b.name,'en')):all;
+    list.innerHTML=hits.length?hits.map((c,i)=>`<li role="option" id="co-${c.code}" data-code="${c.code}" aria-selected="${c.code===issuingCountry}">${esc(c.name)}</li>`).join(''):'<li class="none" role="presentation">No country matches that name</li>';
     comboActive=-1;inp.removeAttribute('aria-activedescendant');
     if(!n&&issuingCountry){const cur=list.querySelector(`[data-code="${issuingCountry}"]`);if(cur)list.scrollTop=Math.max(0,cur.offsetTop-70);}
   }
@@ -343,10 +343,10 @@ if(typeof document!=='undefined'){
   function chooseCountry(code){
     if(!documentCatalog[code])return;
     issuingCountry=code;
-    const keys=Object.keys(documentCatalog[code].documents);documentKey=keys.includes('id')?'id':(keys[0]||'');   // por defecto el documento de identidad; si el país no lo tiene, el pasaporte
+    const keys=Object.keys(documentCatalog[code].documents);documentKey=keys.includes('id')?'id':(keys[0]||'');   // default to the ID document; if the country doesn't have one, the passport
     guide();dialog.querySelector('.type-option.on')?.focus();
   }
-  window.__pickCountry=chooseCountry;   // gancho para pruebas
+  window.__pickCountry=chooseCountry;   // hook for tests
   function moveActive(d){
     const items=[...$('country-list').querySelectorAll('li[data-code]')];if(!items.length)return;
     comboActive=(comboActive+d+items.length)%items.length;

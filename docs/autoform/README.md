@@ -1,23 +1,23 @@
-# Autorrellenado con foto del documento · prototipo
+# Autofill from a document photo · prototype
 
-Prototipo navegable del flujo "escanear documento → rellenar el formulario" para el registro de huéspedes.
-Cubre **196 países** del catálogo de documentos y usa solo recreaciones con IA y datos ficticios.
+A clickable prototype of the "scan document → fill in the form" flow for guest registration.
+It covers **196 countries** from the document catalog and uses only AI recreations and fictitious data.
 
-## Cómo probarlo
-- Abre `index.html` en el navegador (o la versión publicada en GitHub Pages, ruta `/autoform/`).
-- Pulsa **Escanear documento** → elige país y tipo → *Prepara tu documento* → *Hacer la foto*.
-- **Cámara real:** en una dirección HTTPS (GitHub Pages) o en `localhost` el navegador pide permiso y el visor
-  muestra tu cámara con el esquema del documento encima. Si no das permiso o no hay cámara, se usa una simulación.
-  La imagen solo se muestra en pantalla: no se guarda ni se envía.
-- La lectura (OCR) es simulada: al "hacer la foto" se rellenan datos de ejemplo.
+## How to try it
+- Open `index.html` in your browser (or the version published on GitHub Pages, under the `/autoform/` path).
+- Click **Scan document** → choose country and type → *Prepare your document* → *Take the photo*.
+- **Real camera:** on an HTTPS address (GitHub Pages) or on `localhost`, the browser asks for permission and the viewfinder
+  shows your camera with the document outline on top. If you deny permission or there is no camera, a simulation is used.
+  The image is only displayed on screen: it is neither stored nor sent.
+- Reading (OCR) is simulated: when you "take the photo", sample data is filled in.
 
-## Estructura
-- `index.html`, `styles.css`, `app.js`: la aplicación (sin dependencias).
-- `documents.js`: catálogo país → documentos (imagen y cara a fotografiar).
-- `layouts.js`: zonas de cada documento para dibujar el esquema.
-- `scenarios.js`: los 20 perfiles simulados del estudio (`DECISIONES.md`, `VERIFICACION.md`).
-- `assets/`: imágenes (WebP con transparencia) y créditos.
+## Structure
+- `index.html`, `styles.css`, `app.js`: the application (no dependencies).
+- `documents.js`: country → documents catalog (image and side to photograph).
+- `layouts.js`: zones of each document, used to draw the outline.
+- `scenarios.js`: the 20 simulated profiles from the study (`DECISIONES.md`, `VERIFICACION.md`).
+- `assets/`: images (WebP with transparency) and credits.
 
-## Límites
-Imágenes recreadas con IA a partir de referencias públicas; datos y MRZ ficticios. No sirve para validar
-identidades. Las posiciones del esquema son aproximadas.
+## Limits
+Images recreated with AI from public references; data and MRZ are fictitious. Not suitable for verifying
+identities. Outline positions are approximate.
