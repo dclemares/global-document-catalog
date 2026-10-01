@@ -15,5 +15,5 @@ sobre cada recreación para dibujar el esquema de referencia de la cámara. Son 
 PORTADA DEL PASAPORTE (assets/passport/cover.webp)
 Imagen de portada de pasaporte genérica aportada para el prototipo, recortada sin fondo.
 
-MANO (animación)
-Ilustración vectorial propia (SVG) incluida en el código.
+MANO (animación, assets/hand.webp)
+Ilustración de una mano aportada para el prototipo, con fondo transparente.
