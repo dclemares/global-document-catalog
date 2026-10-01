@@ -383,3 +383,14 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .pick-preview .pp-cap{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;font-size:13px;color:var(--muted);line-height:1.35}
 .pick-preview .pp-cap b{color:var(--ink);font-size:14px}
 @media(max-height:560px){.pick-preview{display:none}}
+
+/* ===== Si las imágenes de la guía no han cargado, no se lanzan las animaciones: se muestra el estado final ===== */
+[data-static] *,[data-static] *::before,[data-static] *::after{animation:none!important;transition:none!important}
+[data-static] .tips.big li{background:#eaf4ee;color:var(--ink)}
+[data-static] .mk{background:var(--green)}
+[data-static] .mk .x{display:none}
+[data-static] .mk .ok{opacity:1}
+[data-static] .hand-box,[data-static] .glare,[data-static] .mrz-glow,[data-static] .glint,[data-static] .ring,[data-static] .pshadow{display:none}
+[data-static] .flip-inner{transform:rotateY(180deg)}
+[data-static] .pcover-wrap{display:none}
+[data-static] .pass-stage .pdata{opacity:1}

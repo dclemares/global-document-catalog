@@ -50,8 +50,28 @@ if(typeof document!=='undefined'){
   const stepsHtml=n=>`<ol class="steps" aria-label="Pasos"><li class="${n===1?'on':n>1?'done':''}"><b>1</b> Documento</li><li class="${n===2?'on':n>2?'done':''}"><b>2</b> Prepárate</li><li class="${n===3?'on':''}"><b>3</b> Foto</li></ol>`;
   const sideName=d=>d.sideLabel.split(' · ')[0];
   // Paso 1 · elegir documento
+  // Precarga: las animaciones no empiezan hasta que todas sus imágenes están cargadas y decodificadas
+  const preloadCache=new Map();
+  function preloadImg(src){
+    if(!src)return Promise.resolve(true);
+    if(preloadCache.has(src))return preloadCache.get(src);
+    const p=new Promise(res=>{
+      const im=new Image();im.decoding='async';
+      im.onload=()=>(im.decode?im.decode():Promise.resolve()).then(()=>res(true),()=>res(true));
+      im.onerror=()=>{preloadCache.delete(src);res(false);};   // si falla, se podrá reintentar
+      im.src=src;
+    });
+    preloadCache.set(src,p);return p;
+  }
+  function docAssets(d){return [d.image,d.imageOther,'assets/hand.webp',d.formType==='passport'?'assets/passport/cover.webp':null].filter(Boolean);}
+  function preloadDoc(d,ms=8000){
+    if(!d)return Promise.resolve(true);
+    const all=Promise.all(docAssets(d).map(preloadImg)).then(r=>r.every(Boolean));
+    return Promise.race([all,new Promise(r=>setTimeout(()=>r(false),ms))]);
+  }
+  ['assets/hand.webp','assets/passport/cover.webp'].forEach(preloadImg);   // mano y tapa: desde el arranque
   function guide(){
-    const d=currentDoc();if(d)docType=d.formType;
+    const d=currentDoc();if(d){docType=d.formType;preloadDoc(d);}   // se van cargando mientras la persona elige
     const types=Object.entries(documentCatalog[issuingCountry]?.documents||{});
     const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Tipo de documento">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${docIcon(t.formType)}</span>${esc(t.label)}</button>`).join('')}</div>`:'<p class="hint">Primero elige el país que expidió el documento.</p>';
     const preview=d?`<div class="pick-preview"><div class="pp-img"><img src="${d.image}" alt="${esc(d.alt)}"></div><div class="pp-cap"><b>Fotografiarás: ${esc(sideName(d))}</b><span>${d.formType==='passport'?'La página con tu foto y los datos.':'Solo esta cara; no hace falta la otra.'}</span></div></div>`:'';
@@ -175,7 +195,7 @@ if(typeof document!=='undefined'){
   }
   window.addEventListener('resize',()=>{if(dialog.open)fitFx();});
   // Paso 2 · cómo preparar el documento
-  function prepare(){
+  function prepare(loaded=true){
     const d=currentDoc();if(!d)return guide();docType=d.formType;
     const flipEnd=FLIP_DELAY+FLIP_DUR;
     const isPass=d.formType==='passport';
@@ -190,6 +210,7 @@ if(typeof document!=='undefined'){
     body.keep=true;
     body(`Prepara tu ${d.formType==='passport'?'pasaporte':'documento'}`,`<p class="hint"><span class="pill-doc">${esc(documentCatalog[issuingCountry].name)} · ${esc(d.label)}</span> <button class="text-button" data-action="choose">Cambiar</button></p>${stageHtml(d,false,true,fx)}<ul class="tips big">${tips.map(([k,t])=>`<li style="--t:${T[k]}s"><span class="mk" aria-hidden="true"><b class="x">✕</b><b class="ok">✓</b></span>${t}</li>`).join('')}</ul><div class="dialog-actions"><button class="primary" data-action="camera">Hacer la foto <span aria-hidden="true">→</span></button><button class="secondary" data-action="gallery">Elegir de galería</button><button class="text-button" data-action="choose">Atrás</button></div>`,stepsHtml(2),true);
     fitFx();
+    if(!loaded)dialog.querySelector('.dialog-body').dataset.static='1';   // sin animaciones si faltan imágenes: nada de cortes
   }
   function body(title,content,label='PREPARA TU DOCUMENTO',tall=false){
     if(!body.keep)stopCam();body.keep=false;
@@ -284,7 +305,8 @@ if(typeof document!=='undefined'){
     if(action==='intro'){prepare();return;}
     if(action==='prepare'){
       const b=el;b.disabled=true;b.textContent='Esperando permiso de la cámara…';
-      requestCamera().then(()=>{if(dialog.open&&dialog.querySelector('[data-action="prepare"]'))prepare();});
+      requestCamera().then(()=>{if(dialog.open&&dialog.querySelector('[data-action="prepare"]')){b.textContent='Cargando la guía…';}return preloadDoc(currentDoc());})
+        .then(ok=>{if(dialog.open&&dialog.querySelector('[data-action="prepare"]'))prepare(ok);});
       return;
     }
     if(action==='pick-type'){documentKey=el.dataset.key;guide();dialog.querySelector('.type-option.on')?.focus();}
