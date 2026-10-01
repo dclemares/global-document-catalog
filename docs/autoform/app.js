@@ -281,7 +281,7 @@ if(typeof document!=='undefined'){
   $('dialog-content').addEventListener('change',e=>{
     if(e.target.id==='issuing-country'){
       issuingCountry=e.target.value;documentKey='';
-      const keys=Object.keys(documentCatalog[issuingCountry]?.documents||{});if(keys.length===1)documentKey=keys[0];
+      const keys=Object.keys(documentCatalog[issuingCountry]?.documents||{});documentKey=keys.includes('id')?'id':(keys[0]||'');   // por defecto el documento de identidad; si el país no lo tiene, el pasaporte
       guide();$('issuing-country').focus();return;
     }
   });
