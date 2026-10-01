@@ -2,7 +2,7 @@
 
 Visual catalog of identity documents and passports for **196 countries**, with filters by country, region and coverage. Each country shows the ID front, the ID back and the passport data page, explicitly flagging any missing images or evidence.
 
-**[Open the catalog](https://dclemares.github.io/global-document-catalog/)** · [Download the project](https://github.com/dclemares/global-document-catalog/archive/refs/heads/main.zip)
+**[Open the catalog](https://dclemares.github.io/global-document-catalog/)** · **[Auto-fill prototype (real camera on HTTPS)](https://dclemares.github.io/global-document-catalog/autoform/)** · [Download the project](https://github.com/dclemares/global-document-catalog/archive/refs/heads/main.zip)
 
 ## Contents
 

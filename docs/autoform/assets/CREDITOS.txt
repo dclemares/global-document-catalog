@@ -1,0 +1,19 @@
+Recursos visuales del prototipo de autorrellenado
+
+DOCUMENTOS (assets/catalog/*.webp)
+Recreaciones con IA de documentos de identidad y pasaportes, generadas a partir de referencias públicas
+(fichas PRADO del Consejo de la UE y otras fuentes enlazadas en el catálogo global de documentos).
+Todos los datos son ficticios, los retratos no tienen rasgos y las líneas MRZ son ilustrativas y no están
+validadas para OCR. No sirven para validar identidades ni documentos. Fuentes y límites:
+  ../LEEME.txt  y  ../index.html (catálogo)
+Se ha recortado el fondo blanco de cada imagen y se han guardado en WebP con transparencia.
+
+ZONAS DE CADA DOCUMENTO (layouts.js)
+Posiciones aproximadas (en %) de foto, texto, QR/código de barras, chip y MRZ, anotadas visualmente
+sobre cada recreación para dibujar el esquema de referencia de la cámara. Son estimaciones, no medidas.
+
+PORTADA DEL PASAPORTE (assets/passport/cover.webp)
+Imagen de portada de pasaporte genérica aportada para el prototipo, recortada sin fondo.
+
+MANO (animación)
+Ilustración vectorial propia (SVG) incluida en el código.
