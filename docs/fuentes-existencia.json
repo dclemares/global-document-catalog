@@ -1,37 +1,37 @@
 {
   "GB": {
     "existence": "no_national_card",
-    "text": "No hay tarjeta nacional de identidad británica vigente en este catálogo: el programa anterior fue cancelado. Esto no significa que no existan otras credenciales de identificación.",
+    "text": "There is no current British national identity card in this catalog: the former program was cancelled. This does not mean other identification credentials do not exist.",
     "source": "https://www.gov.uk/government/news/id-cards-consigned-to-history"
   },
   "IE": {
     "existence": "no_national_card",
-    "text": "No emite DNI nacional. La tarjeta de pasaporte se muestra aparte; la Public Services Card es otra categoría.",
+    "text": "Does not issue a national ID card. The passport card is shown separately; the Public Services Card is a different category.",
     "source": "https://data.consilium.europa.eu/doc/document/ST-13462-2018-REV-1/en/pdf"
   },
   "DK": {
     "existence": "exists",
-    "text": "Existe tarjeta municipal de identificación (Legitimationskort); no se ha obtenido su imagen. No equivale al ID nacional de viaje.",
+    "text": "A municipal identification card (Legitimationskort) exists; its image has not been obtained. It is not equivalent to the national travel ID.",
     "source": "https://www.borger.dk/handlingsside?kommunekode=370&selfserviceId=fe1428a8-6314-4e7d-827d-b2f4717d8c61"
   },
   "AU": {
     "existence": "exists",
-    "text": "Existen tarjetas estatales, como NSW Photo Card. Falta incorporar una variante y sus dos caras; no se presenta como un DNI nacional único.",
+    "text": "State cards exist, such as the NSW Photo Card. A variant and its two sides still need to be added; it is not presented as a single national DNI.",
     "source": "https://www.service.nsw.gov.au/services/nsw-photo-card"
   },
   "CA": {
     "existence": "exists",
-    "text": "Existen tarjetas provinciales, como Ontario Photo Card. Falta incorporar una variante y sus dos caras.",
+    "text": "Provincial cards exist, such as the Ontario Photo Card. A variant and its two sides still need to be added.",
     "source": "https://www.ontario.ca/page/ontario-photo-card"
   },
   "US": {
     "existence": "exists",
-    "text": "Existen ID estatales, como la tarjeta del DMV de California. Falta incorporar una variante y sus dos caras; no se confunde con la passport card.",
+    "text": "State IDs exist, such as the California DMV card. A variant and its two sides still need to be added; it is not confused with the passport card.",
     "source": "https://www.dmv.ca.gov/portal/driver-licenses-identification-cards/identification-id-cards/"
   },
   "RU": {
     "existence": "other_format",
-    "text": "La identificación interior se recoge en el inventario como pasaporte en libreta. Falta esa imagen; no se interpreta como un ID en formato tarjeta con front/back.",
+    "text": "The internal identification is listed in the inventory as a booklet passport. That image is missing; it is not interpreted as a card-format ID with front/back.",
     "source": ""
   }
 }
