@@ -17,8 +17,10 @@
       credit:GENERIC_CREDIT,sample:sample(country),generic:true,note:GENERIC_NOTE};
   };
   const models={
+    // PRADO FRA-BO-03001 (since 2021, lines on the back) and FRA-BO-02001/02002 (laminated, 1988-2021, lines on the front)
     FR:{id:{label:'ID card · since 2021',hint:'Bank-card size. Lines on the back.'},
-        'id-paper':frontMrzModel('FR','ID card · before 2021','Laminated paper card. Lines on the front.')},
+        'id-paper':frontMrzModel('FR','ID card · before 2021','Laminated paper card. Lines on the front.',
+          'https://www.consilium.europa.eu/prado/en/prado-documents/FRA/B/docs-per-category.html')},
     // PRADO ROU-BO-05001/05002/06001 (since 2021, with or without chip) and ROU-BO-01002 to 04001 (classic, 2001-2021, blank back)
     RO:{id:{label:'ID card · since 2021',hint:'Bank-card size with the flag. Lines on the back.'},
         'id-classic':frontMrzModel('RO','ID card · before 2021','Classic card. Lines on the front, under the photo.',
