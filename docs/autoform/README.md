@@ -37,10 +37,14 @@ It covers **196 countries** from the document catalog and uses only AI recreatio
   Italy's Permesso di soggiorno works the same way (`IT-permesso-front.webp`, `IT-permesso-back.webp`, from PRADO
   ITA-HO-03008, 2021): every plastic card since 2007 (ITA-HO-03001/03003/03005/03006, ITA-HP-03001) has the lines on the
   back, while the paper permits (ITA-HO-01001, 02001, 03002, 03004, 03007) have none and go in the note below.
+  Portugal's Título de residência too (`PT-titulo-front.webp`, `PT-titulo-back.webp`, from PRADO PRT-HO-08001, 2020;
+  the 2008 card PRT-HO-02001 also has the lines on the back).
+- **Only documents in use today.** Long-expired models are left out: the French card before 1988, the Portuguese título
+  from 2005, the Italian paper ID and the old Greek ID (ID cards without an MRZ stopped being valid on 3 August 2026,
+  Regulation (EU) 2019/1157), and niche paper or asylum documents (for example PRT-HP-01001/01002).
 - Each document can carry a short `hint` shown under its name, so the guest can tell two models apart.
 - **Documents without reading lines.** They aren't offered (they can't fill the form), but a note under the list names
-  them and links back to the form: driving licences for everyone, plus the Italian paper ID, the old Greek ID, the
-  Romanian provisional ID, the French card from before 1988, and the green EU registration certificate (NIE) that EU/EEA/Swiss
+  them and links back to the form: driving licences for everyone, plus the Romanian provisional ID and the green EU registration certificate (NIE) that EU/EEA/Swiss
   citizens get in Spain (paper, PRADO ESP-HP-01001/01002, not valid as proof of identity), the paper Italian residence permit for
   non-EU guests in Italy (only non-EU residents get the TIE card, which has an MRZ). Edit `noLinesByNationality` in `variants.js`.
 

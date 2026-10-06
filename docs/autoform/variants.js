@@ -11,6 +11,7 @@
     'generic-id-front-mrz':[['photo',3.5,19,33,52],['text',39,24,25,12,2],['text',39,49,20,12,2],['text',58,49,20,12,2],['text',76,9,20,6,1],['mrz',4,73,92,24,2]],
     'FR-id-paper-front':[['text',3,14,52,4,1],['photo',2.8,19,26.2,52.8],['text',33,20,30,35,5],['sign',48,59,28,8],['mrz',4.4,77,91,19,2]],
     'ES-tie-back':[['photo',3.4,6.3,12,24.7],['text',18.6,5,40,49,7],['mrz',4,64,92,30.1,3]],
+    'PT-titulo-back':[['photo',3.4,6.3,12,24.7],['text',18.6,5,45,44,6],['mrz',4,64,92,30.1,3]],
     'IT-permesso-back':[['photo',3.4,6.3,12,24.7],['text',18.6,5,45,44,6],['mrz',4,64,92,30.1,3]],
     'RO-id-classic-front':[['text',29,12,40,8,2],['photo',2,12,25.8,50.4],['text',29,21,25,50,7],['ghost',85.8,19,11.2,21.9],['mrz',4,75.8,92,19.3,2]],
   });
@@ -47,7 +48,7 @@
   // Residence permits: issued by the property's country to foreign residents. Same card format as an ID (lines on the back).
   const EU_PERMIT='Residence permit';
   const permitLabels={ES:['Residence card (TIE / NIE)','Foreigner identity card (TIE) with your NIE. Lines on the back.'],IT:['Residence permit (Permesso di soggiorno)','Plastic card. Lines on the back.'],
-    PT:['Residence permit (Título de residência)'],FR:['Residence permit (Titre de séjour)'],DE:['Residence permit (Aufenthaltstitel)'],
+    PT:['Residence permit (Título de residência)','Plastic card. Lines on the back.'],FR:['Residence permit (Titre de séjour)'],DE:['Residence permit (Aufenthaltstitel)'],
     AE:['Emirates ID (resident)','The ID card for UAE residents.']};
   const permitCountries=['AE','AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','CH'];
   const freeMovement=new Set(permitCountries.filter(code=>code!=='AE'));   // EU, EEA and Switzerland: their citizens register without a residence card
@@ -56,7 +57,10 @@
     source:'https://www.consilium.europa.eu/prado/en/prado-documents/ESP/H/docs-per-category.html',credit:OWN_CREDIT},
     // PRADO ITA-HO-03008 (2021); the 2007 and 2013 cards (ITA-HO-03001/03003/03005/03006, ITA-HP-03001) also have the lines on the back
     IT:{image:'assets/catalog/IT-permesso-back.webp',imageOther:'assets/catalog/IT-permesso-front.webp',mrz:[4,64,92,30],
-    source:'https://www.consilium.europa.eu/prado/en/prado-documents/ITA/H/docs-per-category.html',credit:OWN_CREDIT}};
+    source:'https://www.consilium.europa.eu/prado/en/prado-documents/ITA/H/docs-per-category.html',credit:OWN_CREDIT},
+    // PRADO PRT-HO-08001 (2020); the 2008 card (PRT-HO-02001) also has the lines on the back
+    PT:{image:'assets/catalog/PT-titulo-back.webp',imageOther:'assets/catalog/PT-titulo-front.webp',mrz:[4,64,92,30],
+    source:'https://www.consilium.europa.eu/prado/en/prado-documents/PRT/H/docs-per-category.html',credit:OWN_CREDIT}};
   const residencePermit=(code,nationality)=>{
     const c=documentCatalog[code];if(!c||!permitCountries.includes(code))return null;
     if(freeMovement.has(code)&&freeMovement.has(nationality))return null;
@@ -76,7 +80,8 @@
     return permit?[...own,[`permit-${propertyCountry}`,permit]]:own;
   }
   // Documents guests may hold that have no reading lines, so they can't fill the form (driving licences everywhere, plus a few local ones)
-  const noLinesByNationality={IT:['paper ID card'],GR:['old ID card'],RO:['provisional ID card'],FR:['ID card from before 1988']};
+  // Only documents still in use: ID cards without an MRZ stopped being valid on 3 August 2026 (Regulation (EU) 2019/1157)
+  const noLinesByNationality={RO:['provisional ID card']};
   function withoutLinesFor(nationality,propertyCountry){
     if(!nationality)return [];
     const list=['driving licence',...(noLinesByNationality[nationality]||[])];
