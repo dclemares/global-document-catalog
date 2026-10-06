@@ -31,12 +31,14 @@ It covers **196 countries** from the document catalog and uses only AI recreatio
 - **Residence permits for foreign guests.** The first field is now *Nationality*, and the lab panel has a *Property country*.
   The guest sees their nationality's documents plus the property country's residence permit (Spain: TIE/NIE, UAE: Emirates ID,
   Italy, Portugal, France, Germany and the rest of the EU/EEA and Switzerland). EU/EEA/Swiss citizens don't get it inside
-  that area, since they register without a residence card. Permits use the generic card back, except the UAE.
+  that area, since they register without a residence card. Permits use the generic card back, except the UAE and Spain. The Spanish TIE has its own demo
+  (`ES-tie-front.webp`, `ES-tie-back.webp`) drawn from PRADO ESP-HO-03001 (2020); the 2003 and 2011 models
+  (ESP-HO-02001 to 02005) also have the three lines on the back, so one option covers them all.
 - Each document can carry a short `hint` shown under its name, so the guest can tell two models apart.
 - **Documents without reading lines.** They aren't offered (they can't fill the form), but a note under the list names
   them and links back to the form: driving licences for everyone, plus the Italian paper ID, the old Greek ID, the
-  Romanian provisional ID, the French card from before 1988, and the green NIE certificate that EU/EEA/Swiss citizens get
-  in Spain (only non-EU residents get the TIE card, which has an MRZ). Edit `noLinesByNationality` in `variants.js`.
+  Romanian provisional ID, the French card from before 1988, and the green EU registration certificate (NIE) that EU/EEA/Swiss
+  citizens get in Spain (paper, PRADO ESP-HP-01001/01002, not valid as proof of identity) (only non-EU residents get the TIE card, which has an MRZ). Edit `noLinesByNationality` in `variants.js`.
 
 To add another model, add it to `models` in `variants.js` with its `side`, `lines` and image; to add a permit, add the
 country to `permitCountries` (and optionally a label in `permitLabels`).
