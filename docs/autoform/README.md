@@ -56,9 +56,10 @@ draw its images, then add the country to `permitCountries`, `permitLabels` and `
 Countries whose passport was a generic catalog example now get a demo drawn by a template from their newest ordinary passport
 in PRADO: the country name, the data page colours sampled in four horizontal bands of the PRADO photo (so gradients such as
 Kenya's or Pakistan's survive), photo on the left and the two lines at the
-bottom (true of every PRADO data page checked), a blank-face demo photo and fictitious data. Twenty frequent nationalities also get their own header (bilingual title and local script, emblem, flag and features such
-as Egypt's barcode) from a per-country config: Bangladesh, Cuba, Dominican Republic, Egypt, Iran, Iraq, Jordan, Kazakhstan,
-Kenya, Kuwait, Lebanon, Mongolia, Nigeria, Oman, Pakistan, Philippines, Qatar, Saudi Arabia, Singapore and Viet Nam.
+bottom (true of every PRADO data page checked), a blank-face demo photo and fictitious data. Every one of them also gets its own header, read from its PRADO page: the title as printed (bilingual where it is) and the
+local script (Arabic, Persian, Urdu, Bengali, Devanagari, Armenian, Ge'ez, Tibetan, Lao, Thaana, Korean, Cyrillic), plus
+the emblem and flag positions and features such as Egypt's barcode under the photo or the 2D barcode block several
+countries print in the data area. Emblems are simple placeholder shapes in the right place, not the real coats of arms.
 96 passports are covered
 (`XX-passport-prado.webp`); 33 stay generic because PRADO has no image for them (Antigua and Barbuda, Bahamas, Barbados,
 Bolivia, Cambodia, Chad, Eswatini, Fiji, Gabon, Guatemala, Guinea-Bissau, Indonesia, Marshall Islands, Solomon Islands,
