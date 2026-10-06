@@ -421,4 +421,3 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .pcover-wrap{filter:drop-shadow(3px 0 3px #2a101045) drop-shadow(6px 0 5px #2a101022)}
 /* Opening cover keeps the width of the data page: with the old 700px perspective the lifted cover swelled ~12px past it on each side */
 .pcover-wrap{perspective:6000px}
-.hint.no-lines{margin-top:8px;font-size:12.5px}

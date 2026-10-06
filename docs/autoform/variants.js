@@ -80,17 +80,6 @@
     const permit=nationality&&propertyCountry&&propertyCountry!==nationality?residencePermit(propertyCountry,nationality):null;
     return permit?[...own,[`permit-${propertyCountry}`,permit]]:own;
   }
-  // Documents guests may hold that have no reading lines, so they can't fill the form (driving licences everywhere, plus a few local ones)
-  // Only documents still in use: ID cards without an MRZ stopped being valid on 3 August 2026 (Regulation (EU) 2019/1157)
-  const noLinesByNationality={RO:['provisional ID card']};
-  function withoutLinesFor(nationality,propertyCountry){
-    if(!nationality)return [];
-    const list=['driving licence',...(noLinesByNationality[nationality]||[])];
-    if(propertyCountry==='ES'&&nationality!=='ES'&&freeMovement.has(nationality))list.push('green EU registration certificate (NIE)');
-    if(propertyCountry==='IT'&&nationality!=='IT'&&!freeMovement.has(nationality))list.push('paper residence permit');
-    return list;
-  }
   window.documentsFor=documentsFor;
-  window.withoutLinesFor=withoutLinesFor;
   window.resolveDocument=(nationality,key,propertyCountry)=>documentsFor(nationality,propertyCountry).find(([k])=>k===key)?.[1]??null;
 })();
