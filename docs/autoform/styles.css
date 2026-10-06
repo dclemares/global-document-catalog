@@ -421,8 +421,3 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .pcover-wrap{filter:drop-shadow(3px 0 3px #2a101045) drop-shadow(6px 0 5px #2a101022)}
 /* Opening cover keeps the width of the data page: with the old 700px perspective the lifted cover swelled ~12px past it on each side */
 .pcover-wrap{perspective:6000px}
-#scan-dialog .dialog-body:has(.pick-preview){overflow-y:auto}
-#scan-dialog .pick-preview{flex:1 0 auto;justify-content:center}
-.pick-preview .pp-img{flex:none}
-.pick-preview .pp-img img{width:280px;max-width:100%;max-height:none}
-@media(min-width:521px){#scan-dialog.tall:has(.pick-preview){height:fit-content;min-height:min(680px,calc(100dvh - 24px))}}
