@@ -70,12 +70,9 @@ travel certificates (New Zealand) and long-replaced models (Thailand 2001, Singa
 Mali 2000) are left out. Each entry links to its PRADO page and names the model and year in the credit line.
 
 ## Which images were generated here
-Documents whose image was made in this branch carry `generated` and show a purple badge on the picker preview, so they
-can be told apart from the catalog's own recreations:
-- `generated: 'template'` (*Generated · PRADO template*): the 96 passports and 7 ID cards drawn by the template from
-  their PRADO model (`prado.js`, `*-prado.webp`).
-- `generated: 'drawn'` (*Generated · drawn from PRADO*): the hand-drawn French card before 2021, the classic Romanian
-  card and the Spanish, Italian and Portuguese residence cards (`variants.js`).
+The 108 document images made in this branch (96 PRADO-template passports, 7 template ID cards, 5 hand-drawn cards) are
+listed in [`GENERATED.md`](GENERATED.md) with their files and PRADO models. Guests don't see the difference; in the data
+they carry `generated: 'template'` or `generated: 'drawn'`.
 
 ## Limits
 Images recreated with AI from public references; data and MRZ are fictitious. Not suitable for verifying
