@@ -3,28 +3,35 @@
 (function(){
   const FRONT_MRZ_IMAGE='assets/catalog/generic-id-front-mrz.webp';
   const GENERIC_NOTE='Illustrative example: we do not have an image of this model and yours may look different. Look for the lines of letters, numbers and “<”.';
+  const OWN_CREDIT='Demo drawn from the PRADO reference · fictitious data · NOT VALID · DEMO';
   const GENERIC_CREDIT='Generic catalog example · not your country’s design · fictitious data';
   const sample=nationality=>({firstName:'ALEX',surname:'DEMO SAMPLE',nationality,birthDate:'1985-03-14',documentNumber:'DEMO12345',expiryDate:'2031-01-01'});
 
-  if(typeof documentLayouts!=='undefined')documentLayouts['generic-id-front-mrz']=[['photo',3.5,19,33,52],['text',39,24,25,12,2],['text',39,49,20,12,2],['text',58,49,20,12,2],['text',76,9,20,6,1],['mrz',4,73,92,24,2]];
+  if(typeof documentLayouts!=='undefined')Object.assign(documentLayouts,{
+    'generic-id-front-mrz':[['photo',3.5,19,33,52],['text',39,24,25,12,2],['text',39,49,20,12,2],['text',58,49,20,12,2],['text',76,9,20,6,1],['mrz',4,73,92,24,2]],
+    'FR-id-paper-front':[['text',3,12,92,4,1],['photo',4,18.4,26.2,45.7],['text',32,18,30,40,5],['sign',53,60,27,8],['mrz',4.6,77.5,90.8,18.5,2]],
+    'RO-id-classic-front':[['text',4,15,45,6,2],['photo',5,20.9,22.8,44.7],['text',29,20,30,50,5],['ghost',86,20.9,9.6,18.7],['mrz',4.6,74.5,90.8,22,2]],
+  });
 
   // Older model with the reading lines on the front (two lines of 36 characters, below the photo)
-  const frontMrzModel=(code,label,hint,source='')=>{
+  const frontMrzModel=(code,label,hint,source='',own=null)=>{
     const country=documentCatalog[code].name;
     return {label,hint,formType:'id',side:'front',sideLabel:'Front · photo side',title:'Photograph the photo side of your ID card',
       instruction:'On this model the reading lines are on the front, below the photo. The back isn\'t needed.',
-      image:FRONT_MRZ_IMAGE,alt:`Example of an older ID card from ${country}, front`,mrz:[4,73,92,24],approx:true,lines:2,source,
-      credit:GENERIC_CREDIT,sample:sample(country),generic:true,note:GENERIC_NOTE};
+      image:own?.image||FRONT_MRZ_IMAGE,alt:`Example of an older ID card from ${country}, front`,mrz:own?.mrz||[4,73,92,24],approx:true,lines:2,source,
+      credit:own?OWN_CREDIT:GENERIC_CREDIT,sample:sample(country),generic:!own,note:own?undefined:GENERIC_NOTE};
   };
   const models={
     // PRADO FRA-BO-03001 (since 2021, lines on the back) and FRA-BO-02001/02002 (laminated, 1988-2021, lines on the front)
     FR:{id:{label:'ID card · since 2021',hint:'Bank-card size. Lines on the back.'},
         'id-paper':frontMrzModel('FR','ID card · before 2021','Laminated paper card. Lines on the front.',
-          'https://www.consilium.europa.eu/prado/en/prado-documents/FRA/B/docs-per-category.html')},
+          'https://www.consilium.europa.eu/prado/en/prado-documents/FRA/B/docs-per-category.html',
+          {image:'assets/catalog/FR-id-paper-front.webp',mrz:[4,76,92,21]})},
     // PRADO ROU-BO-05001/05002/06001 (since 2021, with or without chip) and ROU-BO-01002 to 04001 (classic, 2001-2021, blank back)
     RO:{id:{label:'ID card · since 2021',hint:'Bank-card size with the flag. Lines on the back.'},
         'id-classic':frontMrzModel('RO','ID card · before 2021','Classic card. Lines on the front, under the photo.',
-          'https://www.consilium.europa.eu/prado/en/prado-documents/ROU/B/docs-per-category.html')},
+          'https://www.consilium.europa.eu/prado/en/prado-documents/ROU/B/docs-per-category.html',
+          {image:'assets/catalog/RO-id-classic-front.webp',mrz:[4,74,92,23]})},
     AE:{id:{label:'Emirates ID'}},
   };
   for(const [code,docs] of Object.entries(models)){

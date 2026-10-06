@@ -23,9 +23,11 @@ It covers **196 countries** from the document catalog and uses only AI recreatio
 `documents.js` only has the current passport and ID card of each country. `variants.js` is loaded after it and adds:
 - **Older models with the reading lines on another side.** France: ID card since 2021 (lines on the back) and the laminated
   paper card from 1988 to 2021 (two lines of 36 characters on the front), per PRADO FRA-BO. The
-  laminated card is a little larger than a bank card; the generic image keeps the bank-card shape. Romania: ID card since 2021, with or without chip (back) and
+  laminated card is squarer than a bank card, and its image and camera outline keep that shape. Romania: ID card since 2021, with or without chip (back) and
   the classic card from 2001 to 2021 (front, blank back), per PRADO ROU-BO. The handwritten provisional card has no MRZ and is left out.
-  The older models use `assets/catalog/generic-id-front-mrz.webp`, a generic front with a two-line MRZ (`generic: true`).
+  The older models have their own demo images drawn from the PRADO references with fictitious data
+  (`FR-id-paper-front.webp`, `RO-id-classic-front.webp`, with their zones in `variants.js`). Any future model without its
+  own image falls back to `generic-id-front-mrz.webp`, a generic front with a two-line MRZ (`generic: true`).
 - **Residence permits for foreign guests.** The first field is now *Nationality*, and the lab panel has a *Property country*.
   The guest sees their nationality's documents plus the property country's residence permit (Spain: TIE/NIE, UAE: Emirates ID,
   Italy, Portugal, France, Germany and the rest of the EU/EEA and Switzerland). EU/EEA/Swiss citizens don't get it inside
