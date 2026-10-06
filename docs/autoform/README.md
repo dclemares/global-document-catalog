@@ -43,7 +43,8 @@ It covers **196 countries** from the document catalog and uses only AI recreatio
 - **Only documents in use today.** Long-expired models are left out: the French card before 1988, the Portuguese título
   from 2005, the Italian paper ID and the old Greek ID (ID cards without an MRZ stopped being valid on 3 August 2026,
   Regulation (EU) 2019/1157), and niche paper or asylum documents (for example PRT-HP-01001/01002).
-- Each document can carry a short `hint` shown under its name, so the guest can tell two models apart.
+- Each document can carry a short `hint`. Options stay one line; when the selected one has a hint, the preview caption
+  shows *What's this?*, which opens a helper with the hint and both sides of the document.
 
 To add another model, add it to `models` in `variants.js` with its `side`, `lines` and image; to add a permit, check it in PRADO,
 draw its images, then add the country to `permitCountries`, `permitLabels` and `ownPermits`.

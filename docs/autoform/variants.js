@@ -47,8 +47,8 @@
 
   // Residence permits: issued by the property's country to foreign residents. Same card format as an ID (lines on the back).
   const EU_PERMIT='Residence permit';
-  const permitLabels={ES:['Residence card (TIE / NIE)','Foreigner identity card (TIE) with your NIE. Lines on the back.'],IT:['Residence permit (Permesso di soggiorno)','Plastic card. Lines on the back.'],
-    PT:['Residence permit (Título de residência)','Plastic card. Lines on the back.'],
+  const permitLabels={ES:['Residence card (TIE)','Foreigner identity card (TIE) with your NIE. Lines on the back.'],IT:['Permesso di soggiorno','Italian residence permit. Plastic card, lines on the back.'],
+    PT:['Título de residência','Portuguese residence permit. Plastic card, lines on the back.'],
     AE:['Emirates ID (resident)','The ID card for UAE residents.']};
   // Only countries whose permit we checked against PRADO and drew; everywhere else the guest gets their ID and passport
   const permitCountries=['AE','ES','IT','PT'];

@@ -73,8 +73,8 @@ if(typeof document!=='undefined'){
   function guide(){
     const d=currentDoc();if(d){docType=d.formType;preloadDoc(d);}   // load while the person is choosing
     const types=documentsFor(issuingCountry,propertyCountry);
-    const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Document type">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${docIcon(t.formType)}</span><span class="tl">${esc(t.label)}${t.hint?`<small>${esc(t.hint)}</small>`:''}</span></button>`).join('')}</div>`:'<p class="hint">First choose your nationality.</p>';
-    const preview=d?`<div class="pick-preview"><div class="pp-img"><img src="${d.image}" alt="${esc(d.alt)}"></div><div class="pp-cap"><b>You will photograph: ${esc(sideName(d))}</b><span>${d.formType==='passport'?'The page with your photo and details.':'Just this side; the other isn\'t needed.'}</span></div></div>`:'';
+    const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Document type">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${docIcon(t.formType)}</span><span class="tl">${esc(t.label)}</span></button>`).join('')}</div>`:'<p class="hint">First choose your nationality.</p>';
+    const preview=d?`<div class="pick-preview"><div class="pp-img"><img src="${d.image}" alt="${esc(d.alt)}"></div><div class="pp-cap"><b>You will photograph: ${esc(sideName(d))}</b><span>${d.formType==='passport'?'The page with your photo and details.':'Just this side; the other isn\'t needed.'}${d.hint?` <button type="button" class="text-button whats" data-action="doc-help">What\'s this?</button>`:''}</span></div></div>`:'';
     body('Which document will you use?',`<div class="field combo"><label for="issuing-country">Nationality</label><div class="cbx"><input id="issuing-country" class="big-select" role="combobox" aria-expanded="false" aria-controls="country-list" aria-autocomplete="list" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Choose a country" value="${esc(documentCatalog[issuingCountry]?.name||'')}"><ul id="country-list" class="cbx-list" role="listbox" hidden></ul></div></div><div class="field"><span class="lbl">Document type</span>${typeButtons}</div>${preview}<div class="dialog-actions single"><button class="primary" data-action="prepare" ${d?'':'disabled'}>Continue</button></div>`,stepsHtml(1),true);   // same height as the other steps: the country list fits inside
   }
   // Document mock-up: photo, data and reading-line zones as a visual reference for the photo
@@ -312,6 +312,10 @@ if(typeof document!=='undefined'){
       return;
     }
     if(action==='pick-type'){documentKey=el.dataset.key;guide();dialog.querySelector('.type-option.on')?.focus();}
+    if(action==='doc-help'){const d=currentDoc();if(!d)return;const imgs=[d.imageOther,d.image].filter(Boolean).map(src=>`<img src="${src}" alt="">`).join('');
+      const h=document.createElement('div');h.className='doc-help';h.innerHTML=`<div class="dh-card" role="dialog" aria-modal="true" aria-labelledby="dh-title"><h3 id="dh-title">${esc(d.label)}</h3><p>${esc(d.hint)}</p><div class="dh-imgs">${imgs}</div><button type="button" class="primary" data-action="doc-help-close">Got it</button></div>`;
+      $('dialog-content').append(h);h.querySelector('button').focus();}
+    if(action==='doc-help-close'){dialog.querySelector('.doc-help')?.remove();dialog.querySelector('.whats')?.focus();}
     if(action==='camera'||action==='retry-photo'){
       const st=dialog.querySelector('.stage'),im=st&&(st.querySelector('.face.turned img')||st.querySelector('img'));
       camera(action==='camera'&&st&&st.querySelector('.fx-wrap')&&im&&im.naturalWidth?{...containRect(st,12,im.naturalWidth/im.naturalHeight),ratio:im.naturalWidth/im.naturalHeight}:null);
