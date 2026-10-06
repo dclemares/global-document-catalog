@@ -9,18 +9,20 @@
   if(typeof documentLayouts!=='undefined')documentLayouts['generic-id-front-mrz']=[['photo',3.5,19,33,52],['text',39,24,25,12,2],['text',39,49,20,12,2],['text',58,49,20,12,2],['text',76,9,20,6,1],['mrz',4,73,92,24,2]];
 
   // Older model with the reading lines on the front (two lines of 36 characters, below the photo)
-  const frontMrzModel=(code,label,hint)=>{
+  const frontMrzModel=(code,label,hint,source='')=>{
     const country=documentCatalog[code].name;
     return {label,hint,formType:'id',side:'front',sideLabel:'Front · photo side',title:'Photograph the photo side of your ID card',
       instruction:'On this model the reading lines are on the front, below the photo. The back isn\'t needed.',
-      image:FRONT_MRZ_IMAGE,alt:`Example of an older ID card from ${country}, front`,mrz:[4,73,92,24],approx:true,lines:2,source:'',
+      image:FRONT_MRZ_IMAGE,alt:`Example of an older ID card from ${country}, front`,mrz:[4,73,92,24],approx:true,lines:2,source,
       credit:GENERIC_CREDIT,sample:sample(country),generic:true,note:GENERIC_NOTE};
   };
   const models={
     FR:{id:{label:'ID card · since 2021',hint:'Bank-card size. Lines on the back.'},
         'id-paper':frontMrzModel('FR','ID card · before 2021','Laminated paper card. Lines on the front.')},
-    RO:{id:{label:'ID card · electronic',hint:'With a chip. Lines on the back.'},
-        'id-classic':frontMrzModel('RO','ID card · classic','Without a chip. Lines on the front.')},
+    // PRADO ROU-BO-05001/05002/06001 (since 2021, with or without chip) and ROU-BO-01002 to 04001 (classic, 2001-2021, blank back)
+    RO:{id:{label:'ID card · since 2021',hint:'Bank-card size with the flag. Lines on the back.'},
+        'id-classic':frontMrzModel('RO','ID card · before 2021','Classic card. Lines on the front, under the photo.',
+          'https://www.consilium.europa.eu/prado/en/prado-documents/ROU/B/docs-per-category.html')},
     AE:{id:{label:'Emirates ID'}},
   };
   for(const [code,docs] of Object.entries(models)){
