@@ -52,6 +52,22 @@ It covers **196 countries** from the document catalog and uses only AI recreatio
 To add another model, add it to `models` in `variants.js` with its `side`, `lines` and image; to add a permit, check it in PRADO,
 draw its images, then add the country to `permitCountries`, `permitLabels` and `ownPermits`.
 
+## PRADO templates (`prado.js`)
+Countries whose passport was a generic catalog example now get a demo drawn by a template from their newest ordinary passport
+in PRADO: the country name, the data page colours sampled from the PRADO photo, photo on the left and the two lines at the
+bottom (true of every PRADO data page checked), a blank-face demo photo and fictitious data. 96 passports are covered
+(`XX-passport-prado.webp`); 33 stay generic because PRADO has no image for them (Antigua and Barbuda, Bahamas, Barbados,
+Bolivia, Cambodia, Chad, Eswatini, Fiji, Gabon, Guatemala, Guinea-Bissau, Indonesia, Marshall Islands, Solomon Islands,
+Kiribati, Madagascar, Mauritius, Micronesia, Myanmar, Nauru, Niger, Papua New Guinea, Central African Republic, Samoa,
+Saint Vincent and the Grenadines, Saint Lucia, Sri Lanka, Sudan, Suriname, Tajikistan, Tonga, Trinidad and Tobago, Vanuatu).
+
+By default a country offers only its ID and passport. Seven countries that had only a passport now also offer their
+national ID card, because PRADO confirms three lines on the back: Bahrain (BHR-BO-01001), Burkina Faso (BFA-BO-02001),
+Congo (COG-BO-01001), Iraq (IRQ-BO-01001), Kazakhstan (KAZ-BO-02001), Paraguay (PRY-BO-01002) and Senegal
+(SEN-BO-03001). Cards without an MRZ (Cameroon, Qatar, Haiti, Oman, Rwanda, Pakistan, Syria, Tunisia, Palestine),
+travel certificates (New Zealand) and long-replaced models (Thailand 2001, Singapore 1982, United Kingdom 2009,
+Mali 2000) are left out. Each entry links to its PRADO page and names the model and year in the credit line.
+
 ## Limits
 Images recreated with AI from public references; data and MRZ are fictitious. Not suitable for verifying
 identities. Outline positions are approximate.
