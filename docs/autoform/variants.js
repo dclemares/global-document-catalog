@@ -67,6 +67,15 @@
     const permit=nationality&&propertyCountry&&propertyCountry!==nationality?residencePermit(propertyCountry,nationality):null;
     return permit?[...own,[`permit-${propertyCountry}`,permit]]:own;
   }
+  // Documents guests may hold that have no reading lines, so they can't fill the form (driving licences everywhere, plus a few local ones)
+  const noLinesByNationality={IT:['paper ID card'],GR:['old ID card'],RO:['provisional ID card'],FR:['ID card from before 1988']};
+  function withoutLinesFor(nationality,propertyCountry){
+    if(!nationality)return [];
+    const list=['driving licence',...(noLinesByNationality[nationality]||[])];
+    if(propertyCountry==='ES'&&nationality!=='ES'&&freeMovement.has(nationality))list.push('green NIE certificate');
+    return list;
+  }
   window.documentsFor=documentsFor;
+  window.withoutLinesFor=withoutLinesFor;
   window.resolveDocument=(nationality,key,propertyCountry)=>documentsFor(nationality,propertyCountry).find(([k])=>k===key)?.[1]??null;
 })();
