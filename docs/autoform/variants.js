@@ -48,10 +48,11 @@
   // Residence permits: issued by the property's country to foreign residents. Same card format as an ID (lines on the back).
   const EU_PERMIT='Residence permit';
   const permitLabels={ES:['Residence card (TIE / NIE)','Foreigner identity card (TIE) with your NIE. Lines on the back.'],IT:['Residence permit (Permesso di soggiorno)','Plastic card. Lines on the back.'],
-    PT:['Residence permit (Título de residência)','Plastic card. Lines on the back.'],FR:['Residence permit (Titre de séjour)'],DE:['Residence permit (Aufenthaltstitel)'],
+    PT:['Residence permit (Título de residência)','Plastic card. Lines on the back.'],
     AE:['Emirates ID (resident)','The ID card for UAE residents.']};
-  const permitCountries=['AE','AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','CH'];
-  const freeMovement=new Set(permitCountries.filter(code=>code!=='AE'));   // EU, EEA and Switzerland: their citizens register without a residence card
+  // Only countries whose permit we checked against PRADO and drew; everywhere else the guest gets their ID and passport
+  const permitCountries=['AE','ES','IT','PT'];
+  const freeMovement=new Set(['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','CH']);   // EU, EEA and Switzerland: their citizens register without a residence card
   // PRADO ESP-HO-03001 (2020); the 2003 and 2011 models (ESP-HO-02001 to 02005) also have the three lines on the back
   const ownPermits={ES:{image:'assets/catalog/ES-tie-back.webp',imageOther:'assets/catalog/ES-tie-front.webp',mrz:[4,64,92,30],
     source:'https://www.consilium.europa.eu/prado/en/prado-documents/ESP/H/docs-per-category.html',credit:OWN_CREDIT},
