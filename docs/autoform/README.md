@@ -33,6 +33,10 @@ It covers **196 countries** from the document catalog and uses only AI recreatio
   Italy, Portugal, France, Germany and the rest of the EU/EEA and Switzerland). EU/EEA/Swiss citizens don't get it inside
   that area, since they register without a residence card. Permits use the generic card back, except the UAE.
 - Each document can carry a short `hint` shown under its name, so the guest can tell two models apart.
+- **Documents without reading lines.** They aren't offered (they can't fill the form), but a note under the list names
+  them and links back to the form: driving licences for everyone, plus the Italian paper ID, the old Greek ID, the
+  Romanian provisional ID, the French card from before 1988, and the green NIE certificate that EU/EEA/Swiss citizens get
+  in Spain (only non-EU residents get the TIE card, which has an MRZ). Edit `noLinesByNationality` in `variants.js`.
 
 To add another model, add it to `models` in `variants.js` with its `side`, `lines` and image; to add a permit, add the
 country to `permitCountries` (and optionally a label in `permitLabels`).
