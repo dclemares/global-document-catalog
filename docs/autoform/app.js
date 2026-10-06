@@ -14,7 +14,7 @@ if(typeof module!=='undefined')module.exports={blankForm,conflictsFor,mergeRead}
 if(typeof document!=='undefined'){
   const $=id=>document.getElementById(id);
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  let form=blankForm(),profile=profiles[1],attempts=0,token=0,readData=null,docType='id',correctedPhoto=false,partialFixed=false,issuingCountry='',documentKey='';
+  let form=blankForm(),profile=profiles[1],attempts=0,token=0,readData=null,docType='id',correctedPhoto=false,partialFixed=false,issuingCountry='',documentKey='',propertyCountry='ES';
   const dialog=$('scan-dialog');
   const announce=message=>{$('live-status').textContent=message;};
   function remember(){for(const key of [...Object.keys(fieldLabels),'documentType'])form[key]=$(key).value;}
@@ -43,9 +43,9 @@ if(typeof document!=='undefined'){
     const corners=cam?'<i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>':'';
     return `<div class="stage ${cam?'cam':''}">${fx?`<div class="tilt">${inner}${fx}</div>`:inner}${corners}</div>`;
   };
-  function currentDoc(){return resolveDocument(issuingCountry,documentKey);}
+  function currentDoc(){return resolveDocument(issuingCountry,documentKey,propertyCountry);}
   function typeOptions(){
-    return `<option value="">Select</option>${Object.entries(documentCatalog[issuingCountry]?.documents||{}).map(([key,d])=>`<option value="${key}" ${documentKey===key?'selected':''}>${esc(d.label)}</option>`).join('')}`;
+    return `<option value="">Select</option>${documentsFor(issuingCountry,propertyCountry).map(([key,d])=>`<option value="${key}" ${documentKey===key?'selected':''}>${esc(d.label)}</option>`).join('')}`;
   }
   const stepsHtml=n=>`<ol class="steps" aria-label="Steps"><li class="${n===1?'on':n>1?'done':''}"><b>1</b> Document</li><li class="${n===2?'on':n>2?'done':''}"><b>2</b> Get ready</li><li class="${n===3?'on':''}"><b>3</b> Photo</li></ol>`;
   const sideName=d=>d.sideLabel.split(' · ')[0];
@@ -72,10 +72,10 @@ if(typeof document!=='undefined'){
   ['assets/hand.webp','assets/passport/cover.webp'].forEach(preloadImg);   // hand and cover: from startup
   function guide(){
     const d=currentDoc();if(d){docType=d.formType;preloadDoc(d);}   // load while the person is choosing
-    const types=Object.entries(documentCatalog[issuingCountry]?.documents||{});
-    const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Document type">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${docIcon(t.formType)}</span>${esc(t.label)}</button>`).join('')}</div>`:'<p class="hint">First choose the country that issued the document.</p>';
+    const types=documentsFor(issuingCountry,propertyCountry);
+    const typeButtons=types.length?`<div class="type-options" role="radiogroup" aria-label="Document type">${types.map(([k,t])=>`<button type="button" role="radio" aria-checked="${documentKey===k}" class="type-option ${documentKey===k?'on':''}" data-action="pick-type" data-key="${k}"><span class="ti" aria-hidden="true">${docIcon(t.formType)}</span><span class="tl">${esc(t.label)}${t.hint?`<small>${esc(t.hint)}</small>`:''}</span></button>`).join('')}</div>`:'<p class="hint">First choose your nationality.</p>';
     const preview=d?`<div class="pick-preview"><div class="pp-img"><img src="${d.image}" alt="${esc(d.alt)}"></div><div class="pp-cap"><b>You will photograph: ${esc(sideName(d))}</b><span>${d.formType==='passport'?'The page with your photo and details.':'Just this side; the other isn\'t needed.'}</span></div></div>`:'';
-    body('Which document will you use?',`<div class="field combo"><label for="issuing-country">Issuing country</label><div class="cbx"><input id="issuing-country" class="big-select" role="combobox" aria-expanded="false" aria-controls="country-list" aria-autocomplete="list" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Choose a country" value="${esc(documentCatalog[issuingCountry]?.name||'')}"><ul id="country-list" class="cbx-list" role="listbox" hidden></ul></div></div><div class="field"><span class="lbl">Document type</span>${typeButtons}</div>${preview}<div class="dialog-actions single"><button class="primary" data-action="prepare" ${d?'':'disabled'}>Continue</button></div>`,stepsHtml(1),true);   // same height as the other steps: the country list fits inside
+    body('Which document will you use?',`<div class="field combo"><label for="issuing-country">Nationality</label><div class="cbx"><input id="issuing-country" class="big-select" role="combobox" aria-expanded="false" aria-controls="country-list" aria-autocomplete="list" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Choose a country" value="${esc(documentCatalog[issuingCountry]?.name||'')}"><ul id="country-list" class="cbx-list" role="listbox" hidden></ul></div></div><div class="field"><span class="lbl">Document type</span>${typeButtons}</div>${preview}<div class="dialog-actions single"><button class="primary" data-action="prepare" ${d?'':'disabled'}>Continue</button></div>`,stepsHtml(1),true);   // same height as the other steps: the country list fits inside
   }
   // Document mock-up: photo, data and reading-line zones as a visual reference for the photo
   function genericMock(d){
@@ -98,8 +98,8 @@ if(typeof document!=='undefined'){
     if(!L||!L.length)return genericMock(d);
     const pass=d.formType==='passport';let n=0;
     const box=(cls,x,y,w,h,inner='',st='')=>`<i class="${cls}" style="left:${x}%;top:${y}%;width:${w}%;height:${h}%;--i:${n++};${st}">${inner}</i>`;
-    const chars=pass?44:30;
-    const mrzLines=pass?['P&lt;XXXMOCK&lt;&lt;DEMO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;','DEMO000012XXX9001018M3101018&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;']:['IDXXXDEMO00012345&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;','9001017M3101018XXX&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;2','MOCK&lt;&lt;DEMO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;'];
+    const twoLineCard=!pass&&d.lines===2,chars=pass?44:twoLineCard?36:30;
+    const mrzLines=twoLineCard?['IDXXXMOCK&lt;&lt;DEMO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;','DEMO000012XXX9001018M3101018&lt;&lt;&lt;&lt;&lt;&lt;&lt;2']:pass?['P&lt;XXXMOCK&lt;&lt;DEMO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;','DEMO000012XXX9001018M3101018&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;']:['IDXXXDEMO00012345&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;','9001017M3101018XXX&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;2','MOCK&lt;&lt;DEMO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;'];
     const parts=L.map(([t,x,y,w,h,k])=>{
       switch(t){
         case 'photo':return box('mphoto',x,y,w,h,'<b></b>');
@@ -206,9 +206,9 @@ if(typeof document!=='undefined'){
     const T={side:endOpen,place:endOpen+GAP,lines:endOpen+2*GAP,glare:endOpen+3*GAP};
     const tips=[['side',isPass?'Open it to the photo page':d.side==='back'?'Show the back side':'Show the photo side'],['place','Lay it flat on a plain background'],['lines','Keep the bottom lines fully in view'],['glare','No glare or fingers']];
     const hand=`<img class="hand hand-img" src="assets/hand.webp" alt="">`;
-    const fx=`<div class="fx-wrap" style="--bd:${BAD}s;--ud:${(T.place-.7).toFixed(2)}s;--hd:${(T.lines-.55).toFixed(2)}s;--tp:${T.place}s;--ts:${T.side}s;--po:${OPEN_AT}s;--pt:${TURN_AT}s;--pdur:${OPEN_DUR}s;--cr:.75;--tl:${T.lines}s;--tg:${T.glare}s;--mt:${d.formType==='passport'?76:58}%;--mh:${d.formType==='passport'?20:36}%"><div class="fx">${isPass?'<i class="pshadow"></i>':''}<i class="ring r1"></i>${T.side?'<i class="ring r2"></i>':''}<i class="mrz-glow"></i><i class="glare"></i><i class="glint"></i></div><div class="hand-box">${hand}</div></div>`;
+    const fx=`<div class="fx-wrap" style="--bd:${BAD}s;--ud:${(T.place-.7).toFixed(2)}s;--hd:${(T.lines-.55).toFixed(2)}s;--tp:${T.place}s;--ts:${T.side}s;--po:${OPEN_AT}s;--pt:${TURN_AT}s;--pdur:${OPEN_DUR}s;--cr:.75;--tl:${T.lines}s;--tg:${T.glare}s;--mt:${d.formType==='passport'?76:d.lines===2?d.mrz[1]-2:58}%;--mh:${d.formType==='passport'?20:d.lines===2?d.mrz[3]+4:36}%"><div class="fx">${isPass?'<i class="pshadow"></i>':''}<i class="ring r1"></i>${T.side?'<i class="ring r2"></i>':''}<i class="mrz-glow"></i><i class="glare"></i><i class="glint"></i></div><div class="hand-box">${hand}</div></div>`;
     body.keep=true;
-    body(`Get your ${d.formType==='passport'?'passport':'ID document'} ready`,`<p class="hint"><span class="pill-doc">${esc(documentCatalog[issuingCountry].name)} · ${esc(d.label)}</span> <button class="text-button" data-action="choose">Change</button></p>${stageHtml(d,false,true,fx)}<ul class="tips big">${tips.map(([k,t])=>`<li style="--t:${T[k]}s"><span class="mk" aria-hidden="true"><b class="x">✕</b><b class="ok">✓</b></span>${t}</li>`).join('')}</ul><div class="dialog-actions"><button class="primary" data-action="camera">Take the photo <span aria-hidden="true">→</span></button><button class="secondary" data-action="gallery">Choose from gallery</button><button class="text-button" data-action="choose">Back</button></div>`,stepsHtml(2),true);
+    body(`Get your ${d.formType==='passport'?'passport':'ID document'} ready`,`<p class="hint"><span class="pill-doc">${esc(documentCatalog[d.issuer||issuingCountry].name)} · ${esc(d.label)}</span> <button class="text-button" data-action="choose">Change</button></p>${stageHtml(d,false,true,fx)}<ul class="tips big">${tips.map(([k,t])=>`<li style="--t:${T[k]}s"><span class="mk" aria-hidden="true"><b class="x">✕</b><b class="ok">✓</b></span>${t}</li>`).join('')}</ul><div class="dialog-actions"><button class="primary" data-action="camera">Take the photo <span aria-hidden="true">→</span></button><button class="secondary" data-action="gallery">Choose from gallery</button><button class="text-button" data-action="choose">Back</button></div>`,stepsHtml(2),true);
     fitFx();
     if(!loaded)dialog.querySelector('.dialog-body').dataset.static='1';   // no animations if images are missing: no jerky cuts
   }
@@ -292,6 +292,8 @@ if(typeof document!=='undefined'){
   function showStudy(show){$('study').hidden=!show;$('prototype').hidden=show;$('study-toggle').textContent=show?'Back to the prototype ↗':'20-profile study ↗';window.scrollTo({top:0,behavior:'auto'});}
   $('study-toggle').onclick=()=>showStudy($('study').hidden);
   $('profile-list').onclick=e=>{const button=e.target.closest('[data-profile]');if(button){profile=profiles.find(p=>p.id===Number(button.dataset.profile));reset();showStudy(false);}};
+  $('property-country').innerHTML=Object.entries(documentCatalog).sort((x,y)=>x[1].name.localeCompare(y[1].name,'en')).map(([code,c])=>`<option value="${code}" ${code===propertyCountry?'selected':''}>${esc(c.name)}</option>`).join('');
+  $('property-country').onchange=e=>{propertyCountry=e.target.value;if(dialog.open&&dialog.querySelector('#issuing-country')){if(!resolveDocument(issuingCountry,documentKey,propertyCountry))documentKey=documentsFor(issuingCountry,propertyCountry)[0]?.[0]||'';guide();}};
   $('profile-select').onchange=e=>{profile=profiles.find(p=>p.id===Number(e.target.value));reset();};$('reset').onclick=reset;
   $('guest-form').addEventListener('input',e=>{if(fieldLabels[e.target.id]){form.sources[e.target.id]='manual';e.target.classList.remove('read');e.target.parentElement.querySelector('.read-origin')?.remove();}remember();});
   $('guest-form').onsubmit=e=>e.preventDefault();
@@ -344,7 +346,7 @@ if(typeof document!=='undefined'){
   function chooseCountry(code,viaKey=false){
     if(!documentCatalog[code])return;
     issuingCountry=code;
-    const keys=Object.keys(documentCatalog[code].documents);documentKey=keys.includes('id')?'id':(keys[0]||'');   // default to the ID document; if the country doesn't have one, the passport
+    const keys=documentsFor(code,propertyCountry).map(([k])=>k);documentKey=keys.includes('id')?'id':(keys[0]||'');   // default to the ID document; if the country doesn't have one, the passport
     choosing=true;try{guide();}finally{choosing=false;}   // re-rendering fires a focusout with the old text: it must not re-select the previous country
     if(viaKey)dialog.querySelector('.type-option.on')?.focus();   // only keyboard users: a mouse/touch pick must not leave a focus ring on the document type
   }

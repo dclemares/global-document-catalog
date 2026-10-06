@@ -15,8 +15,23 @@ It covers **196 countries** from the document catalog and uses only AI recreatio
 - `index.html`, `styles.css`, `app.js`: the application (no dependencies).
 - `documents.js`: country → documents catalog (image and side to photograph).
 - `layouts.js`: zones of each document, used to draw the outline.
+- `variants.js`: hand-maintained additions on top of `documents.js` (see below).
 - `scenarios.js`: the 20 simulated profiles from the study (`DECISIONES.md`, `VERIFICACION.md`).
 - `assets/`: images (WebP with transparency) and credits.
+
+## Variants and residence permits (`variants.js`)
+`documents.js` only has the current passport and ID card of each country. `variants.js` is loaded after it and adds:
+- **Older models with the reading lines on another side.** France: ID card since 2021 (lines on the back) and the laminated
+  paper card from before 2021 (two lines of 36 characters on the front). Romania: electronic ID (back) and classic ID (front).
+  The older models use `assets/catalog/generic-id-front-mrz.webp`, a generic front with a two-line MRZ (`generic: true`).
+- **Residence permits for foreign guests.** The first field is now *Nationality*, and the lab panel has a *Property country*.
+  The guest sees their nationality's documents plus the property country's residence permit (Spain: TIE/NIE, UAE: Emirates ID,
+  Italy, Portugal, France, Germany and the rest of the EU/EEA and Switzerland). EU/EEA/Swiss citizens don't get it inside
+  that area, since they register without a residence card. Permits use the generic card back, except the UAE.
+- Each document can carry a short `hint` shown under its name, so the guest can tell two models apart.
+
+To add another model, add it to `models` in `variants.js` with its `side`, `lines` and image; to add a permit, add the
+country to `permitCountries` (and optionally a label in `permitLabels`).
 
 ## Limits
 Images recreated with AI from public references; data and MRZ are fictitious. Not suitable for verifying

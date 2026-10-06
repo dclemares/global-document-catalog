@@ -8,6 +8,7 @@
   <script defer src="scenarios.js"></script>
   <script defer src="documents.js"></script>
   <script defer src="layouts.js"></script>
+  <script defer src="variants.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -37,7 +38,7 @@
       </section>
       <section id="study" hidden><p class="eyebrow">PRODUCT EXPLORATION</p><h1>From photo to form.</h1><p class="study-intro">20 profiles, two rounds of synthetic simulation. Only from the click on auto-fill until the details appear in the fields. These are design hypotheses, not real interviews.</p><div class="flow-strip"><span>Click</span><b>→</b><span>Guide</span><b>→</b><span>Photo</span><b>→</b><span>Reading</span><b>→</b><span>Form filled</span></div><p><a href="DECISIONES.md" target="_blank" rel="noopener">Read the decisions and specification ↗</a></p><div id="profile-list"></div></section>
     </main>
-    <aside class="lab" aria-label="Prototype controls"><p class="eyebrow">FLOW LAB</p><h2>Try another context</h2><p>Choose a profile to walk through their case. Changing it resets the sample data.</p><label for="profile-select">Simulated profile</label><select id="profile-select"></select><div id="profile-detail"></div><div class="lab-rule"></div><p class="eyebrow">CORE DECISION</p><h3>Readable photo.<br>Form filled.</h3><p>A correct reading is applied directly. We only ask you to step in if some details are doubtful or differ from what you already typed.</p><button id="reset" class="secondary">Reset this case</button><small class="lab-note">No real OCR. Data lasts only while this page is open.</small></aside>
+    <aside class="lab" aria-label="Prototype controls"><p class="eyebrow">FLOW LAB</p><h2>Try another context</h2><p>Choose a profile to walk through their case. Changing it resets the sample data.</p><label for="profile-select">Simulated profile</label><select id="profile-select"></select><label for="property-country">Property country</label><select id="property-country"></select><small class="lab-note">Guests from another country can also use this country's residence permit.</small><div id="profile-detail"></div><div class="lab-rule"></div><p class="eyebrow">CORE DECISION</p><h3>Readable photo.<br>Form filled.</h3><p>A correct reading is applied directly. We only ask you to step in if some details are doubtful or differ from what you already typed.</p><button id="reset" class="secondary">Reset this case</button><small class="lab-note">No real OCR. Data lasts only while this page is open.</small></aside>
   </div>
   <dialog id="scan-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span id="dialog-context"></span><button id="close-dialog" class="close" aria-label="Close scan">×</button></div><div id="dialog-content"></div></dialog>
   <div id="live-status" class="sr-only" aria-live="polite"></div>
