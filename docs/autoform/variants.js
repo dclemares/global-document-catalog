@@ -22,7 +22,7 @@
     return {label,hint,formType:'id',side:'front',sideLabel:'Front · photo side',title:'Photograph the photo side of your ID card',
       instruction:'On this model the reading lines are on the front, below the photo. The back isn\'t needed.',
       image:own?.image||FRONT_MRZ_IMAGE,alt:`Example of an older ID card from ${country}, front`,mrz:own?.mrz||[4,73,92,24],approx:true,lines:2,source,
-      credit:own?OWN_CREDIT:GENERIC_CREDIT,sample:sample(country),generic:!own,note:own?undefined:GENERIC_NOTE};
+      credit:own?OWN_CREDIT:GENERIC_CREDIT,sample:sample(country),generic:!own,generated:own?'drawn':'template',note:own?undefined:GENERIC_NOTE};
   };
   const models={
     // PRADO FRA-BO-03001 (since 2021, lines on the back) and FRA-BO-02001/02002 (laminated, 1988-2021, lines on the front)
@@ -71,7 +71,7 @@
       instruction:'Turn it over. The reading lines are at the bottom of the back.',
       image:own?own.image:'assets/catalog/generic-id-back.webp',imageOther:own?own.imageOther:'assets/catalog/generic-id-front.webp',
       alt:`Example residence card from ${c.name}, back`,mrz:own?.mrz||[4,62,92,28],approx:true,lines:3,source:own?own.source:'',
-      credit:own?own.credit:GENERIC_CREDIT,sample:sample(c.name),generic:!own,note:own?undefined:GENERIC_NOTE,issuer:code};
+      credit:own?own.credit:GENERIC_CREDIT,sample:sample(c.name),generic:!own,generated:ownPermits[code]?'drawn':undefined,note:own?undefined:GENERIC_NOTE,issuer:code};
   };
 
   // Documents the guest can choose from: their nationality's own, plus the property country's residence permit for foreigners

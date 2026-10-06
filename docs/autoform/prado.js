@@ -8,14 +8,14 @@
   for(const [cc,[code,year,source]] of Object.entries(PRADO.passports)){
     const doc=documentCatalog[cc]?.documents?.passport;if(!doc)continue;
     documentLayouts[`${cc}-passport-prado`]=passportLayout;
-    Object.assign(doc,{image:`assets/catalog/${cc}-passport-prado.webp`,mrz:[3,80,94,17],source,credit:credit(code,year),generic:false,note:undefined});
+    Object.assign(doc,{image:`assets/catalog/${cc}-passport-prado.webp`,mrz:[3,80,94,17],source,credit:credit(code,year),generic:false,generated:'template',note:undefined});
   }
   for(const [cc,[code,year,source]] of Object.entries(PRADO.ids)){
     const c=documentCatalog[cc];if(!c||c.documents.id)continue;
     documentLayouts[`${cc}-id-back-prado`]=idBackLayout;
     c.documents={id:{label:'ID card',formType:'id',side:'back',sideLabel:'Back · reverse side',title:'Photograph the back of your ID card',
       instruction:'Turn it over. The reading lines are at the bottom of the back.',image:`assets/catalog/${cc}-id-back-prado.webp`,imageOther:`assets/catalog/${cc}-id-front-prado.webp`,
-      alt:`Example ID card from ${c.name}, back`,mrz:[4,64,92,30],approx:true,lines:3,source,credit:credit(code,year),
+      alt:`Example ID card from ${c.name}, back`,mrz:[4,64,92,30],approx:true,lines:3,source,credit:credit(code,year),generated:'template',
       sample:{firstName:'ALEX',surname:'DEMO SAMPLE',nationality:c.name,birthDate:'1985-03-14',documentNumber:'DEMO12345',expiryDate:'2031-01-01'},generic:false},...c.documents};
   }
 })();

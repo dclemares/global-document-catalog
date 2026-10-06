@@ -69,6 +69,14 @@ Congo (COG-BO-01001), Iraq (IRQ-BO-01001), Kazakhstan (KAZ-BO-02001), Paraguay (
 travel certificates (New Zealand) and long-replaced models (Thailand 2001, Singapore 1982, United Kingdom 2009,
 Mali 2000) are left out. Each entry links to its PRADO page and names the model and year in the credit line.
 
+## Which images were generated here
+Documents whose image was made in this branch carry `generated` and show a purple badge on the picker preview, so they
+can be told apart from the catalog's own recreations:
+- `generated: 'template'` (*Generated · PRADO template*): the 96 passports and 7 ID cards drawn by the template from
+  their PRADO model (`prado.js`, `*-prado.webp`).
+- `generated: 'drawn'` (*Generated · drawn from PRADO*): the hand-drawn French card before 2021, the classic Romanian
+  card and the Spanish, Italian and Portuguese residence cards (`variants.js`).
+
 ## Limits
 Images recreated with AI from public references; data and MRZ are fictitious. Not suitable for verifying
 identities. Outline positions are approximate.

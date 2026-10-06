@@ -421,3 +421,5 @@ dialog{color:var(--ink);width:min(590px,calc(100% - 28px));max-height:calc(100dv
 .pcover-wrap{filter:drop-shadow(3px 0 3px #2a101045) drop-shadow(6px 0 5px #2a101022)}
 /* Opening cover keeps the width of the data page: with the old 700px perspective the lifted cover swelled ~12px past it on each side */
 .pcover-wrap{perspective:6000px}
+.pick-preview .pp-img{position:relative}
+.gen-badge{position:absolute;top:4px;left:4px;padding:2px 7px;border-radius:999px;background:#7a3cff;color:#fff;font-size:10.5px;font-weight:650;letter-spacing:.2px;box-shadow:0 1px 3px #0003}
