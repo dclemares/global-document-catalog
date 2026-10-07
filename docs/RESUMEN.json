@@ -1,33 +1,40 @@
 {
   "countries": 196,
-  "countries_with_images": 85,
-  "countries_without_images": 111,
-  "images": 212,
-  "demos": 194,
+  "countries_with_images": 104,
+  "countries_without_images": 92,
+  "images": 251,
+  "demos": 233,
   "slots": {
-    "missing_image": 152,
-    "image": 210,
+    "missing_image": 125,
+    "image": 237,
     "unconfirmed": 220,
     "not_issued": 4,
     "other_format": 2
   },
   "global_examples": {
-    "assignments": 333,
+    "assignments": 335,
     "countries": 196,
     "by_side": {
-      "anverso": 82,
-      "reverso": 55,
+      "anverso": 83,
+      "reverso": 56,
       "pagina-datos": 196
     },
-    "complete_sets": 55
+    "complete_sets": 56
   },
-  "empty_countries_id_documented": 22,
-  "empty_countries_id_mrz_documented": 9,
-  "passport_standard_only": 121,
+  "empty_countries_id_documented": 16,
+  "empty_countries_id_mrz_documented": 5,
+  "passport_standard_only": 96,
   "passport_mrz": {
-    "catalog_model": 75,
-    "standard_only": 121,
+    "catalog_model": 100,
+    "standard_only": 96,
     "without_mrz": [],
     "scope": "Ordinary MRP passport. It does not certify all issuances nor include emergency or historical documents."
+  },
+  "latest_additions": {
+    "date": "2026-10-07",
+    "originals": 39,
+    "recreations": 39,
+    "filled_main_slots": 27,
+    "additional_models": 12
   }
 }

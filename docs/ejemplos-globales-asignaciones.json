@@ -114,9 +114,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/pt/AND-AO-03001/image-299231.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -234,9 +234,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/de/ARM-AO-02001/image-301616.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -362,13 +362,37 @@
   {
     "code": "BH",
     "country": "Bahrain",
+    "kind": "ID",
+    "side": "anverso",
+    "file": "ejemplos-globales/id-front.png",
+    "label": "Face photo · no MRZ",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/BHR-BO-01001/image-221455.html",
+    "note": "Generic capture guide; does not reproduce the national design."
+  },
+  {
+    "code": "BH",
+    "country": "Bahrain",
+    "kind": "ID",
+    "side": "reverso",
+    "file": "ejemplos-globales/id-back.png",
+    "label": "MRZ on the back · with or without photo",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/BHR-BO-01001/image-221458.html",
+    "note": "Generic capture guide; does not reproduce the national design."
+  },
+  {
+    "code": "BH",
+    "country": "Bahrain",
     "kind": "PASAPORTE",
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/BHR-AO-01001/image-102939.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -738,9 +762,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/QAT-AO-03001/image-234788.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -1026,9 +1050,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/CRI-AO-01001/image-209597.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -1086,9 +1110,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/CUB-AO-01001/image-223995.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -1146,9 +1170,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/ECU-AO-01001/image-104473.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -1158,9 +1182,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/EGY-AO-01001/image-83772.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -1410,9 +1434,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/pt/PHL-AO-04001/image-287289.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -1986,9 +2010,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/JAM-AO-02001/image-118359.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -2046,9 +2070,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/KAZ-AO-02001/image-103131.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -2082,9 +2106,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/KGZ-AO-02001/image-359484.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -2142,9 +2166,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/pt/KWT-AO-01001/image-279699.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -2442,9 +2466,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/pt/MDV-AO-04001/image-285122.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -2790,9 +2814,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/NPL-AO-02001/image-359996.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -2874,9 +2898,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/NZL-AO-04001/image-339536.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -2958,9 +2982,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/pt/PAN-AO-02001/image-314114.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -2994,9 +3018,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/PRY-AO-03001/image-367347.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -3150,9 +3174,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/DOM-AO-02001/image-261732.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -3282,9 +3306,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/SMR-AO-03001/image-384424.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -3486,9 +3510,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/ZAF-AO-02001/image-243197.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -3870,9 +3894,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/URY-AO-01001/image-225050.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -3882,9 +3906,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/UZB-AO-02001/image-259032.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -3906,9 +3930,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/pt/VEN-AO-02001/image-296970.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {
@@ -3942,9 +3966,9 @@
     "side": "pagina-datos",
     "file": "ejemplos-globales/passport.png",
     "label": "Face photo and MRZ",
-    "basis": "Per ICAO standard: photo and MRZ in the ordinary MRP passport; this country's model not verified",
-    "evidence_basis": "standard",
-    "source": "https://www.icao.int/sites/default/files/publications/DocSeries/9303_p4_cons_en.pdf",
+    "basis": "Characteristics of the model shown in the catalog",
+    "evidence_basis": "catalog_model",
+    "source": "https://www.consilium.europa.eu/prado/en/VNM-AO-03001/image-367025.html",
     "note": "Global example to guide capture. Matches in the presence of photo and MRZ; it does not reproduce this country's design."
   },
   {

@@ -6,13 +6,13 @@ Visual catalog of identity documents and passports for **196 countries**, with f
 
 ## Contents
 
-- 212 selected images across 85 countries, including 194 demo recreations.
+- 251 selected images across 104 countries, including 233 demo recreations.
 - Original references where available, with links to the source of each model.
 - Face-photo and MRZ indications per side or page, with their level of evidence.
-- 333 global example assignments: 82 fronts, 55 backs and 196 passports.
-- 55 countries with all three global pieces assigned.
+- 335 global example assignments: 83 fronts, 56 backs and 196 passports.
+- 56 countries with all three global pieces assigned.
 
-The global examples guide capture: the front is assigned when there is a photo and the MRZ is absent or to be confirmed (keeping the stated uncertainty); the back when the reverse carries an MRZ, with or without a photo; the passport stands for a data page with photo and MRZ. For passports, 75 assignments rely on the catalog model and 121 on the ICAO standard, with the country model unverified.
+The global examples guide capture: the front is assigned when there is a photo and the MRZ is absent or to be confirmed (keeping the stated uncertainty); the back when the reverse carries an MRZ, with or without a photo; the passport stands for a data page with photo and MRZ. For passports, 100 assignments rely on the catalog model and 96 on the ICAO standard, with the country model unverified.
 
 ## Open and update
 
@@ -40,4 +40,8 @@ Demos contain fictitious data and illustrative MRZ, with no OCR validation. The 
 
 Third-party images keep the rights and conditions of their sources; this repository does not grant them a new redistribution license. See the provenance links before reusing them. The detailed criteria are in [`docs/LEEME.txt`](docs/LEEME.txt).
 
-Inventory reviewed on 30 September 2026. The 196 entries are the 195 countries on the initial list plus Kosovo.
+Inventory updated on 7 October 2026. The 196 entries are the 195 countries on the initial list plus Kosovo.
+
+## Additions — 7 October 2026
+
+[Compare the 39 original references and 39 generated recreations](https://dclemares.github.io/global-document-catalog/incorporaciones/2026-10-07/). Includes PRADO model and source links, image downloads, prompts, and an original-image inventory with hashes. 27 missing main slots are now covered; 12 images are additional models or document types. Historical IDs, residence permits and the California driving licence retain their specific labels. Original reference files are preserved unchanged.

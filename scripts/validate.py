@@ -31,6 +31,21 @@ assert len(assignments) == stats['global_examples']['assignments']
 for image in manifest:
     path = DOCS / image['file']
     assert hashlib.sha256(path.read_bytes()).hexdigest() == image['sha256'], path
+batch_dir = DOCS / 'incorporaciones/2026-10-07'
+batch = json.loads((batch_dir / 'manifest.json').read_text())
+originals = json.loads((batch_dir / 'originales.json').read_text())
+assert len(batch) == len(originals) == 39
+assert len({row['key'] for row in batch}) == 39
+for row in batch:
+    assert (batch_dir / row['reference']).is_file()
+    assert hashlib.sha256((batch_dir / row['file']).read_bytes()).hexdigest() == row['sha256']
+    placements = [p for c in countries for p in c['pieces'] + c['extras']
+                  if (p.get('image') or {}).get('id') == 'OCT07-' + row['key']]
+    assert len(placements) == 1, row['key']
+for row in originals:
+    assert hashlib.sha256((DOCS / row['file']).read_bytes()).hexdigest() == row['sha256']
+assert stats['images'] == len(manifest)
+assert stats['countries_with_images'] == sum(c['image_count'] > 0 for c in countries)
 for path in DOCS.rglob('*'):
     if path.suffix in ('.html', '.json', '.txt'):
         text = path.read_text()

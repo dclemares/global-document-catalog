@@ -1,0 +1,7 @@
+39 RECREACIONES — 7 OCTUBRE 2026
+
+Abrir ABRIR_CATALOGO.html para comparar originales y recreaciones por país.
+imagenes/: PNG generados. referencias/: originales oficiales usados como base.
+prompts.json: instrucciones exactas. manifest.json: país, modelo, lado, fuente y SHA-256.
+
+Generadas con imagegen integrado, sin API/CLI. Modelos exactos de la colección original; no equivalen necesariamente a la última edición en circulación. No son credenciales auténticas. MRZ y códigos ilustrativos, no validados para OCR. Las pequeñas diferencias tipográficas no se han corregido.
